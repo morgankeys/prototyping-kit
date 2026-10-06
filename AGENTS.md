@@ -38,6 +38,8 @@ column, read the right column first.
 | Any work in `Code/` (editing, adding, or debugging code) | `Code/ARCHITECTURE.md` |
 | Quick commands, getting started, or which real command a role (`dev`, `build`, …) maps to | `Code/README.md` |
 | Styling components, writing CSS, or implementing a page from Figma | `Agents/context/design-system.md` |
+| Rounded cards or thumbnails with a scrim, gradient, or border over media | `Agents/context/troubleshooting/rounded-clipping.md` |
+| A visual glitch, odd build or tooling behavior, or a bug that resists an obvious fix | `Agents/context/troubleshooting/README.md` |
 | Regenerating tokens from a new Figma export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |

@@ -74,6 +74,8 @@ styling hooks, they cannot drift from what is rendered. In DevTools,
 
 - [`Agents/skills/design-tokens/SKILL.md`](../skills/design-tokens/SKILL.md) — token
   regeneration workflow and the alpha gotcha
+- [`troubleshooting/rounded-clipping.md`](troubleshooting/rounded-clipping.md) — clipping
+  and layering rounded surfaces without edge fringes
 - [`Docs/Design system/design-in-code architecture.md`](../../Docs/Design%20system/design-in-code%20architecture.md)
   — principles, validator contract, deviations backlog
 - [`Code/ARCHITECTURE.md`](../../Code/ARCHITECTURE.md) — how this stack implements it

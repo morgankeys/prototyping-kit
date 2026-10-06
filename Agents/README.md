@@ -12,6 +12,7 @@ The repo-root `AGENTS.md` is the entry point agents load first; it points here.
 Agents/
 ├── skills/        Reusable capabilities, one folder per skill (design-tokens/, pr/, example-skill/)
 ├── context/       Conventions and background (kit-structure, git-workflow, design-system, dev-only-pages)
+│   └── troubleshooting/  Tips, tricks, and gotchas, indexed by symptom (load as needed)
 ├── prompts/       Task templates (review-drift, regenerate-tokens, example-task)
 └── README.md      This index
 ```
@@ -27,6 +28,9 @@ Agents/
 - **context/** — Durable knowledge: coding conventions, folder structure decisions,
   architecture notes, gotchas. Load relevant files before making changes. Add to it when
   you learn something the next agent should know.
+  - **context/troubleshooting/** — Gotchas indexed by symptom, written so they hold for
+    any stack. Load only the entry that matches the symptom. Add an entry when a fix took
+    real digging; see its `README.md`.
 - **prompts/** — Ready-to-run task templates. Current prompts: `review-drift` (review
   `Docs/` and `Agents/` against `Code/`) and `regenerate-tokens` (bring in a new Figma
   export). Copy `example-task.md` for a new one. Keep them parameterized and short.

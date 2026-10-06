@@ -34,15 +34,17 @@ column, read the right column first.
 | --- | --- |
 | Creating a branch, committing, or separating tracks of work | `Agents/context/git-workflow.md` |
 | `/pr` — commit, push, and open a pull request | `Agents/skills/pr/SKILL.md` |
+| Repo settings, promoting to production, or branch cleanup | `Docs/github.md` |
 | Any work in `Code/` (editing, adding, or debugging code) | `Code/ARCHITECTURE.md` |
 | Quick commands, getting started, or which real command a role (`dev`, `build`, …) maps to | `Code/README.md` |
-| Forking the kit or porting changes between kit and fork | `Agents/context/kit-structure.md` |
-| Reviewing `Docs/` and `Agents/` for drift against `Code/` | `Agents/prompts/review-drift.md` |
 | Styling components, writing CSS, or implementing a page from Figma | `Agents/context/design-system.md` |
 | Regenerating tokens from a new Figma export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
-| Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
+| Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
+| Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |
 | Choosing or adding a tool (token converter, linter, Figma capture) | `Docs/Tooling.md` |
+| Forking the kit or porting changes between kit and fork | `Agents/context/kit-structure.md` |
+| Reviewing `Docs/` and `Agents/` for drift against `Code/` | `Agents/prompts/review-drift.md` |
 
 When a `.cursor/rules/*.mdc` file auto-attaches because you're editing a relevant file,
 trust it — it has the just-in-time rules you need.

@@ -15,6 +15,33 @@ scripts.
   identified deviations.
 * Code-linting should be used within or alongside validation.
 
+## Validator contract
+
+Any validator, in any language, implements these rules. Each finding becomes one backlog
+entry with a rule id, a line, and a detail string. Rule ids below are suggestions; keep
+them stable once chosen, because rationale is matched on them.
+
+| Rule | Flags |
+| --- | --- |
+| `hardcoded-color` | A literal color (hex, `rgb()`, `hsl()`, named) in a color property **or** a color-bearing shorthand (`border*`, `outline`, `background*`, `box-shadow`, `text-shadow`), including as a `var()` fallback. |
+| `raw-spacing` | A raw length in `margin`, `padding`, `gap`, `row-gap`, or `column-gap`, including one mixed with a token or inside `calc()`. |
+| `raw-border-radius` | A raw length in `border-radius` or its longhands. |
+| `non-token-font-family` | A `font-family` that does not resolve through a token. |
+| `raw-font-size` | A raw length in `font-size`. |
+| `raw-typography` | A literal `font-weight`, `line-height`, or `letter-spacing`. |
+| `non-token-variable` | A CSS variable outside the project's token namespace (`--<prefix>-*`). |
+| `local-token-override` | A component redefining a namespace token with a literal value. |
+| `unscoped-style` | A style block in a component file that is not scoped. |
+| `global-component-leak` | Component-level selectors or styling in the global stylesheet. |
+
+Allowed values the rules ignore (`0`, `inherit`, `auto`, `transparent`, `currentcolor`, and
+so on), explicit exemptions (a file that defines primitives the export lacks), and how the
+validator finds component style blocks are stack decisions: record them in
+`Code/ARCHITECTURE.md`.
+
+The validator also implements the backlog interface below: regenerate, carry rationale
+forward, write only on change, and the exit codes under [Exit codes and CI](#exit-codes-and-ci).
+
 ## Handling deviations
 
 Design-system validation creates and updates a running backlog of deviations,

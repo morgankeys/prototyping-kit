@@ -26,3 +26,13 @@ span folders.
   `.github/copilot-instructions.md` point to `AGENTS.md`.
 - **Single source of truth.** When guidance could live in two places, put it in `Agents/`
   and reference it from the tool-mandated file.
+
+## Kit provenance
+
+A project forked from the kit records where it came from, so later kit improvements can be
+compared and pulled in. Add one line to the fork's root `README.md`:
+
+> Forked from prototyping-kit @ `<sha>` on `<date>`.
+
+When you port a kit change into the fork, or a fork's improvement back into the kit,
+update the line or note the port in the commit body.

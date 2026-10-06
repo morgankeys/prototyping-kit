@@ -34,6 +34,10 @@ column, read the right column first.
 | --- | --- |
 | Creating a branch, committing, or separating tracks of work | `Agents/context/git-workflow.md` |
 | `/pr` — commit, push, and open a pull request | `Agents/skills/pr/SKILL.md` |
+| Any work in `Code/` (editing, adding, or debugging code) | `Code/ARCHITECTURE.md` |
+| Quick commands, getting started, or which real command a role (`dev`, `build`, …) maps to | `Code/README.md` |
+| Forking the kit or porting changes between kit and fork | `Agents/context/kit-structure.md` |
+| Reviewing `Docs/` and `Agents/` for drift against `Code/` | `Agents/prompts/review-drift.md` |
 
 When a `.cursor/rules/*.mdc` file auto-attaches because you're editing a relevant file,
 trust it — it has the just-in-time rules you need.

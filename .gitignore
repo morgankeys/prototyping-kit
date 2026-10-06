@@ -1,3 +1,14 @@
+# Environment files: keep the example, ignore real values
+.env
+.env.*
+!.env.example
+
+# Project-specific: add this stack's dependency folders, build output, and caches here,
+# for example:
+# Code/<dependency folder>/
+# Code/<build output>/
+# Code/<generated token CSS folder>/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

@@ -5,10 +5,10 @@ name: CI
 
 on:
   pull_request:
-    # The integration branch (default `main`). Add `staging` here if the project uses one.
-    branches: [main]
+    # Feature pull requests target staging. Promotions target main.
+    branches: [staging, main]
   push:
-    branches: [main]
+    branches: [staging, main]
 
 # A newer push to the same PR makes the in-flight run obsolete.
 concurrency:

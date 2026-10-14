@@ -14,7 +14,9 @@ Read-only chats do not need a branch. Never commit directly to the integration b
 
 ### Base branch: the integration branch
 
-Every track branches from an up-to-date **integration branch** and opens its pull request back into it. By default the integration branch is `main`. If the project adopts a separate integration branch (see [Optional: a staging branch](#optional-a-staging-branch)), record its name here and use it everywhere this doc says `<integration branch>`.
+Every track branches from an up-to-date **integration branch** and opens its pull request back into it. The preferred integration branch is `staging` (see [Preferred: staging in front of main](#preferred-staging-in-front-of-main)). A project that has not adopted `staging` uses `main` as the integration branch. Use the project's integration branch everywhere this doc says `<integration branch>`.
+
+New work goes on a feature branch unless this chat was explicitly told to work on `main` or `staging`.
 
 ```bash
 git fetch origin
@@ -32,13 +34,17 @@ Branch names are `<type>/<slug>`, lowercase and hyphenated.
 | `chore`  | Dependencies, config, tooling, housekeeping           |
 | `tokens` | Token pipeline changes and Figma export regenerations |
 
-### Optional: a staging branch
+### Preferred: staging in front of main
 
-Some projects put an integration branch in front of production: all work merges into `staging`, and `staging` is promoted to `main` through its own pull request. If the project uses this model:
+`staging` is `main` plus commits that have not been promoted yet. Everything on `main` is already on `staging`, apart from the promotion merge commit itself. Do not put any other commit on `main`, and do not rewrite `staging`. Once those two drift, later promotions conflict.
 
-- The integration branch is `staging`. Feature work branches from it and merges into it.
-- Only the `staging` → `main` promotion pull request targets `main`. Feature work never branches from or merges into `main` directly.
-- Promotions use a merge commit, never squash or rebase. See [`Docs/github.md`](../../Docs/github.md).
+The person who owns the work runs the merges:
+
+1. When a feature branch is ready, open a pull request into `staging` and **squash-merge** it.
+2. To promote, open a pull request from `staging` into `main` and merge it with **Create a merge commit**.
+3. Never squash-merge `staging` into `main`. A squash rewrites `staging`'s commits into new ones on `main`, the branches stop sharing history, and the next promotion conflicts.
+
+Feature work never branches from or merges into `main` directly. Only that promotion pull request targets `main`. Rulesets that lock this in are in [`Docs/github.md`](../../Docs/github.md). Agents push the feature branch; they open the pull request only when asked (`/pr`), and that pull request targets `staging`.
 
 ## Commit style
 

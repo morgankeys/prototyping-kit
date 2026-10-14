@@ -67,10 +67,12 @@ moves and kit reuse.
    leave the "needs review" sentinel only when the reason is genuinely unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded
    color, spacing, or radius.
-4. **Keep tracks of work organized.** Each track stays recognizable in its branch, commits,
-   and pull request. Push a feature branch when its commits are ready. If the chat was told
-   to work on `main` or `staging`, ask before pushing those branches. Opening a pull request
-   still waits for an ask; `/pr` is that ask.
+4. **Keep tracks of work organized.** New work goes on a feature branch unless the chat was
+   explicitly told to work on `main` or `staging`. The preferred flow squash-merges that
+   branch into `staging`, then promotes `staging` into `main` with a merge commit, never a
+   squash. Push a feature branch when its commits are ready. If the chat was told to work
+   on `main` or `staging`, ask before pushing those branches. Opening a pull request still
+   waits for an ask; `/pr` is that ask.
 5. **Sandbox, specimen, and sample pages never ship.** They render only on the local dev
    server. Never weaken whatever build check enforces this.
 6. **The token pipeline must preserve alpha.** Figma's variables export stores opacity in a

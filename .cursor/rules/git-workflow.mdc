@@ -7,8 +7,8 @@ Keep each track of work recognizable in its branch, commits, and pull request.
 
 - Stay on the current branch when this chat belongs to that track.
 - When the checkout has another conversation's changes, or this chat is a different track, ask before mixing them. Separate with a new branch, separate commits, or by leaving the other work untouched.
-- Never commit directly to the integration branch (default `main`) or the production branch.
-- Branch from the integration branch and open pull requests into it.
+- New work goes on a feature branch unless this chat was explicitly told to work on `main` or `staging`. Never commit directly to those branches.
+- The preferred integration branch is `staging`. Feature pull requests target it and are squash-merged. Promote `staging` into `main` with a merge commit, never a squash. A project without `staging` uses `main` as the integration branch.
 - Push a feature branch when its commits are ready. A new branch does not need a separate ask. If this chat was told to work on `main` or `staging`, ask before pushing those branches.
 - Do not open a pull request unless asked in that turn. Invoking `/pr` is that ask — follow `Agents/skills/pr/SKILL.md`.
 

@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 Invoking `/pr` is the explicit ask to commit, push, and open a pull request in this turn. Pushing a feature branch does not require `/pr`. Opening the pull request does. If this chat was told to work on `main` or `staging`, ask before pushing those branches.
 
-Read `Agents/context/git-workflow.md` for commit style and the name of the integration branch. Below, `<base>` is that branch (default `main`). Run the conflict check, then ship. Do not resolve conflicts in this skill — report them and continue.
+Read `Agents/context/git-workflow.md` for commit style and the name of the integration branch. Below, `<base>` is that branch. The preferred base is `staging`; use `main` only when the project has no `staging` branch, or when this chat was explicitly asked to open the promotion pull request from `staging` into `main`. A feature pull request never targets `main` while `staging` exists. Run the conflict check, then ship. Do not resolve conflicts in this skill — report them and continue. Do not choose the merge method: the person squash-merges into `staging` and merge-commits `staging` into `main`.
 
 This procedure uses the `gh` CLI for the PR steps below. Claude Code web sessions don't have `gh` available; in those sessions, use the GitHub MCP tools to accomplish the same steps instead.
 

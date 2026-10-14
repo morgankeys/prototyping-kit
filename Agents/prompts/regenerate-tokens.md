@@ -21,8 +21,8 @@ guard intact, and the deviations backlog is current.
    any token with `alpha < 1` that changed.
 4. Fix components that referenced removed or renamed tokens; log anything you cannot fix
    in the backlog with a rationale.
-5. Commit the token regeneration and any component fixes as separate commits. Stop before
-   push.
+5. Commit the token regeneration and any component fixes as separate commits, then push the
+   feature branch. Do not open a pull request unless asked.
 
 ## Done when
 

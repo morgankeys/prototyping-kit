@@ -55,11 +55,13 @@ Add tone overlays to project cards
 
 Do not write session-summary subjects: one commit describes one change, not everything a chat did.
 
-## Stop before push
+## Push the branch
 
-The agent creates the branch and the commits. The human pushes and opens the pull request.
+Push a feature branch whenever its commits are ready. A new branch — anything other than `main` or `staging` — does not need a separate ask. Use `git push -u origin HEAD` the first time, then `git push` after later commits. Do not force-push.
 
-Do not run `git push`, `gh pr create`, or anything else that writes to the remote unless the user asks in that turn. Invoking `/pr` is that ask — follow [`Agents/skills/pr/SKILL.md`](../skills/pr/SKILL.md). Without `/pr`, report the branch name and the commits so the user can take it from there.
+Opening a pull request is separate. Do not run `gh pr create` or any other command that opens a pull request unless the user asks in that turn. Invoking `/pr` is that ask — follow [`Agents/skills/pr/SKILL.md`](../skills/pr/SKILL.md). Without `/pr`, report the branch name and the commits so the user can open the pull request.
+
+If this chat was told to work on `main` or `staging` themselves, ask before pushing. Those branches are shared; a feature branch cut from either of them is fine to push.
 
 ## Two chats editing at once
 

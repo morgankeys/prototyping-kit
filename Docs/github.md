@@ -69,8 +69,10 @@ delete head branches** on, this is rarely needed.
 
 ## Working with agents
 
-- **Agents open pull requests; people merge them.** An agent pushes a branch and opens a
-  PR only when asked (the `/pr` skill). Merging and promoting are always done by a person.
+- **Agents push feature branches; people merge them.** An agent pushes a new branch when
+  its commits are ready, and asks first when the work is on `main` or `staging`. An agent
+  opens a PR only when asked (the `/pr` skill). Merging and promoting are always done by a
+  person.
 - **Agent sessions can't delete branches.** Claude Code cloud sessions can push branches
   but get a 403 when deleting one, so branch cleanup is a person's job.
 - **Agent rules live in the repo.** `AGENTS.md` is the entry point, and changes to how

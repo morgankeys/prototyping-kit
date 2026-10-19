@@ -36,3 +36,12 @@ compared and pulled in. Add one line to the fork's root `README.md`:
 
 When you port a kit change into the fork, or a fork's improvement back into the kit,
 update the line or note the port in the commit body.
+
+Kits made with the template's `new-kit.sh` get this line automatically, plus a `template`
+git remote pointing back at the kit, so `git fetch template` brings in kit changes to
+compare or merge.
+<!-- template-only:start -->
+
+In the template itself, `new-kit.sh` is the way to start a new kit. It strips itself and
+every `template-only` block (like this one) from the copy, so a kit never contains it.
+<!-- template-only:end -->

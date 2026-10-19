@@ -27,10 +27,28 @@ The one assumed dependency is Figma. The spine of the kit is
 | `Export/` | Built versions of the prototype, staged for manual transfer to a server.  |
 | `Agents/` | Instructions, skills, context, and prompts for AI agents.                 |
 
+<!-- template-only:start -->
+## Start a new kit
+
+```bash
+./new-kit.sh
+```
+
+The script asks for the new kit's name and where to put it, copies the template's
+committed files into a fresh git repo, and can create and push a GitHub repo for it.
+
+The new kit is standalone: it does not include `new-kit.sh` or any `template-only`
+sections of the docs, like this one. Its README gets the kit's name and a
+[provenance line](Agents/context/kit-structure.md#kit-provenance), and the repo gets a
+`template` git remote pointing back here so you can pull in later kit updates
+(`git fetch template`, then merge).
+
+<!-- template-only:end -->
 ## Getting started
 
-1. Fork the repo and record where it came from (see
+1. Make sure the kit records where it came from (see
    [`Agents/context/kit-structure.md`](Agents/context/kit-structure.md#kit-provenance)).
+   Kits made with the template's `new-kit.sh` already do.
 2. Pick a stack for `Code/` and fill in the command table in
    [`Code/README.md`](Code/README.md) and the skeleton in
    [`Code/ARCHITECTURE.md`](Code/ARCHITECTURE.md).

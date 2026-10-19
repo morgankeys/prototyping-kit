@@ -16,6 +16,22 @@ A prototyping kit. Work is organized into four top-level, peer folders:
 
 You may read and manage **all four** folders, not just `Code/`.
 
+<!-- template-only:start -->
+## This is the template
+
+This repo is the prototyping-kit **template**. `new-kit.sh` at the repo root duplicates it
+into a fresh, standalone kit for one specific prototype (it asks for the new repo's name).
+
+- Run it when someone wants a new kit: `./new-kit.sh`. It is a plain script, not a skill.
+- It is **not copied** into the new kit, and neither is this section: anything between
+  `template-only:start` / `template-only:end` HTML comments in a Markdown file is stripped
+  from the copy. Wrap any future template-only notes the same way.
+- In a duplicated kit there is no `new-kit.sh`. Don't recreate it there; new kits come
+  from the template.
+- The copy's `README.md` gets the kit's name and the provenance line described in
+  `Agents/context/kit-structure.md`.
+
+<!-- template-only:end -->
 ## Where to look
 
 - **Skills** — reusable capabilities: `Agents/skills/`

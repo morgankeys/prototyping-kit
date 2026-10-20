@@ -52,7 +52,7 @@ sections of the docs, like this one. Its README gets the kit's name and a
 2. Pick a stack for `Code/` and fill in the command table in
    [`Code/README.md`](Code/README.md) and the skeleton in
    [`Code/ARCHITECTURE.md`](Code/ARCHITECTURE.md).
-3. Export your Figma variables into `Docs/Design system/Figma tokens/` and follow
+3. Export your Figma variables into `Docs/Design system/Figma/Tokens/` and follow
    [`Agents/skills/design-tokens/SKILL.md`](Agents/skills/design-tokens/SKILL.md).
 4. Browse [`Docs/Tooling.md`](Docs/Tooling.md) for tools worth adding.
 5. Managing branches and repo settings: [`Docs/github.md`](Docs/github.md).

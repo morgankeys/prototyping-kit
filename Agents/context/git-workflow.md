@@ -93,4 +93,4 @@ git branch -d <type>/<slug>
 
 - Rebase onto the integration branch. Do not merge the integration branch into a feature branch.
 - Never commit generated output: build output and dependency folders belong in [`.gitignore`](../../.gitignore). If generated files show up in `git status`, fix the ignore rules.
-  Exception: unpacked Figma token JSON under `Docs/Design system/Figma tokens/` is tracked on purpose, even though the `tokens` command regenerates it, so token diffs are reviewable in pull requests.
+  Exception: unpacked Figma token JSON under `Docs/Design system/Figma/Tokens/` is tracked on purpose, even though the `tokens` command regenerates it, so token diffs are reviewable in pull requests.

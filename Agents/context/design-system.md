@@ -29,6 +29,10 @@ All under `Docs/Design system/`:
   `Guidelines/README.md` lists each one and when to read it. Read `components.md` before
   building UI, so you reuse a component instead of recreating it.
 
+`Export/DESIGN.md` is a generated, portable summary of all this for other AI tools. Don't
+read it as a source or edit it; regenerate it with `/export-design-md` after changing
+guidelines or tokens.
+
 When a guideline and a token disagree on a value, the token wins. Guidelines say when and
 why to use a token; they don't restate its value.
 

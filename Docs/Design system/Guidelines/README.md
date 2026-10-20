@@ -27,6 +27,8 @@ extended.
   so an agent can pick files without opening them all.
 - **Unfilled is fine.** Leave a stub's placeholders in place until there's a real answer;
   add gaps under *Open questions* rather than inventing a rule.
+- **Portable export.** `/export-design-md` turns the filled-in parts of these files (all
+  but `components.md`) into `Export/DESIGN.md`. Re-run it after editing them.
 - **New topic:** copy [`_template.md`](_template.md) and add a row above.
 - Docs that live elsewhere: link to them rather than copying, and note when they were last
   checked.

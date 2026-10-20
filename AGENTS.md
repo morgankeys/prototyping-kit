@@ -59,6 +59,7 @@ column, read the right column first.
 | Design patterns or guidelines: color, type, layout, elevation, shape, motion, accessibility, copy | The matching file in `Docs/Design system/Guidelines/` (index: its `README.md`) |
 | Building UI that might already exist as a component | `Docs/Design system/Guidelines/components.md` |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
+| `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
 | Regenerating tokens from a new Figma export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |

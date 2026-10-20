@@ -24,8 +24,13 @@ All under `Docs/Design system/`:
 - `Figma/Assets/` — mockups, images, and icons exported from Figma.
 - `Supplemental/` — tokens and assets that aren't Figma variables (from production code,
   hand-maintained, …). Check here before concluding a value has no token.
-- `Guidelines/` — written patterns and guidelines that tokens don't capture. Read the
-  relevant file before building a new pattern or component.
+- `Guidelines/` — written patterns and guidelines that tokens don't capture, one file per
+  topic (color, typography, layout, components, …). Load only the files your task needs;
+  `Guidelines/README.md` lists each one and when to read it. Read `components.md` before
+  building UI, so you reuse a component instead of recreating it.
+
+When a guideline and a token disagree on a value, the token wins. Guidelines say when and
+why to use a token; they don't restate its value.
 
 ## Styling rules
 

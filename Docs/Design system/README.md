@@ -21,7 +21,7 @@ variable belongs in `Supplemental/` or `Guidelines/`.
 | --- | --- |
 | [`Figma/`](Figma/) | Everything that comes straight out of Figma. [`Tokens/`](Figma/Tokens/) holds the variables exports and their unpacked JSON; [`Assets/`](Figma/Assets/) holds exported mockups, images, icons, and the like. |
 | [`Supplemental/`](Supplemental/) | Extended tokens and assets that are not literally Figma variables: sourced from production code, maintained by hand, or anything else. |
-| [`Guidelines/`](Guidelines/) | Written context, as docs or Markdown, capturing patterns and guidelines that tokens don't define. |
+| [`Guidelines/`](Guidelines/) | Written patterns and guidelines that tokens don't define, one file per topic (color, typography, layout, components, …). |
 
 Also at this level:
 

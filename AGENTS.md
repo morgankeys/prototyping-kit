@@ -56,7 +56,9 @@ column, read the right column first.
 | Styling components, writing CSS, or implementing a page from Figma | `Agents/context/design-system.md` |
 | Rounded cards or thumbnails with a scrim, gradient, or border over media | `Agents/context/troubleshooting/rounded-clipping.md` |
 | A visual glitch, odd build or tooling behavior, or a bug that resists an obvious fix | `Agents/context/troubleshooting/README.md` |
-| Design patterns or guidelines not captured in tokens, or tokens/assets that aren't Figma variables | `Docs/Design system/README.md` |
+| Design patterns or guidelines: color, type, layout, elevation, shape, motion, accessibility, copy | The matching file in `Docs/Design system/Guidelines/` (index: its `README.md`) |
+| Building UI that might already exist as a component | `Docs/Design system/Guidelines/components.md` |
+| Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | Regenerating tokens from a new Figma export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |

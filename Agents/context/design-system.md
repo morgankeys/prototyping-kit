@@ -16,6 +16,17 @@ Two files, two jobs:
 
 List the same links for humans in `Docs/Design system/README.md`.
 
+## Where design-system sources live
+
+All under `Docs/Design system/`:
+
+- `Figma/Tokens/` — Figma variables exports and their unpacked JSON (input to `tokens`).
+- `Figma/Assets/` — mockups, images, and icons exported from Figma.
+- `Supplemental/` — tokens and assets that aren't Figma variables (from production code,
+  hand-maintained, …). Check here before concluding a value has no token.
+- `Guidelines/` — written patterns and guidelines that tokens don't capture. Read the
+  relevant file before building a new pattern or component.
+
 ## Styling rules
 
 **Scoped styles only.** Component styling lives in the component's own scoped style block.

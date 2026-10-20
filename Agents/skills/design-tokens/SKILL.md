@@ -11,7 +11,7 @@ each role to this project's real command.
 
 ## When to use this skill
 
-- A new Figma token export (`.zip`) has been added to `Docs/Design system/Figma tokens/`.
+- A new Figma token export (`.zip`) has been added to `Docs/Design system/Figma/Tokens/`.
 - Tokens were added, removed, or renamed in the Figma library file.
 - The token transform or converter config in `Code/` changed.
 - You need to validate design-system compliance before committing styling changes.
@@ -26,7 +26,7 @@ Export each variable collection from the **library file** (see
 
 ### 2. Place the export
 
-Drop the zips in `Docs/Design system/Figma tokens/`, replacing the previous ones with the
+Drop the zips in `Docs/Design system/Figma/Tokens/`, replacing the previous ones with the
 same names.
 
 ### 3. Run `tokens`
@@ -34,7 +34,7 @@ same names.
 `tokens` does two things in order:
 
 1. **Unpack.** Each zip expands into its own folder under
-   `Docs/Design system/Figma tokens/unpacked/<collection>/`. They must not share a folder:
+   `Docs/Design system/Figma/Tokens/unpacked/<collection>/`. They must not share a folder:
    several Figma collections export a file with the same name, `Baseline.tokens.json`, and
    would overwrite each other.
 2. **Build.** The converter reads the unpacked JSON and writes the generated token CSS,
@@ -47,7 +47,7 @@ project's `Code/ARCHITECTURE.md` says which.
 ### 4. Review the diff
 
 ```bash
-git diff -- "Docs/Design system/Figma tokens/unpacked/"
+git diff -- "Docs/Design system/Figma/Tokens/unpacked/"
 ```
 
 Look for tokens added, removed, or renamed, values that changed, and any change to a
@@ -137,7 +137,7 @@ exits non-zero and lists the offending tokens. It protects against:
 - **Build fails on the alpha guard.** The transform emitted a translucent token as opaque.
   Fix the color transform as above.
 - **A new token does not appear in the CSS.** Check the zip is in
-  `Docs/Design system/Figma tokens/`, that it unpacked into its own folder, and that the
+  `Docs/Design system/Figma/Tokens/`, that it unpacked into its own folder, and that the
   converter's filters (by `$type` or collection) include it.
 - **Components broke after regeneration.** Run `validate` and search for the removed or
   renamed names; update components to the new tokens and validate again.

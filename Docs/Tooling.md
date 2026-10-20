@@ -16,7 +16,7 @@ Core to the kit's spine: Figma → tokens → prototype → capture back to Figm
 ### Figma variables export
 
 Figma exports variable collections as DTCG-style JSON, one zip per collection, dropped in
-`Docs/Design system/Figma tokens/`.
+`Docs/Design system/Figma/Tokens/`.
 
 - **Alpha is a separate field.** A color token's `hex` is 6-digit RGB only; opacity lives
   in `alpha`. Anything that reads only `hex` silently drops transparency. See

@@ -15,7 +15,7 @@ current when the stack changes.
 | `build`    | Produce the production build. Runs `tokens` first, the alpha regression guard, and the dev-only pages guard. | `<fill in>` |
 | `lint`     | Formatting check, code lint, and style lint (with token-only rules).                                  | `<fill in>` |
 | `check`    | Type or template check, if the stack has one.                                                          | `<fill in>` |
-| `tokens`   | Unpack the Figma token exports and regenerate the token CSS.                                           | `<fill in>` |
+| `tokens`   | Unpack the token source (a Figma variables export, by default) and regenerate the token CSS.           | `<fill in>` |
 | `validate` | Run design-system validation and rewrite `Docs/Design system/deviations-backlog.md`. Exits 0 with deviations present; `validate --strict` exits 1 on any deviation (local only). | `<fill in>` |
 
 ## Quick Start

@@ -4,8 +4,14 @@ The design system this prototype is built against, and where each kind of source
 lives. Agents load the same links from
 [`Agents/context/design-system.md`](../../Agents/context/design-system.md).
 
+The prototype needs a source of truth for tokens. Figma is the default: export variables
+from the library file into [`Figma/Tokens/`](Figma/Tokens/). A team can instead maintain
+tokens in this kit or a separate repository and feed both the prototype and Figma, or use
+another design tool, as long as the tokens are stored here.
+
 <!-- Summarize the system here once the project starts: what it is (an in-house library, a
-Material- or Radix-based kit, …), its token namespace, and anything unusual about it. -->
+Material- or Radix-based kit, …), its token namespace, where the tokens come from if not
+Figma, and anything unusual about it. -->
 
 ## Figma files
 

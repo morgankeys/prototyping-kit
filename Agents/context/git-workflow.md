@@ -32,7 +32,7 @@ Branch names are `<type>/<slug>`, lowercase and hyphenated.
 | `fix`    | Bug fixes and layout/style corrections                |
 | `docs`   | `Docs/`, `Agents/`, and README changes                |
 | `chore`  | Dependencies, config, tooling, housekeeping           |
-| `tokens` | Token pipeline changes and Figma export regenerations |
+| `tokens` | Token pipeline changes and token-export regenerations |
 
 ### Preferred: staging in front of main
 

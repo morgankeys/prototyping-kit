@@ -11,7 +11,12 @@ unchanged.
 
 ## Design ↔ code
 
-Core to the kit's spine: Figma → tokens → prototype → capture back to Figma.
+The kit needs a source of truth for tokens. The default path is
+**Figma → tokens → prototype → capture back to Figma**.
+
+A team can instead keep tokens in this kit or a separate repository and feed both the
+prototype and Figma, or use another design tool, as long as the tokens land in this kit.
+The tools below are the Figma path.
 
 ### Figma variables export
 

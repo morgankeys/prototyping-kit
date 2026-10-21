@@ -20,8 +20,9 @@ extended.
 
 ## Conventions
 
-- **Cite token names, never copy values.** Values live in `../Figma/Tokens/` and
-  `../Supplemental/`; when a guideline and a token disagree on a value, the token wins.
+- **Cite token names, never copy values.** Values live in `../Figma/Tokens/` (a Figma
+  variables export, by default) and `../Supplemental/`; when a guideline and a token
+  disagree on a value, the token wins.
   Guidelines say *when* and *why*.
 - **Front matter** carries `title` and a one-line `description` of when to load the file,
   so an agent can pick files without opening them all.

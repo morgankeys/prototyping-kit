@@ -1,6 +1,7 @@
-# Regenerate tokens from a new Figma export
+# Regenerate tokens from a new export
 
-Bring a fresh Figma variables export into the prototype and land it as a reviewable change.
+Bring a fresh token export into the prototype and land it as a reviewable change. Figma
+variables are the default source; the inputs below assume that export.
 
 ## Goal
 

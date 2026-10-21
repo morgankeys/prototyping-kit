@@ -53,14 +53,14 @@ column, read the right column first.
 | Repo settings, promoting to production, or branch cleanup | `Docs/github.md` |
 | Any work in `Code/` (editing, adding, or debugging code) | `Code/ARCHITECTURE.md` |
 | Quick commands, getting started, or which real command a role (`dev`, `build`, …) maps to | `Code/README.md` |
-| Styling components, writing CSS, or implementing a page from Figma | `Agents/context/design-system.md` |
+| Styling components, writing CSS, or implementing a page from a design | `Agents/context/design-system.md` |
 | Rounded cards or thumbnails with a scrim, gradient, or border over media | `Agents/context/troubleshooting/rounded-clipping.md` |
 | A visual glitch, odd build or tooling behavior, or a bug that resists an obvious fix | `Agents/context/troubleshooting/README.md` |
 | Design patterns or guidelines: color, type, layout, elevation, shape, motion, accessibility, copy | The matching file in `Docs/Design system/Guidelines/` (index: its `README.md`) |
 | Building UI that might already exist as a component | `Docs/Design system/Guidelines/components.md` |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
-| Regenerating tokens from a new Figma export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
+| Regenerating tokens from a new export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
 | Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |
@@ -95,11 +95,12 @@ moves and kit reuse.
    waits for an ask; `/pr` is that ask.
 5. **Sandbox, specimen, and sample pages never ship.** They render only on the local dev
    server. Never weaken whatever build check enforces this.
-6. **The token pipeline must preserve alpha.** Figma's variables export stores opacity in a
-   separate `alpha` field; the `hex` field is RGB only. Whatever converts tokens to CSS must
-   emit an alpha-bearing color for every token with `alpha < 1`, and the build must include
-   a regression guard that fails when one loses its alpha. Never simplify, remove, or
-   bypass that guard; fix the transform.
+6. **The token pipeline must preserve alpha.** Whatever converts tokens to CSS must emit an
+   alpha-bearing color wherever the source token is not fully opaque, and the build must
+   include a regression guard that fails when one loses its alpha. Never simplify, remove,
+   or bypass that guard; fix the transform. The usual source is a Figma variables export,
+   which stores opacity in a separate `alpha` field while `hex` is RGB only — reading only
+   `hex` drops transparency.
 
 ## Operating notes
 

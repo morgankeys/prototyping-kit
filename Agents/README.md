@@ -21,8 +21,8 @@ Agents/
 
 - **skills/** — A repeatable, self-contained capability with clear trigger conditions
   (e.g. "package the prototype for export"). Each skill lives in its own folder with a
-  `SKILL.md`. Current skills: `design-tokens` (regenerate tokens from a Figma export and
-  validate design-system compliance), `export-design-md` (`/export-design-md` builds a
+  `SKILL.md`. Current skills: `design-tokens` (regenerate tokens from an export — Figma by
+  default — and validate design-system compliance), `export-design-md` (`/export-design-md` builds a
   portable `Export/DESIGN.md` from the design-system docs), and `pr` (`/pr` commits,
   pushes, and opens a pull request). Copy `example-skill/` as a starting point for a new one, and add thin stubs in
   `.claude/skills/<skill>/` and `.cursor/skills/<skill>/` so those tools discover it.
@@ -33,8 +33,8 @@ Agents/
     any stack. Load only the entry that matches the symptom. Add an entry when a fix took
     real digging; see its `README.md`.
 - **prompts/** — Ready-to-run task templates. Current prompts: `review-drift` (review
-  `Docs/` and `Agents/` against `Code/`) and `regenerate-tokens` (bring in a new Figma
-  export). Copy `example-task.md` for a new one. Keep them parameterized and short.
+  `Docs/` and `Agents/` against `Code/`) and `regenerate-tokens` (bring in a new token
+  export; Figma variables by default). Copy `example-task.md` for a new one. Keep them parameterized and short.
 
 ## Conventions
 

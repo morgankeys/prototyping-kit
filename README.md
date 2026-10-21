@@ -15,8 +15,14 @@ file, and build the prototype in `Code/` with whatever stack suits the project.
 - **`Docs/` is the source of truth** for design and content: personas, assets, and the
   design system, including the Figma token exports the prototype is built from.
 
-The one assumed dependency is Figma. The spine of the kit is
+What the kit needs is a source of truth for tokens. The default is Figma:
+
 **Figma → tokens → prototype → capture back to Figma**.
+
+Alternatively, a team can use this kit, or in a separate repository, as the source of truth 
+and feed both the prototype and Figma.
+
+Teams can also use tools other than Figma as long as tokens can be stored/exported to this kit.
 
 ## Folders
 
@@ -52,7 +58,7 @@ sections of the docs, like this one. Its README gets the kit's name and a
 2. Pick a stack for `Code/` and fill in the command table in
    [`Code/README.md`](Code/README.md) and the skeleton in
    [`Code/ARCHITECTURE.md`](Code/ARCHITECTURE.md).
-3. Export your Figma variables into `Docs/Design system/Figma/Tokens/` and follow
+3. Export your Figma variables into `Docs/Design system/Figma tokens/` and follow
    [`Agents/skills/design-tokens/SKILL.md`](Agents/skills/design-tokens/SKILL.md).
 4. Browse [`Docs/Tooling.md`](Docs/Tooling.md) for tools worth adding.
 5. Managing branches and repo settings: [`Docs/github.md`](Docs/github.md).

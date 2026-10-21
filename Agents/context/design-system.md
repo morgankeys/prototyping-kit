@@ -4,17 +4,22 @@ Durable styling and component conventions for the prototype in `Code/`. Load thi
 editing components, styles, or anything that renders UI. Fill in the placeholders when the
 project starts; keep stack-specific detail in `Code/ARCHITECTURE.md`.
 
-For the token pipeline — how token CSS is generated from Figma exports, and the alpha
-transform — see [`Agents/skills/design-tokens/SKILL.md`](../skills/design-tokens/SKILL.md).
+For the token pipeline — how token CSS is generated, and the alpha transform — see
+[`Agents/skills/design-tokens/SKILL.md`](../skills/design-tokens/SKILL.md). Figma is the
+default source. The same pipeline applies when tokens are maintained in this kit, another
+repository, or another design tool: they still land in the folders below, and generated
+token CSS is what components use.
 
 ## Figma sources
 
-Two files, two jobs:
+When the project uses Figma, record two files:
 
 - **Site file** — the pages and features to implement: `<Figma link to the site file>`
 - **Library file** — core styles; tokens are exported from here: `<Figma link to the library file>`
 
-List the same links for humans in `Docs/Design system/README.md`.
+List the same links for humans in `Docs/Design system/README.md`. If tokens come from this
+kit, another repository, or another design tool, say so here and point at where they are
+maintained.
 
 ## Where design-system sources live
 

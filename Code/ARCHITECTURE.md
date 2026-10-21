@@ -38,7 +38,7 @@ against the code before editing.
 ## Build & Dev Workflow
 
 <!-- Commands reference, the order things run in during `build`, and the typical loops:
-     after a new Figma export, before committing component changes. -->
+     after a new token export, before committing component changes. -->
 
 ## Maintenance
 

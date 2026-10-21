@@ -1,13 +1,17 @@
 ---
 name: design-tokens
-description: Regenerate design tokens from a Figma variables export and run design-system validation. Use when a new Figma token export arrives, when the token transform changes, or when validating design-system compliance.
+description: Regenerate design tokens from a token export and run design-system validation. Figma variables are the default source. Use when a new token export arrives, when the token transform changes, or when validating design-system compliance.
 ---
 
 # Design tokens
 
-Workflow for turning a Figma variables export into the prototype's token CSS, and checking
-the result. Commands are named by role; [`Code/README.md`](../../../Code/README.md) maps
-each role to this project's real command.
+Workflow for turning a token export into the prototype's token CSS, and checking the
+result. Figma variables are the default source. Tokens maintained in this kit, another
+repository, or another design tool follow the same pipeline once they are stored under
+`Docs/Design system/`. Commands are named by role;
+[`Code/README.md`](../../../Code/README.md) maps each role to this project's real command.
+
+The steps below are the Figma variables export.
 
 ## When to use this skill
 

@@ -4,7 +4,9 @@ The following are general requirements for how the design system should be archi
 code, whatever the stack. These principles should be enforced via linting or validation
 scripts.
 
-* There is a global variables file, built directly from tokens exported from Figma.
+* There is a global variables file, built directly from the source-of-truth tokens. A Figma
+  variables export is the default source; the same file is built when tokens are maintained
+  in this kit, another repository, or another design tool.
 * There is a global CSS file that contains a minimal set of universal styles. For example,
   type settings.
 * Component styles should be contained and scoped to the component itself.

@@ -22,13 +22,18 @@ today.
 4. Check the component registry in `Docs/Design system/Guidelines/components.md` against
    `Code/`: every component has a row, and every Story and Code Connect `✓` has a file
    behind it.
-5. Check that every stub in `.claude/skills/`, `.cursor/skills/`, and `.cursor/rules/`
+5. Check that each rule and tool fact is stated in one place and linked from the others:
+   rules in `Agents/context/`, procedures in `Agents/skills/`, tool facts in
+   `Docs/Tooling.md`. Entry points (`README.md`, guideline files, `.cursor/rules/`) may
+   keep a one-line reminder plus a link. Replace any fuller restatement with a link.
+6. Check that every stub in `.claude/skills/`, `.cursor/skills/`, and `.cursor/rules/`
    points at a file that exists.
-6. Fix the docs, not the code, unless the code is plainly wrong; if it is, report it
+7. Fix the docs, not the code, unless the code is plainly wrong; if it is, report it
    instead of changing it in this task.
-7. Commit per `Agents/context/git-workflow.md` (type `docs`), then push the feature branch. Do not open a pull request unless asked.
+8. Commit per `Agents/context/git-workflow.md` (type `docs`), then push the feature branch. Do not open a pull request unless asked.
 
 ## Done when
 
 - Each drift found is either fixed or listed in your reply with why it was left.
 - No routing-table row, rule glob, or stub points at a missing file.
+- No rule or tool fact is stated in full in more than one place.

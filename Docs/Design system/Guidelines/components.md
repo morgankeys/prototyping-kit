@@ -37,10 +37,9 @@ if the project doesn't use Figma. -->
 - Reuse a listed component before building a new one; extend it with a variant before forking it.
 - A new component gets a row here in the same change that adds it to `Code/`, plus its
   property mapping if it has variants.
-- Leave a column empty rather than guess. Never invent a Figma link or a code path.
-- Stories and Code Connect files follow
-  [`Agents/context/component-catalog.md`](../../../Agents/context/component-catalog.md);
-  `/component-catalog` turns them on and fills gaps.
+- Fill in only what you can confirm; leave the rest empty. The full rules for this
+  registry, stories, and Code Connect files are in
+  [`Agents/context/component-catalog.md`](../../../Agents/context/component-catalog.md).
 
 ## Do / Don't
 

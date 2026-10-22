@@ -5,9 +5,14 @@ workbench (Storybook by default), and Figma Code Connect. Read this before addin
 component, a story, or a Code Connect file, or before turning these tools on for a stack.
 
 The kit installs none of the tools. The registry is plain docs and works from day one; the
-workbench and Code Connect are turned on with `/component-catalog`
-([`Agents/skills/component-catalog/SKILL.md`](../skills/component-catalog/SKILL.md)) once
-their inputs exist.
+workbench and Code Connect are turned on with `/component-catalog` once their inputs exist.
+
+This file holds the rules, and is the only place they are stated. The steps for turning
+the tools on are in
+[`Agents/skills/component-catalog/SKILL.md`](../skills/component-catalog/SKILL.md); facts
+about the tools themselves (gotchas, add-ons, setup by stack, plans) are in
+[`Docs/Tooling.md`](../../Docs/Tooling.md#component-catalog). Other files link here
+rather than restating a rule.
 
 ## Why
 
@@ -46,9 +51,7 @@ from.
   component's `data-*` variant attribute (see
   [`design-system.md`](design-system.md#component-variants)), so the mapping can be
   written from the Figma side before any code exists.
-- **Status columns:** empty means not yet, `✓` means done and passing its check, `n/a`
-  means it will never apply (no Figma, or a Figma-only component the prototype won't
-  build).
+- **Status columns** use the values defined in the registry's own comment.
 
 ## Rules once the tools are on
 
@@ -69,8 +72,8 @@ from.
 - **Code Connect files sit next to their component** (`<Component>.figma.*`) and map
   Figma properties exactly as the registry's property mapping says.
 - **Publishing is manual and local.** `connect` validates in CI; `connect --publish`
-  runs only on the owner's machine, with `FIGMA_ACCESS_TOKEN` in `Code/.env`. Code
-  Connect publishing is limited to Figma's Organization and Enterprise plans.
+  runs only on the owner's machine, with `FIGMA_ACCESS_TOKEN` in `Code/.env`. Agents and
+  CI never publish. Plan requirements are in `Docs/Tooling.md`.
 
 ## Without Storybook
 
@@ -91,13 +94,14 @@ To also remove the Code Connect placeholders, delete:
 | Place | What to remove |
 | --- | --- |
 | `Docs/Tooling.md` | The "Figma Code Connect" entry |
+| `README.md` | The *Figma* publishing step in "Getting started" |
 | `Code/README.md` | The `connect` row |
 | `Code/ARCHITECTURE.md` | The Code Connect comment under "Component catalog" |
 | `.github/workflows/ci.yml` | The `connect` step |
 | `.github/pull_request_template.md` | `connect` in the component catalog checkbox |
 | `Code/.env.example` | The `FIGMA_ACCESS_TOKEN` block |
 | `Docs/Design system/Guidelines/components.md` | The Figma and Code Connect columns, and the Figma columns of the property mappings |
-| `Agents/skills/component-catalog/SKILL.md` | Step 5, "Code Connect" |
+| `Agents/skills/component-catalog/SKILL.md` | The "Set up Code Connect" step, and its mentions in the other steps |
 
 The token pipeline's Figma default is separate; see
 [`Agents/skills/design-tokens/SKILL.md`](../skills/design-tokens/SKILL.md).

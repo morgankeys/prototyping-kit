@@ -76,8 +76,8 @@ it.
    and, if a Figma library is recorded, sets up Code Connect. See
    [`Agents/context/component-catalog.md`](Agents/context/component-catalog.md).
 8. ***Figma:* publish the Code Connect mappings.** Put a Figma personal access token in
-   `Code/.env` as `FIGMA_ACCESS_TOKEN` and run `connect --publish` from `Code/`. Needs a
-   Figma Organization or Enterprise plan.
+   `Code/.env` as `FIGMA_ACCESS_TOKEN` and run `connect --publish` from `Code/`. Check the
+   [plan requirement](Docs/Tooling.md#figma-code-connect) first.
 
 After setup:
 

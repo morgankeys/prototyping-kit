@@ -25,7 +25,11 @@ span folders.
   `Agents/skills/pr/SKILL.md`). `CLAUDE.md`, `GEMINI.md`, and
   `.github/copilot-instructions.md` point to `AGENTS.md`.
 - **Single source of truth.** When guidance could live in two places, put it in `Agents/`
-  and reference it from the tool-mandated file.
+  and reference it from the tool-mandated file. Within the kit, each kind of material has
+  one home: rules in `Agents/context/`, procedures in `Agents/skills/` (which link to the
+  rules rather than restating them), and facts about third-party tools in
+  `Docs/Tooling.md`. Entry points (`README.md`, guideline files, `.cursor/rules/`) keep at
+  most a one-line reminder plus a link.
 
 ## Kit provenance
 

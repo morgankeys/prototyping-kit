@@ -4,11 +4,9 @@ globs: Code/**/*.stories.*, Code/**/*.figma.*, Code/figma.config.json, Code/.sto
 alwaysApply: false
 ---
 
-Auto-attaches when editing stories, Code Connect files, or their config.
+Auto-attaches when editing stories, Code Connect files, or their config. Before editing,
+read `Agents/context/component-catalog.md`: each story or mapping must match its
+component's row and property mapping in `Docs/Design system/Guidelines/components.md`.
 
-- Each story or mapping matches its component's row and property mapping in
-  `Docs/Design system/Guidelines/components.md`.
-- Stories add no styles of their own; the workbench never ships with the build.
-- Never invent a Figma node link. Never publish Code Connect from CI or an agent session.
-
-Full guidance: `Agents/context/component-catalog.md`.
+Keep this rule thin: put durable guidance in `Agents/` and reference it here rather than
+duplicating it.

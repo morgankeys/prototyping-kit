@@ -33,6 +33,10 @@ Read this before adding any page that is not meant for the audience, or any page
   renders, never in a page file of its own.
 - **Real pages never import sample components.**
 
+Stories in the component workbench (Storybook by default) are the other home for specimen
+material. The same rules hold: story fixtures are sample content, and the workbench never
+ships with `build`. See [`component-catalog.md`](component-catalog.md).
+
 How the exclusion and the guard are implemented depends on the stack in `Code/`; document
 both in `Code/ARCHITECTURE.md` under "Dev-only pages guard".
 

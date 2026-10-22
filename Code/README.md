@@ -17,6 +17,13 @@ current when the stack changes.
 | `check`    | Type or template check, if the stack has one.                                                          | `<fill in>` |
 | `tokens`   | Unpack the token source (a Figma variables export, by default) and regenerate the token CSS.           | `<fill in>` |
 | `validate` | Run design-system validation and rewrite `Docs/Design system/deviations-backlog.md`. Exits 0 with deviations present; `validate --strict` exits 1 on any deviation (local only). | `<fill in>` |
+| `stories`  | Start the component workbench (Storybook by default) locally. Like `dev`, the only place it renders. | `<not turned on>` |
+| `stories-build` | Build the workbench to its static folder and check every story renders. The output never goes to `Export/`. | `<not turned on>` |
+| `connect`  | Validate the Figma Code Connect files without publishing. `connect --publish` publishes them to Figma: local only, needs `FIGMA_ACCESS_TOKEN` in `Code/.env`. | `<not turned on>` |
+
+The last three stay `<not turned on>` until `/component-catalog` fills them in (see
+[`Agents/context/component-catalog.md`](../Agents/context/component-catalog.md)). `connect`
+becomes `n/a` if the project doesn't use Figma.
 
 ## Quick Start
 

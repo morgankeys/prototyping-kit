@@ -64,6 +64,46 @@ Lets an agent session read designs, variables, and screenshots straight from a F
 and push captures back. Useful for implementing a page from the site file without
 copy-pasting specs.
 
+## Component catalog
+
+Both tools hang off the component registry in
+[`Docs/Design system/Guidelines/components.md`](Design%20system/Guidelines/components.md).
+`/component-catalog` installs them once a stack exists; the contract is
+[`Agents/context/component-catalog.md`](../Agents/context/component-catalog.md).
+
+### Storybook
+
+The default component workbench: every component and variant in isolation, wired to the
+`stories` and `stories-build` roles. Supports React, Vue, Svelte, Angular, Web Components,
+and more; its installer detects the framework.
+
+- **Delete the installer's example stories.** They hardcode colors and spacing and add
+  deviations to the backlog.
+- **Load the real styles in the preview:** the global stylesheet and the generated token
+  CSS, or stories won't look like the prototype.
+- **The static build is a public site.** Keep it out of `Export/` and out of `build`.
+- **MCP add-on** (`@storybook/addon-mcp`): lets agents query components and stories. React
+  only, and in preview, at the time of writing.
+- **`@storybook/addon-designs`** embeds a component's Figma frame in its story, a free
+  design-to-code link when the Figma plan doesn't include Code Connect.
+- **No Storybook:** a gallery page under the `dev/` pages folder meets the same contract
+  with no dependency.
+
+### Figma Code Connect
+
+Maps code components to Figma components, so Dev Mode and the Figma MCP server show this
+project's components instead of generic markup. Wired to the `connect` role.
+
+- **Parsers by stack:** `react` (React, React Native), `html` (Web Components, Angular,
+  Vue), `swift`, `compose`. Other stacks use template files (`.figma.js` or `.figma.ts`)
+  with `label` and `language` set in `figma.config.json`.
+- **Publishing needs an Organization or Enterprise plan** and a personal access token
+  (`FIGMA_ACCESS_TOKEN`, server-side only). Publish locally; let CI only validate, with
+  `--exit-on-unreadable-files`.
+- **Needs a Figma library.** Without one there is nothing to map; see "Not using Figma?"
+  in the contract to switch it off.
+- Docs: [developers.figma.com/docs/code-connect](https://developers.figma.com/docs/code-connect/).
+
 ## Enforcement (any stack)
 
 ### Stylelint + `stylelint-declaration-strict-value`

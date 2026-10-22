@@ -19,11 +19,14 @@ today.
    and rule they state, confirm it exists in `Code/` and behaves as described.
 3. Do the same for each file the `AGENTS.md` routing table points to that touches
    `<scope>`, plus the `.cursor/rules/*.mdc` globs (do they still match real paths?).
-4. Check that every stub in `.claude/skills/`, `.cursor/skills/`, and `.cursor/rules/`
+4. Check the component registry in `Docs/Design system/Guidelines/components.md` against
+   `Code/`: every component has a row, and every Story and Code Connect `✓` has a file
+   behind it.
+5. Check that every stub in `.claude/skills/`, `.cursor/skills/`, and `.cursor/rules/`
    points at a file that exists.
-5. Fix the docs, not the code, unless the code is plainly wrong; if it is, report it
+6. Fix the docs, not the code, unless the code is plainly wrong; if it is, report it
    instead of changing it in this task.
-6. Commit per `Agents/context/git-workflow.md` (type `docs`), then push the feature branch. Do not open a pull request unless asked.
+7. Commit per `Agents/context/git-workflow.md` (type `docs`), then push the feature branch. Do not open a pull request unless asked.
 
 ## Done when
 

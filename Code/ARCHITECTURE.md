@@ -35,6 +35,16 @@ against the code before editing.
 <!-- Where dev-only pages live, how this stack keeps them out of every build, and how the
      build fails if one leaks. See Agents/context/dev-only-pages.md for the contract. -->
 
+## Component catalog
+
+<!-- Filled in by /component-catalog; contract in Agents/context/component-catalog.md.
+     Workbench: the tool and version (Storybook by default, or a dev-only gallery page),
+     where its config lives, how its preview loads the global stylesheet and token CSS,
+     how token modes are switched, and where its static output goes.
+     Code Connect: the parser or template setup, where figma.config.json lives, what
+     `connect` runs in CI and whether it needs a token. Write "Not used" if the project
+     doesn't use Figma. -->
+
 ## Build & Dev Workflow
 
 <!-- Commands reference, the order things run in during `build`, and the typical loops:
@@ -42,5 +52,6 @@ against the code before editing.
 
 ## Maintenance
 
-<!-- When to regenerate tokens, how to add a component, how to work down the deviations
-     backlog, and which docs to update when this file changes. -->
+<!-- When to regenerate tokens, how to add a component (with its registry row, story,
+     and Code Connect file), how to work down the deviations backlog, and which docs to
+     update when this file changes. -->

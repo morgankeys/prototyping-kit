@@ -16,6 +16,7 @@ Run from `Code/`. `Code/README.md` maps each role to this project's real command
 - [ ] `check`
 - [ ] `build`
 - [ ] `validate`
+- [ ] `stories-build` and `connect`, once `/component-catalog` has turned them on
 - [ ] Checked the affected pages in the dev server
 
 ## Design system deviations

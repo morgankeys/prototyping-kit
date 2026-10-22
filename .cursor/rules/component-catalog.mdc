@@ -1,0 +1,14 @@
+---
+description: Stories and Code Connect files follow the component catalog contract
+globs: Code/**/*.stories.*, Code/**/*.figma.*, Code/figma.config.json, Code/.storybook/**
+alwaysApply: false
+---
+
+Auto-attaches when editing stories, Code Connect files, or their config.
+
+- Each story or mapping matches its component's row and property mapping in
+  `Docs/Design system/Guidelines/components.md`.
+- Stories add no styles of their own; the workbench never ships with the build.
+- Never invent a Figma node link. Never publish Code Connect from CI or an agent session.
+
+Full guidance: `Agents/context/component-catalog.md`.

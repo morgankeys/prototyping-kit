@@ -24,6 +24,10 @@ extended.
   variables export, by default) and `../Supplemental/`; when a guideline and a token
   disagree on a value, the token wins.
   Guidelines say *when* and *why*.
+- **Checkable rules also go in the usage map.** When a "Not for" or a Don't can be stated
+  as a token pattern plus a property, selector, or pairing, add it to
+  [`../token-usage.json`](../token-usage.json) too, so `validate` enforces it. The
+  guideline keeps the reason.
 - **Front matter** carries `title` and a one-line `description` of when to load the file,
   so an agent can pick files without opening them all.
 - **Unfilled is fine.** Leave a stub's placeholders in place until there's a real answer;

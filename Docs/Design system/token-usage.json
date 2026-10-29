@@ -1,0 +1,105 @@
+{
+  "$comment": [
+    "Intended use of each token, in a form the validator can check. Hand-maintained: the design-system owner decides what goes here.",
+    "Contract: 'Token usage' in design-in-code architecture.md. Keys starting with '$' are notes; validators ignore them.",
+    "The groups below are a starting example for a Material-style system. Replace them with this project's groups once the first export is in."
+  ],
+  "namespace": "<prefix>",
+
+  "propertySets": {
+    "$comment": "Named CSS property lists. Reference one as '@name' anywhere a property list is expected. A trailing '*' matches any longhand.",
+    "fill": ["background", "background-color", "fill"],
+    "text-color": ["color", "-webkit-text-fill-color", "caret-color", "text-decoration-color", "fill", "stroke"],
+    "stroke-color": ["border", "border-*-color", "border-color", "border-top", "border-right", "border-bottom", "border-left", "border-block*", "border-inline*", "outline", "outline-color", "stroke", "column-rule-color"],
+    "effect-color": ["box-shadow", "text-shadow", "filter"],
+    "spacing": ["margin*", "padding*", "gap", "row-gap", "column-gap", "inset*", "top", "right", "bottom", "left", "scroll-margin*", "scroll-padding*"],
+    "size": ["width", "height", "min-width", "min-height", "max-width", "max-height", "inline-size", "block-size", "min-inline-size", "min-block-size", "max-inline-size", "max-block-size", "flex-basis"],
+    "radius": ["border-radius", "border-*-radius"],
+    "stroke-width": ["border-width", "border-*-width", "border", "border-top", "border-right", "border-bottom", "border-left", "outline", "outline-width", "outline-offset", "stroke-width"]
+  },
+
+  "figmaScopes": {
+    "$comment": "How each Figma variable scope (from $extensions 'com.figma.scopes') maps to CSS properties. ALL_SCOPES, or no scopes at all, means the export records no restriction.",
+    "ALL_FILLS": ["@fill", "@text-color"],
+    "FRAME_FILL": ["@fill"],
+    "SHAPE_FILL": ["@fill"],
+    "TEXT_FILL": ["@text-color"],
+    "STROKE_COLOR": ["@stroke-color"],
+    "EFFECT_COLOR": ["@effect-color"],
+    "CORNER_RADIUS": ["@radius"],
+    "WIDTH_HEIGHT": ["@size"],
+    "GAP": ["@spacing"],
+    "STROKE_FLOAT": ["@stroke-width"],
+    "EFFECT_FLOAT": ["box-shadow", "text-shadow", "filter", "backdrop-filter"],
+    "OPACITY": ["opacity"],
+    "FONT_FAMILY": ["font-family", "font"],
+    "FONT_STYLE": ["font-style", "font-variation-settings", "font"],
+    "FONT_WEIGHT": ["font-weight", "font"],
+    "FONT_SIZE": ["font-size", "font"],
+    "LINE_HEIGHT": ["line-height", "font"],
+    "LETTER_SPACING": ["letter-spacing"],
+    "PARAGRAPH_SPACING": ["margin-block*", "margin-top", "margin-bottom"],
+    "PARAGRAPH_INDENT": ["text-indent"],
+    "TEXT_CONTENT": ["content"]
+  },
+
+  "groups": [
+    {
+      "id": "primitive",
+      "match": "ref-*",
+      "intent": "Palette and scale primitives. Reach them through a semantic token, never directly.",
+      "direct": false
+    },
+    {
+      "id": "state-layer",
+      "match": "color-state-layers-*",
+      "intent": "Translucent overlay that shows hover, focus, and pressed states.",
+      "properties": ["@fill"],
+      "selectors": [":hover", ":focus", ":focus-visible", ":focus-within", ":active", "[data-state", "::before", "::after"]
+    },
+    {
+      "id": "on-surface",
+      "match": "color-on-surface*",
+      "intent": "Text and icons on any surface or surface container.",
+      "properties": ["@text-color", "@stroke-color"],
+      "pairs": [{ "properties": ["@fill"], "tokens": ["color-surface", "color-surface-*", "color-background"] }]
+    },
+    {
+      "id": "on-color",
+      "match": "color-on-{role}",
+      "intent": "Text and icons drawn on the {role} color.",
+      "properties": ["@text-color", "@stroke-color"],
+      "pairs": [{ "properties": ["@fill"], "tokens": ["color-{role}"] }]
+    },
+    {
+      "id": "outline",
+      "match": "color-outline*",
+      "intent": "Borders, dividers, and focus outlines.",
+      "properties": ["@stroke-color"]
+    },
+    {
+      "id": "color",
+      "match": "color-*",
+      "intent": "Color roles: containers, surfaces, and accents. Text on them uses the matching on-* token.",
+      "properties": ["@fill", "@text-color", "@stroke-color", "@effect-color"]
+    },
+    {
+      "id": "spacing",
+      "match": "spacing-*",
+      "intent": "Space between and inside elements.",
+      "properties": ["@spacing"]
+    },
+    {
+      "id": "radius",
+      "match": "shape-*",
+      "intent": "Corner radius.",
+      "properties": ["@radius"]
+    },
+    {
+      "id": "typography",
+      "match": "typescale-*",
+      "intent": "One role in the type scale. Set family, size, weight, line-height, and tracking from the same role.",
+      "properties": ["font", "font-family", "font-size", "font-weight", "font-style", "line-height", "letter-spacing"]
+    }
+  ]
+}

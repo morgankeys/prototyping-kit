@@ -63,6 +63,8 @@ column, read the right column first.
 | Regenerating tokens from a new export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
+| Whether a token fits its intended use, the token usage map, or `token-*` deviations | "Token usage" in `Docs/Design system/design-in-code architecture.md` |
+| `/token-usage-review` (changed tokens by default, `full` for everything), or reviewing token use before a pull request that changes styles | `Agents/skills/token-usage-review/SKILL.md` |
 | Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |
 | Choosing or adding a tool (token converter, linter, Figma capture) | `Docs/Tooling.md` |
 | Forking the kit or porting changes between kit and fork | `Agents/context/kit-structure.md` |
@@ -82,8 +84,8 @@ moves and kit reuse.
    edited and are read back on the next run (for example, the `Rationale:` lines in the
    design-system deviations backlog).
 2. **Never weaken lint or validation rules to suppress design-system deviations.** Fix the
-   root cause or log the deviation in the backlog — do not disable the rule or add an
-   ignore comment. When you log one, write your best guess of why on its rationale line;
+ root cause or log the deviation in the backlog — do not disable the rule, add an
+ ignore comment, or widen the token usage map. When you log one, write your best guess of why on its rationale line;
    leave the "needs review" sentinel only when the reason is genuinely unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded
    color, spacing, or radius.

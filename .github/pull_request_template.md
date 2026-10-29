@@ -16,6 +16,7 @@ Run from `Code/`. `Code/README.md` maps each role to this project's real command
 - [ ] `check`
 - [ ] `build`
 - [ ] `validate`
+- [ ] `/token-usage-review` (changed tokens; `full` before a promotion to `main`)
 - [ ] Checked the affected pages in the dev server
 
 ## Design system deviations

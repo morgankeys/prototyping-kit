@@ -64,7 +64,7 @@ column, read the right column first.
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
 | Whether a token fits its intended use, the token usage map, or `token-*` deviations | "Token usage" in `Docs/Design system/design-in-code architecture.md` |
-| `/token-usage-review`, or reviewing token use before a pull request that changes styles | `Agents/skills/token-usage-review/SKILL.md` |
+| `/token-usage-review` (changed tokens by default, `full` for everything), or reviewing token use before a pull request that changes styles | `Agents/skills/token-usage-review/SKILL.md` |
 | Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |
 | Choosing or adding a tool (token converter, linter, Figma capture) | `Docs/Tooling.md` |
 | Forking the kit or porting changes between kit and fork | `Agents/context/kit-structure.md` |

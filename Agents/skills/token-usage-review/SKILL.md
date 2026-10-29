@@ -1,6 +1,6 @@
 ---
 name: token-usage-review
-description: Review whether design tokens are used for their intended purpose, beyond what validate can check. Use when the user invokes /token-usage-review, before opening a pull request that changes styles or components, or when asked to check that tokens are used appropriately.
+description: Review whether design tokens are used for their intended purpose, beyond what validate can check. Reviews recently changed tokens by default; pass `full` for the whole codebase. Use when the user invokes /token-usage-review, before opening a pull request that changes styles or components, or when asked to check that tokens are used appropriately.
 ---
 
 # /token-usage-review
@@ -15,18 +15,48 @@ read that section first.
 The review is advisory. It never gates CI, and it never edits the deviations backlog
 except to write `Rationale:` lines.
 
-## Inputs
+## Scope
 
-- `<scope>`: the files to review. Default: the style and component files changed on this
-  branch, `git diff --name-only <integration branch>...HEAD` plus uncommitted changes. The
-  integration branch is named in `Agents/context/git-workflow.md`.
+By default the review looks only at **recently changed tokens**: token uses that changed,
+and tokens whose meaning changed. Extra words after the command pick another scope:
+
+| Invocation | Reviews |
+| --- | --- |
+| `/token-usage-review` | Changes since the integration branch, plus uncommitted changes. The integration branch is named in `Agents/context/git-workflow.md`. |
+| `/token-usage-review since <ref>` | Changes since `<ref>`, such as a tag or the last full review's commit. |
+| `/token-usage-review full` | Every token reference in `Code/` and every entry in the review file. |
+
+A change scope (the default or `since`) collects two sets of references from
+`git diff <base>...HEAD` plus the working tree:
+
+- **Changed uses.** Every token reference inside a rule block the diff touches, not only on
+  changed lines, because pairing depends on the whole block. Add the token references in
+  components whose markup changed, since a moved element can land on a different
+  background.
+- **Changed tokens.** Every reference anywhere in `Code/`, changed or not, to a token whose
+  intent changed:
+  - its value, scopes, description, or alias changed in `Docs/Design system/Figma/Tokens/unpacked/`
+    or `Docs/Design system/Supplemental/`;
+  - the usage-map group it matches changed in `Docs/Design system/token-usage.json`;
+  - a changed file in `Docs/Design system/Guidelines/` names it or its group.
+
+Also re-check the review file's entries for files in scope, and drop the ones that are
+fixed. Leave the other entries alone.
+
+If the diff has no style, component, token, usage-map, or guideline changes, say so and
+stop.
+
+Run `full` when the kit first adopts this review, after a guidelines or usage-map
+overhaul, and before promoting `staging` to `main`. In the reply, name the scope used and
+how many references it covered.
 
 ## Steps
 
 ### 1. Run `validate` first
 
 Fix or give a rationale for every new `token-*` deviation in the backlog before reviewing
-meaning. Don't re-report what the backlog already lists.
+meaning. Don't re-report what the backlog already lists. `validate` always scans the whole
+codebase whatever this review's scope is; it is cheap and rewrites the full backlog.
 
 ### 2. Load the intent
 

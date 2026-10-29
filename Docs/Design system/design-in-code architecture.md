@@ -159,8 +159,15 @@ Some misuse depends on meaning no pattern captures: the primary color on a decor
 element, a `display` type role on body copy, `on-surface` text inside a child of a
 `primary` container, a spacing token named for one relationship used for another. An agent
 reviews this with the
-[`token-usage-review`](../../Agents/skills/token-usage-review/SKILL.md) skill, scoped to the
-files a change touches.
+[`token-usage-review`](../../Agents/skills/token-usage-review/SKILL.md) skill.
+
+By default the review covers only **recently changed tokens**. That means token uses in
+rule blocks or markup the change touches, and every use of a token whose value, scopes,
+description, usage-map group, or guideline changed. A `full` option reviews every token
+reference in the codebase, for first adoption, after an overhaul of the guidelines or usage
+map, and before a promotion to production. Layers 1 and 2 always scan everything: they are
+cheap, and `validate` rewrites the whole backlog on each run, so a partial scan would drop
+entries and fail the CI check for a stale backlog.
 
 Its findings are advisory and never gate CI. They live in
 `Docs/Design system/token-usage-review.md`, which the agent maintains by hand (it is not

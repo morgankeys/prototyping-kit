@@ -12,6 +12,8 @@ scripts.
 * Component styles should be contained and scoped to the component itself.
 * Raw or hardcoded CSS values should be minimized. Wherever possible, token-based variables
   should be used.
+* Each token is used for its intended purpose, as recorded in the token source and the
+  token usage map. See [Token usage](#token-usage).
 * There is a design-system validation script/mechanism (run either automatically or
   on-demand) that assesses code based on these principles and generates a list of
   identified deviations.
@@ -43,6 +45,127 @@ validator finds component style blocks are stack decisions: record them in
 
 The validator also implements the backlog interface below: regenerate, carry rationale
 forward, write only on change, and the exit codes under [Exit codes and CI](#exit-codes-and-ci).
+
+## Token usage
+
+The rules above check that code uses tokens. The rules here check that it uses each token
+**for what it is meant for**: a spacing token in `font-size`, an `on-primary` text color as
+a background, or a hover state layer on a resting element all pass the rules above and
+still break the system.
+
+Intended use is checked in three layers, most deterministic first. Each layer handles only
+what the one before it cannot.
+
+| Layer | Source of intent | Checked by | Findings go to |
+| --- | --- | --- | --- |
+| 1. Token source | Figma variable scopes (`$extensions` → `com.figma.scopes`) and `$description` | `validate` | The deviations backlog |
+| 2. Usage map | `Docs/Design system/token-usage.json`, hand-maintained | `validate` | The deviations backlog |
+| 3. Semantic review | Token names, descriptions, the usage map's `intent` lines, and `Guidelines/` | An agent, with the [`token-usage-review`](../../Agents/skills/token-usage-review/SKILL.md) skill | `Docs/Design system/token-usage-review.md` |
+
+When the agent review keeps finding the same kind of misuse, the fix is to encode it in
+layer 1 or 2 so `validate` catches it from then on. The review exists for what can't be
+expressed as a pattern.
+
+### Layer 1: the token source
+
+A Figma variable records where it may be applied: its scopes (`TEXT_FILL`, `GAP`,
+`CORNER_RADIUS`, …) are set by the designer in the variable's settings and exported with it.
+`tokens` writes a generated **token manifest** next to the token CSS, one entry per CSS
+variable:
+
+```json
+{
+  "--<prefix>-color-on-primary": {
+    "type": "color",
+    "collection": "Color",
+    "scopes": ["TEXT_FILL", "STROKE_COLOR"],
+    "description": "Text and icons on primary.",
+    "aliasOf": "--<prefix>-ref-palette-primary-100"
+  }
+}
+```
+
+`scopes` and `description` come straight from the export; omit what the source lacks.
+`aliasOf` is set when the token's value references another token. Tokens from outside
+Figma can supply the same fields. Where the manifest lives is a stack decision; record it in
+`Code/ARCHITECTURE.md`. It is generated: never hand-edit it.
+
+The usage map's `figmaScopes` table translates each scope into CSS properties. A token
+whose scopes are `ALL_SCOPES`, or empty, has no restriction from this layer.
+
+Setting scopes in Figma is the cheapest way to make intent checkable, and it also keeps the
+token out of the wrong pickers for designers. Prefer it to a usage-map entry whenever a
+scope can express the rule.
+
+### Layer 2: the usage map
+
+[`token-usage.json`](token-usage.json) records intent that scopes can't: which selectors a
+token belongs in, which tokens pair with which, and which tokens are not for direct use. It
+is authored by the design-system owner. The template ships an example for a Material-style
+system; replace it with the project's own groups.
+
+- **`namespace`**: the token prefix, without dashes. Patterns below are written after
+  `--<namespace>-`.
+- **`propertySets`**: named property lists, referenced as `@name`. A trailing `*` in a
+  property matches any longhand (`padding*` matches `padding-inline-start`), and a `*`
+  inside one matches a segment (`border-*-radius`).
+- **`figmaScopes`**: scope → property list, used by layer 1.
+- **`groups`**: ordered; **the first group whose `match` fits a token wins.** Put specific
+  groups above general ones. Each group has:
+
+| Field | Meaning |
+| --- | --- |
+| `id` | Stable name, quoted in findings. Renaming it drops carried-forward rationale. |
+| `match` | Name pattern. `*` matches any run of characters. `{name}` captures one or more hyphen-separated segments, as many as still let the pattern match, for use in `pairs` and `intent`. |
+| `collection` | Optional. The group only matches tokens from this manifest collection. |
+| `intent` | One line saying what the token is for. Read by the agent review; not checked. |
+| `properties` | The CSS properties the token may appear in. Omitted means no restriction from this group. |
+| `direct` | `false` means the token is never used in component code, only through other tokens. |
+| `selectors` | Optional. The token may only appear in a rule whose selector contains one of these strings. |
+| `pairs` | Optional. Each entry is `{ properties, tokens }`: when the same rule block sets one of `properties` from a namespace token, that token must match one of the `tokens` patterns. `{name}` is filled in from the token's own match. |
+
+### Usage rules
+
+`validate` implements these alongside the rules in the [validator contract](#validator-contract).
+They apply to every namespace token referenced in a declaration's value, including inside
+`calc()` and as a `var()` fallback, in every file the validator scans except the generated
+token files. A declaration that defines a custom property is skipped, because its target
+property is not known there.
+
+| Rule | Flags |
+| --- | --- |
+| `token-wrong-property` | A token in a property outside its Figma scopes, or outside its usage-map group's `properties`. A token must pass both when both apply. |
+| `token-not-for-direct-use` | A token whose group sets `direct: false`. |
+| `token-wrong-context` | A token whose group sets `selectors`, in a rule whose selector contains none of them. |
+| `token-unpaired` | A rule block whose tokens break a group's `pairs`, such as `on-primary` text on a `surface` background. Only declarations in the same block are compared. |
+| `token-unclassified` | A token with no restricting scope and no usage-map group: nothing records what it is for. |
+
+Detail strings name the token, the property, and the group or scopes, and nothing that
+changes when unrelated map entries change, so rationale carries forward. For example:
+`` `--<prefix>-spacing-md` in `font-size` is outside group `spacing`. ``
+
+`validate` also prints, without adding to the backlog, a warning for each usage-map group
+that matches no token in the manifest. After an export renames tokens, that is the sign the
+map needs updating.
+
+The usage map is held to the same standard as lint rules: **never widen a group** (add a
+property, a selector, or a pair) to make a deviation disappear. Widening is a design-system
+decision for the owner. Until it is made, the deviation stays in the backlog with its
+rationale.
+
+### Layer 3: semantic review
+
+Some misuse depends on meaning no pattern captures: the primary color on a decorative
+element, a `display` type role on body copy, `on-surface` text inside a child of a
+`primary` container, a spacing token named for one relationship used for another. An agent
+reviews this with the
+[`token-usage-review`](../../Agents/skills/token-usage-review/SKILL.md) skill, scoped to the
+files a change touches.
+
+Its findings are advisory and never gate CI. They live in
+`Docs/Design system/token-usage-review.md`, which the agent maintains by hand (it is not
+generated). Each entry is keyed by file, token, and property, with a `Rationale:` line in
+the same form as the backlog.
 
 ## Handling deviations
 

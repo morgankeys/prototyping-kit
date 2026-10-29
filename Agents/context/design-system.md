@@ -63,10 +63,20 @@ run `tokens` first on a fresh clone.
 
 **Never hand-edit generated token CSS.** Change the transform and rerun `tokens`.
 
+**Use each token for what it is for.** A token that exists is not automatically the right
+one. Before picking a token, read its intent: the `description` in the token manifest, its
+group's `intent` in `Docs/Design system/token-usage.json`, and the matching `Guidelines/`
+file. `validate` flags a token in the wrong property, selector, or pairing; the
+[`token-usage-review`](../skills/token-usage-review/SKILL.md) skill covers meaning that no
+rule can check. Run it before opening a pull request that changes styles. The contract is
+under "Token usage" in
+[`Docs/Design system/design-in-code architecture.md`](../../Docs/Design%20system/design-in-code%20architecture.md#token-usage).
+
 ## Handling deviations
 
-**Never weaken lint rules to suppress design-system violations.** When `lint` or `validate`
-flags a hardcoded value:
+**Never weaken lint rules to suppress design-system violations.** That includes the token
+usage map: never widen a group to clear a finding. When `lint` or `validate` flags a
+hardcoded value or a misused token:
 
 1. Check whether a suitable token exists (grep the generated token CSS).
 2. If yes: use the token.
@@ -101,6 +111,8 @@ styling hooks, they cannot drift from what is rendered. In DevTools,
   regeneration workflow and the alpha gotcha
 - [`troubleshooting/rounded-clipping.md`](troubleshooting/rounded-clipping.md) — clipping
   and layering rounded surfaces without edge fringes
+- [`Agents/skills/token-usage-review/SKILL.md`](../skills/token-usage-review/SKILL.md) —
+  agent review of whether tokens are used for their intended purpose
 - [`Docs/Design system/design-in-code architecture.md`](../../Docs/Design%20system/design-in-code%20architecture.md)
-  — principles, validator contract, deviations backlog
+  — principles, validator contract, token usage checks, deviations backlog
 - [`Code/ARCHITECTURE.md`](../../Code/ARCHITECTURE.md) — how this stack implements it

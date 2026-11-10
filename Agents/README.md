@@ -10,7 +10,7 @@ The repo-root `AGENTS.md` is the entry point agents load first; it points here.
 
 ```
 Agents/
-├── skills/        Reusable capabilities, one folder per skill (component-catalog/, design-tokens/, export-design-md/, pr/, example-skill/)
+├── skills/        Reusable capabilities, one folder per skill (component-catalog/, design-tokens/, token-usage-review/, export-design-md/, pr/, example-skill/)
 ├── context/       Conventions and background (kit-structure, git-workflow, design-system, dev-only-pages, component-catalog)
 │   └── troubleshooting/  Tips, tricks, and gotchas, indexed by symptom (load as needed)
 ├── prompts/       Task templates (review-drift, regenerate-tokens, example-task)
@@ -24,7 +24,9 @@ Agents/
   `SKILL.md`. Current skills: `component-catalog` (`/component-catalog` turns on Storybook
   and Figma Code Connect for the chosen stack and fills in stories and mappings),
   `design-tokens` (regenerate tokens from an export — Figma by
-  default — and validate design-system compliance), `export-design-md` (`/export-design-md` builds a
+  default — and validate design-system compliance), `token-usage-review`
+  (`/token-usage-review` checks that tokens are used for their intended purpose, beyond
+  what `validate` can check), `export-design-md` (`/export-design-md` builds a
   portable `Export/DESIGN.md` from the design-system docs), and `pr` (`/pr` commits,
   pushes, and opens a pull request). Copy `example-skill/` as a starting point for a new one, and add thin stubs in
   `.claude/skills/<skill>/` and `.cursor/skills/<skill>/` so those tools discover it.

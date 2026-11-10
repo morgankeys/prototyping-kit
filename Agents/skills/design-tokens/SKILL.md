@@ -42,7 +42,10 @@ same names.
    several Figma collections export a file with the same name, `Baseline.tokens.json`, and
    would overwrite each other.
 2. **Build.** The converter reads the unpacked JSON and writes the generated token CSS,
-   whose header marks it as generated.
+   whose header marks it as generated, plus the token manifest: each variable's type,
+   collection, Figma scopes, description, and alias target. `validate` reads the manifest
+   to check intended use (see "Token usage" in
+   [`design-in-code architecture.md`](../../../Docs/Design%20system/design-in-code%20architecture.md#token-usage)).
 
 The unpacked JSON is **tracked in git** on purpose, so a token change shows up as a
 readable diff in the pull request. The generated CSS can be ignored or tracked; the
@@ -57,6 +60,10 @@ git diff -- "Docs/Design system/Figma/Tokens/unpacked/"
 Look for tokens added, removed, or renamed, values that changed, and any change to a
 token with `alpha < 1`. A removed or renamed token breaks every component that used it.
 
+Also look for changes to `com.figma.scopes` and `$description`: they change what
+`validate` allows. A token whose scopes went from specific to `ALL_SCOPES` has lost its
+restriction.
+
 ### 5. Run `build`
 
 `build` fails if the alpha regression guard finds a token that lost its alpha (see below)
@@ -66,6 +73,11 @@ or the stack cannot compile the generated CSS.
 
 `validate` scans the code for design-system deviations and rewrites
 `Docs/Design system/deviations-backlog.md`. Write a `Rationale:` line for each new entry.
+
+After a new export, also read the warnings `validate` prints for usage-map groups that
+match no token, and the new `token-unclassified` entries. Both mean
+`Docs/Design system/token-usage.json` is behind the tokens: propose the update to the
+design-system owner rather than guessing intent.
 The backlog contract and the rules a validator checks are in
 [`Docs/Design system/design-in-code architecture.md`](../../../Docs/Design%20system/design-in-code%20architecture.md).
 

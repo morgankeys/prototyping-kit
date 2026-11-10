@@ -28,7 +28,9 @@ against the code before editing.
 
 <!-- Which linters and validator implement the contract in
      Docs/Design system/design-in-code architecture.md, where their config lives, and any
-     stack-specific exemptions. -->
+     stack-specific exemptions. Include where `tokens` writes the token manifest, and how
+     the validator resolves a rule block's selector for the token usage rules (nesting,
+     scoped-style rewriting). -->
 
 ## Dev-only pages guard
 

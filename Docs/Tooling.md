@@ -29,6 +29,10 @@ Figma exports variable collections as DTCG-style JSON, one zip per collection, d
 - Several collections share the filename `Baseline.tokens.json`, so unpack each zip into
   its own folder.
 - Only `color`, `number`, and `string` `$type`s come out of the export.
+- **Scopes and descriptions come along.** Each variable's `$extensions` carries
+  `com.figma.scopes` (where it may be applied) and its `$description`. Most converters
+  ignore `$extensions`; read them explicitly to write the token manifest that `validate`
+  uses to check intended use.
 
 ### Style Dictionary
 

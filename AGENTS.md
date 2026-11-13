@@ -63,6 +63,7 @@ column, read the right column first.
 | Setting up a new kit, step by step | `README.md` (Getting started) |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
+| Exporting the design system to other platforms (Lovable, Replit, Bolt.new, v0, Figma Make), or setting up `Code/design-export/` | `Agents/skills/design-system-export/SKILL.md` |
 | Regenerating tokens from a new export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |

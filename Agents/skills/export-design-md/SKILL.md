@@ -15,6 +15,11 @@ Commands below run from the repo root. The helper script is
 [`scripts/design-md.mjs`](scripts/design-md.mjs) (Node 18+, no install; the linter is
 fetched with `npx` at a pinned version).
 
+Once `Code/design-export/` is set up, the `design-system-export` skill also writes a
+DESIGN.md, from the shipped token CSS rather than the docs, alongside packages for
+Lovable, Replit, Bolt.new, v0, and Figma Make. This skill is for a portable summary
+before the code exists, or when only the docs should be the source.
+
 ## What goes in, what stays out
 
 - **In:** brand and principles, color, typography, layout and spacing, elevation, shape,

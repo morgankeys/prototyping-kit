@@ -10,6 +10,9 @@
 # Code/<generated token CSS folder>/
 # Code/storybook-static/
 
+# Design-system exports: regenerate with the design-system-export skill
+Export/design-system/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

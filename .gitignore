@@ -8,6 +8,7 @@
 # Code/<dependency folder>/
 # Code/<build output>/
 # Code/<generated token CSS folder>/
+# Code/storybook-static/
 
 # OS / editor cruft
 .DS_Store

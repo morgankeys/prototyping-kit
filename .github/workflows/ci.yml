@@ -46,6 +46,14 @@ jobs:
       - name: validate
         run: echo "TODO - <validate>"
 
+      # Component catalog (Agents/context/component-catalog.md). Placeholders until
+      # /component-catalog turns them on. Delete `connect` if the project doesn't use Figma.
+      - name: stories-build
+        run: echo "TODO - <stories-build>"
+
+      - name: connect
+        run: echo "TODO - <connect>"
+
       # Build and validation regenerate tracked files (the unpacked Figma token JSON and
       # the deviations backlog). A stale committed copy is what fails the job.
       - name: tracked files are up to date

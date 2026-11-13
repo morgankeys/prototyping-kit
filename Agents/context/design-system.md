@@ -21,6 +21,10 @@ List the same links for humans in `Docs/Design system/README.md`. If tokens come
 kit, another repository, or another design tool, say so here and point at where they are
 maintained.
 
+If the project doesn't use Figma, replace both lines with `Figma: not used`. Agents and
+`/component-catalog` then skip Figma-only steps, such as Code Connect, for good (see
+[`component-catalog.md`](component-catalog.md#not-using-figma)).
+
 ## Where design-system sources live
 
 All under `Docs/Design system/`:

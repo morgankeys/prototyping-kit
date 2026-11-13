@@ -58,6 +58,9 @@ column, read the right column first.
 | A visual glitch, odd build or tooling behavior, or a bug that resists an obvious fix | `Agents/context/troubleshooting/README.md` |
 | Design patterns or guidelines: color, type, layout, elevation, shape, motion, accessibility, copy | The matching file in `Docs/Design system/Guidelines/` (index: its `README.md`) |
 | Building UI that might already exist as a component | `Docs/Design system/Guidelines/components.md` |
+| Adding a component, a story, or a Code Connect file | `Agents/context/component-catalog.md` |
+| `/component-catalog`, turning on Storybook or Code Connect, or the first components after choosing a stack | `Agents/skills/component-catalog/SKILL.md` |
+| Setting up a new kit, step by step | `README.md` (Getting started) |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
 | Regenerating tokens from a new export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |

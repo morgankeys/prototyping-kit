@@ -11,7 +11,7 @@ The repo-root `AGENTS.md` is the entry point agents load first; it points here.
 ```
 Agents/
 ├── skills/        Reusable capabilities, one folder per skill (component-catalog/, design-tokens/, token-usage-review/, export-design-md/, pr/, example-skill/)
-├── context/       Conventions and background (kit-structure, git-workflow, design-system, dev-only-pages, component-catalog)
+├── context/       Conventions and background (kit-structure, git-workflow, design-system, design-system-platforms, dev-only-pages, component-catalog)
 │   └── troubleshooting/  Tips, tricks, and gotchas, indexed by symptom (load as needed)
 ├── prompts/       Task templates (review-drift, regenerate-tokens, example-task)
 └── README.md      This index
@@ -32,7 +32,11 @@ Agents/
   `.claude/skills/<skill>/` and `.cursor/skills/<skill>/` so those tools discover it.
 - **context/** — Durable knowledge: coding conventions, folder structure decisions,
   architecture notes, gotchas. Load relevant files before making changes. Add to it when
-  you learn something the next agent should know.
+  you learn something the next agent should know. `design-system-platforms.md` and
+  `design-system-platform-packages.md` record how Lovable, Replit, Bolt.new, v0, and
+  Figma Make ingest a design system, and what a Docs-sourced export should hand each
+  one. The exporter itself is not built yet. `/export-design-md` remains the Docs →
+  DESIGN.md path.
   - **context/troubleshooting/** — Gotchas indexed by symptom, written so they hold for
     any stack. Load only the entry that matches the symptom. Add an entry when a fix took
     real digging; see its `README.md`.

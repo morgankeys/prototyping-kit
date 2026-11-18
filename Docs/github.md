@@ -92,8 +92,10 @@ delete head branches** on, this is rarely needed.
 
 ## Working with agents
 
-- **Agents push feature branches; people merge them.** An agent pushes a new branch when
-  its commits are ready, and asks first when the work is on `main` or `staging`. An agent
+- **Agents push feature branches; people merge them.** Once an agent has created a new,
+  clean feature branch, it commits and pushes without a separate ask. If the repo is
+  already dirty with work that chat did not create, the agent asks what to do and leaves
+  that work untouched. It also asks first when the work is on `main` or `staging`. An agent
   opens a PR only when asked (the `/pr` skill). Merging and promoting are always done by a
   person.
 - **Agent sessions can't delete branches.** Claude Code cloud sessions can push branches

@@ -4,11 +4,13 @@ How a track of work becomes commits and a pull request. Read this before creatin
 
 Each track stays recognizable in its branch, its commits, and its pull request. Stay on the current branch when this chat belongs to that track. When the checkout has another conversation's changes, or this chat is a different track, ask before mixing them.
 
+If the repo is already dirty — staged changes, unstaged changes, or untracked files this chat did not create — ask what to do before branching, committing, or switching. Leave that work untouched until the user answers.
+
 ## Creating a branch
 
 - This chat continues the branch already checked out: stay on it.
 - `HEAD` is the integration branch (or the production branch, if they differ): create a feature branch from the integration branch before committing. Uncommitted work from this chat comes along with `git switch -c`.
-- Another conversation's changes are in the checkout, or this chat is a different track: ask first. Separate with a new branch, separate commits, or by leaving the other work untouched.
+- The repo is already dirty, another conversation's changes are in the checkout, or this chat is a different track: ask what to do first. Leave the existing work untouched until the user answers.
 
 Read-only chats do not need a branch. Never commit directly to the integration branch or the production branch.
 
@@ -44,7 +46,17 @@ The person who owns the work runs the merges:
 2. To promote, open a pull request from `staging` into `main` and merge it with **Create a merge commit**.
 3. Never squash-merge `staging` into `main`. A squash rewrites `staging`'s commits into new ones on `main`, the branches stop sharing history, and the next promotion conflicts.
 
-Feature work never branches from or merges into `main` directly. Only that promotion pull request targets `main`. Rulesets that lock this in are in [`Docs/github.md`](../../Docs/github.md). Agents push the feature branch; they open the pull request only when asked (`/pr`), and that pull request targets `staging`.
+Feature work never branches from or merges into `main` directly. Only that promotion pull request targets `main`. Rulesets that lock this in are in [`Docs/github.md`](../../Docs/github.md). Once a chat has created a new, clean feature branch, it commits and pushes that branch. It opens the pull request only when asked (`/pr`), and that pull request targets `staging`.
+
+## Committing and pushing
+
+Create commits and push them once this chat has a new, clean branch. That does not need a separate ask.
+
+A branch is clean when this chat created it from an up-to-date integration branch and it holds only this track. If the repo is already dirty with work this chat did not create, ask what to do and leave that work untouched. Never commit or push directly on the integration branch or the production branch. If this chat was told to work on `main` or `staging`, ask before committing or pushing those branches.
+
+Use `git push -u origin HEAD` the first time, then `git push` after later commits. Do not force-push.
+
+Opening a pull request is separate. Do not run `gh pr create` or any other command that opens a pull request unless the user asks in that turn. Invoking `/pr` is that ask — follow [`Agents/skills/pr/SKILL.md`](../skills/pr/SKILL.md). Without `/pr`, report the branch name and the commits so the user can open the pull request.
 
 ## Commit style
 
@@ -60,14 +72,6 @@ Add tone overlays to project cards
 ```
 
 Do not write session-summary subjects: one commit describes one change, not everything a chat did.
-
-## Push the branch
-
-Push a feature branch whenever its commits are ready. A new branch — anything other than `main` or `staging` — does not need a separate ask. Use `git push -u origin HEAD` the first time, then `git push` after later commits. Do not force-push.
-
-Opening a pull request is separate. Do not run `gh pr create` or any other command that opens a pull request unless the user asks in that turn. Invoking `/pr` is that ask — follow [`Agents/skills/pr/SKILL.md`](../skills/pr/SKILL.md). Without `/pr`, report the branch name and the commits so the user can open the pull request.
-
-If this chat was told to work on `main` or `staging` themselves, ask before pushing. Those branches are shared; a feature branch cut from either of them is fine to push.
 
 ## Two chats editing at once
 

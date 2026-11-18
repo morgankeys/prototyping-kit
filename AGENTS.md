@@ -95,9 +95,12 @@ moves and kit reuse.
 4. **Keep tracks of work organized.** New work goes on a feature branch unless the chat was
    explicitly told to work on `main` or `staging`. The preferred flow squash-merges that
    branch into `staging`, then promotes `staging` into `main` with a merge commit, never a
-   squash. Push a feature branch when its commits are ready. If the chat was told to work
-   on `main` or `staging`, ask before pushing those branches. Opening a pull request still
-   waits for an ask; `/pr` is that ask.
+   squash. Once this chat has created a new, clean feature branch, commit and push
+   without a separate ask. A clean branch was cut from an up-to-date integration branch
+   and holds only this track. If the repo is already dirty with work this chat did not
+   create, ask what to do and leave that work untouched. If the chat was told to work on
+   `main` or `staging`, ask before committing or pushing those branches. Opening a pull request still waits for
+   an ask; `/pr` is that ask.
 5. **Sandbox, specimen, and sample pages never ship.** They render only on the local dev
    server. Never weaken whatever build check enforces this.
 6. **The token pipeline must preserve alpha.** Whatever converts tokens to CSS must emit an

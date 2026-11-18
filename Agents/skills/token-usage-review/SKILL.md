@@ -22,7 +22,7 @@ and tokens whose meaning changed. Extra words after the command pick another sco
 
 | Invocation | Reviews |
 | --- | --- |
-| `/token-usage-review` | Changes since the integration branch, plus uncommitted changes. The integration branch is named in `Agents/context/git-workflow.md`. |
+| `/token-usage-review` | Changes since `main`, plus uncommitted changes. Use another base when this branch was cut from one, as named in `Agents/context/git-workflow.md`. |
 | `/token-usage-review since <ref>` | Changes since `<ref>`, such as a tag or the last full review's commit. |
 | `/token-usage-review full` | Every token reference in `Code/` and every entry in the review file. |
 

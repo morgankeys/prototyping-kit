@@ -5,12 +5,9 @@ alwaysApply: true
 
 Keep each track of work recognizable in its branch, commits, and pull request.
 
-- Stay on the current branch when this chat belongs to that track.
+- A new thread starts a new branch from an up-to-date `main`. Use another base only when the user specifies one. Stay on the current branch only when the user says to keep working on it.
 - If the repo is already dirty with work this chat did not create, ask what to do before branching, committing, or switching. Leave that work untouched until the user answers.
-- When the checkout has another conversation's changes, or this chat is a different track, ask before mixing them.
-- New work goes on a feature branch unless this chat was explicitly told to work on `main` or `staging`. Never commit directly to those branches.
-- The preferred integration branch is `staging`. Feature pull requests target it and are squash-merged. Promote `staging` into `main` with a merge commit, never a squash. A project without `staging` uses `main` as the integration branch.
-- Once this chat has created a new, clean feature branch, commit and push without a separate ask. A clean branch was cut from an up-to-date integration branch and holds only this track. If this chat was told to work on `main` or `staging`, ask before committing or pushing those branches.
+- Once the branch for this chat is clear, commit and push without a separate ask. Never commit directly to `main` or `staging` unless this chat was told to work on that branch.
 - Do not open a pull request unless asked in that turn. Invoking `/pr` is that ask — follow `Agents/skills/pr/SKILL.md`.
 
 Branch naming, commit style, and worktrees live in `Agents/context/git-workflow.md`. Read it before creating a branch or committing.

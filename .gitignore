@@ -19,3 +19,6 @@ Thumbs.db
 .cursor/*
 !.cursor/rules/
 !.cursor/skills/
+
+# Generated platform packages. Regenerate with `npm run ds-export`.
+Export/design-system/

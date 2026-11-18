@@ -1,14 +1,12 @@
 # What each platform export should produce
 
-Companion to [`design-system-platforms.md`](design-system-platforms.md). This is the
-packaging and the import steps, written from the platform's side. Output belongs in
-`Export/` and is generated, never hand-edited.
+Companion to [`design-system-platforms.md`](design-system-platforms.md). Output belongs in
+`Export/design-system/` and is generated, never hand-edited.
 
-The words below assume a future exporter whose input is `Docs/Design system/`. Where a
-step uploads a React project or an npm package, that artifact does not exist until
-component implementations can be generated from the guidelines. Until then, ship the
-document option for that platform (instructions, `DESIGN.md`, agent prompt) and the
-token CSS. Do not read component source out of `Code/` to fill the gap.
+`npm run ds-export` writes the document and token files from `Docs/Design system/` every
+time. A zip, tarball, or component source file is added only when
+`Agents/skills/design-system-export/components/manifest.json` validates. The script does
+not read `Code/` to find components; the skill writes the manifest.
 
 Several targets share one guideline folder. `Guidelines.md` is the entry point and routes
 to short files:
@@ -28,7 +26,8 @@ characters.
 
 ## DESIGN.md
 
-`/export-design-md` already writes `Export/DESIGN.md` from Docs. Reuse that file.
+`/export-design-md` writes `Export/DESIGN.md` from Docs. The platform export's `design-md`
+target is a README that points at that file. It does not write another one.
 
 - AI Studio: attach `DESIGN.md` to the prompt in Build mode, or paste it into System
   instructions, and ask it to follow the file.
@@ -38,6 +37,8 @@ characters.
   `npx @google/design.md@0.4.0 lint DESIGN.md`.
 
 ## Lovable
+
+The script always writes `instructions.md` and `guidelines/`. The project zip is added only when a component manifest validates.
 
 | Path | What it is |
 | --- | --- |
@@ -75,6 +76,8 @@ text can live in a top-level `AGENTS.md`, which Lovable reads on every message.
 
 ## Replit
 
+The script always writes the skill prose, token CSS, and `tokens.json`. Component source under `assets/components/` is added only when a component manifest validates.
+
 | Path | What it is |
 | --- | --- |
 | `.agents/skills/<slug>-design-system/` | An Agent skill: `SKILL.md`, `references/`, and `assets/` |
@@ -109,6 +112,8 @@ close to the kit rather than identical. The skill options carry the kit's own CS
 
 ## Bolt.new
 
+The script always writes `project-prompt.md` and `agent-instructions.md`. The source zip and tarball are added only when a component manifest validates.
+
 | Path | What it is |
 | --- | --- |
 | `<slug>-design-system-<version>.tgz` | Built npm package: components, CSS, guidelines |
@@ -135,6 +140,8 @@ Paste `project-prompt.md` as the first message and attach the tarball so Bolt ca
 install the package. Without the package, Bolt rebuilds components from the recipes.
 
 ## v0
+
+The script always writes `import-notes.md` and `guidelines/`. The source zip, tarball, and a component registry (no guessed shadcn theme) are added only when a component manifest validates.
 
 | Path | What it is |
 | --- | --- |
@@ -172,6 +179,8 @@ npx shadcn@latest add https://YOUR-HOST/r/<slug>-design-system.json
 `cssVars`, `css`, and `envVars`. It can carry the design-system item, not the theme.
 
 ## Figma Make
+
+The script always writes `guidelines/` and `tokens.css`. The npm package is added only when a component manifest validates.
 
 | Path | What it is |
 | --- | --- |

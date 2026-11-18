@@ -45,8 +45,10 @@ Also at this level:
 To hand the system to another AI tool as a DESIGN.md, run `/export-design-md`.
 It generates a portable `Export/DESIGN.md` from this folder; see
 [`Agents/skills/export-design-md/SKILL.md`](../../Agents/skills/export-design-md/SKILL.md).
-How Lovable, Replit, Bolt.new, v0, and Figma Make ingest a system, and what a future
-export should produce for each, is in
+To package the same docs for Lovable, Replit, Bolt.new, v0, and Figma Make, run
+`/design-system-export` (`npm run ds-export` from the repo root). See
+[`Agents/skills/design-system-export/SKILL.md`](../../Agents/skills/design-system-export/SKILL.md).
+How those platforms ingest a system is in
 [`Agents/context/design-system-platforms.md`](../../Agents/context/design-system-platforms.md).
 
 After a new Figma export, follow

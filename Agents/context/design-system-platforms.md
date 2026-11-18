@@ -1,27 +1,21 @@
 # Design-system platforms
 
-Notes for a future export that translates `Docs/Design system/` into packages other AI
-prototyping tools can import. The design system lives in Docs. `Code/` is one expression
-of it, and it is not an input. `/export-design-md` is the existing Docs → `DESIGN.md`
-path. These notes are what the other platforms need on top of that.
+How Lovable, Replit, Bolt.new, v0, Figma Make, and DESIGN.md ingest a design system, and
+what [`design-system-export`](../skills/design-system-export/SKILL.md) hands them.
 
-The file lists below and the import steps are in
+The design system lives in `Docs/Design system/`. The export script reads that folder
+and writes `Export/design-system/`. `Code/` is not an input to the script. The skill
+ports a component from `Code/` only when `Guidelines/components.md` lists it and the
+file exists, and the script packages the port only after its checks pass.
+
+`/export-design-md` writes `Export/DESIGN.md` from the same Docs. The platform export
+does not write a second copy.
+
+File lists and import steps are in
 [`design-system-platform-packages.md`](design-system-platform-packages.md).
 
-Kept from research read in November 2026. An exporter that read shipped CSS and component
-source out of `Code/` was not kept: that treated the prototype as the source of truth.
-Re-read each platform's docs before building a target. These products change quickly.
-
-Platforms take two kinds of input:
-
-- **Documents.** `DESIGN.md`, Lovable Instructions, a Replit skill's prose, Bolt agent
-  instructions. Tokens and guidelines from Docs are enough.
-- **A library.** Lovable's design-system project, Bolt and v0's npm and zip import, and a
-  Figma Make kit want CSS and React components. Docs does not contain component
-  implementations. `Guidelines/components.md` is an inventory, and `/export-design-md`
-  leaves components out on purpose. A Docs-sourced export can still ship token CSS and
-  guidelines to those platforms. It can ship components only once the guidelines specify
-  them well enough to generate.
+Re-read each platform's docs before changing a target. These products change quickly.
+Research below was read in November 2026.
 
 ## How each platform ingests a design system
 

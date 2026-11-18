@@ -1,0 +1,7 @@
+{
+  "name": "prototyping-kit",
+  "private": true,
+  "scripts": {
+    "ds-export": "node Agents/skills/design-system-export/scripts/export.mjs"
+  }
+}

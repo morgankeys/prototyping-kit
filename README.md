@@ -52,8 +52,13 @@ sections of the docs, like this one. Its README gets the kit's name and a
 <!-- template-only:end -->
 ## Getting started
 
-Setting up a new kit, in order. Steps marked *Figma* are skipped by teams that don't use
-it.
+Ask an agent to run **`/setup`**. It checks the kit against the
+[setup checklist](Agents/skills/setup/checklist.md), tells you which steps are yours and
+which it can do, and walks you through them. Progress is kept in `Docs/setup-status.md`,
+and any tool can be skipped.
+
+The outline below is the same path in brief; the checklist is the full list. Steps marked
+*Figma* are skipped by teams that don't use it.
 
 1. **Check provenance.** Make sure the kit records where it came from (see
    [`Agents/context/kit-structure.md`](Agents/context/kit-structure.md#kit-provenance)).
@@ -85,5 +90,6 @@ After setup:
   story and mapping in the same change).
 - A Figma library arrives late: add its links to the registry and rerun
   `/component-catalog` to turn on Code Connect.
+- Rerun `/setup` any time to see what is still open, including unfilled placeholders.
 - Browse [`Docs/Tooling.md`](Docs/Tooling.md) for other tools worth adding.
 - Managing branches and repo settings: [`Docs/github.md`](Docs/github.md).

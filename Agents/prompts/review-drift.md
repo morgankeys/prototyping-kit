@@ -28,9 +28,13 @@ today.
    keep a one-line reminder plus a link. Replace any fuller restatement with a link.
 6. Check that every stub in `.claude/skills/`, `.cursor/skills/`, and `.cursor/rules/`
    points at a file that exists.
-7. Fix the docs, not the code, unless the code is plainly wrong; if it is, report it
+7. Run `node Agents/skills/setup/scripts/setup-scan.mjs`. Every placeholder the template
+   ships with should have a row under "Stubs" in `Agents/skills/setup/checklist.md`, and
+   every link in the checklist should resolve. In a kit, check `Docs/setup-status.md`
+   against the repo with `/setup status`.
+8. Fix the docs, not the code, unless the code is plainly wrong; if it is, report it
    instead of changing it in this task.
-8. Commit per `Agents/context/git-workflow.md` (type `docs`), then push the feature branch. Do not open a pull request unless asked.
+9. Commit per `Agents/context/git-workflow.md` (type `docs`), then push the feature branch. Do not open a pull request unless asked.
 
 ## Done when
 

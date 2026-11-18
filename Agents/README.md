@@ -10,7 +10,7 @@ The repo-root `AGENTS.md` is the entry point agents load first; it points here.
 
 ```
 Agents/
-├── skills/        Reusable capabilities, one folder per skill (component-catalog/, design-tokens/, token-usage-review/, export-design-md/, pr/, example-skill/)
+├── skills/        Reusable capabilities, one folder per skill (setup/, component-catalog/, design-tokens/, token-usage-review/, export-design-md/, pr/, example-skill/)
 ├── context/       Conventions and background (kit-structure, git-workflow, design-system, dev-only-pages, component-catalog)
 │   └── troubleshooting/  Tips, tricks, and gotchas, indexed by symptom (load as needed)
 ├── prompts/       Task templates (review-drift, regenerate-tokens, example-task)
@@ -21,7 +21,9 @@ Agents/
 
 - **skills/** — A repeatable, self-contained capability with clear trigger conditions
   (e.g. "package the prototype for export"). Each skill lives in its own folder with a
-  `SKILL.md`. Current skills: `component-catalog` (`/component-catalog` turns on Storybook
+  `SKILL.md`. Current skills: `setup` (`/setup` checks the kit against the setup
+  checklist, tracks progress in `Docs/setup-status.md`, and walks through what is left),
+  `component-catalog` (`/component-catalog` turns on Storybook
   and Figma Code Connect for the chosen stack and fills in stories and mappings),
   `design-tokens` (regenerate tokens from an export — Figma by
   default — and validate design-system compliance), `token-usage-review`

@@ -31,6 +31,10 @@ span folders.
   `Docs/Tooling.md`. Entry points (`README.md`, guideline files, `.cursor/rules/`) keep at
   most a one-line reminder plus a link.
 
+- **Setup progress is per kit.** What a kit needs is defined once, in
+  `Agents/skills/setup/checklist.md`. Each kit's progress is in `Docs/setup-status.md`,
+  written by `/setup`. The template never has that file.
+
 ## Kit provenance
 
 A project forked from the kit records where it came from, so later kit improvements can be

@@ -101,7 +101,6 @@ To also remove the Code Connect placeholders, delete:
 | `Code/README.md` | The `connect` row |
 | `Code/ARCHITECTURE.md` | The Code Connect comment under "Component catalog" |
 | `.github/workflows/ci.yml` | The `connect` step |
-| `.github/pull_request_template.md` | `connect` in the component catalog checkbox |
 | `Code/.env.example` | The `FIGMA_ACCESS_TOKEN` block |
 | `Docs/Design system/Guidelines/components.md` | The Figma and Code Connect columns, and the Figma columns of the property mappings |
 | `Agents/skills/component-catalog/SKILL.md` | The "Set up Code Connect" step, and its mentions in the other steps |

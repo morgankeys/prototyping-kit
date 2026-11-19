@@ -66,9 +66,17 @@ decide, and say in a sentence what each one guards against.
 check ("your colors are in; the page now uses them"), and what, if anything, they should
 look at. Skip the list of files unless they ask.
 
-**When something breaks, own it.** Say plainly what went wrong and what you are doing
-about it. Don't paste a raw error and stop. If the fix needs the user, give them one
-action, not a diagnosis.
+**Fix technical problems quietly.** Lint errors, type errors, a failing build, a broken
+install: these are yours. Fix them and carry on without a report on each one. Bring one
+to the user only when the fix is risky (it could change how the prototype looks or
+behaves, or touch work they made), needs a decision, or you can't find one. Then say
+plainly what went wrong and what you propose, and give them one choice or one action, not
+a diagnosis or a raw error.
+
+**Design problems are theirs to weigh.** When a check finds the prototype drifting from
+the design system, that is a design question, not a technical one. Say what was found in
+design terms and ask whether to fix it now or carry on; it stays on record either way.
+The split is in the operating notes in `AGENTS.md`.
 
 **Explain the safety net once.** The first time you create a branch or a commit, say in a
 sentence that work is saved in steps and can be undone. After that, don't narrate git.

@@ -63,8 +63,8 @@ the real command.
 
 ## 4. Enforcement
 
-The checks always run; none can be skipped. What the user decides is what to do about a
-finding, not whether to look (see "Operating notes" in [`AGENTS.md`](../../../AGENTS.md)).
+The checks always run; none can be skipped. Agents fix technical findings themselves; the
+user decides what to do about design findings, not whether to look (see "Operating notes" in [`AGENTS.md`](../../../AGENTS.md)).
 
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |

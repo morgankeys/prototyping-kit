@@ -102,12 +102,10 @@ moves and kit reuse.
    waits for an ask; `/pr` is that ask.
 5. **Sandbox, specimen, and sample pages never ship.** They render only on the local dev
    server. Never weaken whatever build check enforces this.
-6. **The token pipeline must preserve alpha.** Whatever converts tokens to CSS must emit an
-   alpha-bearing color wherever the source token is not fully opaque, and the build must
-   include a regression guard that fails when one loses its alpha. Never simplify, remove,
-   or bypass that guard; fix the transform. The usual source is a Figma variables export,
-   which stores opacity in a separate `alpha` field while `hex` is RGB only — reading only
-   `hex` drops transparency.
+6. **The token pipeline must preserve alpha.** A translucent token must come out of the
+   pipeline translucent, and the build includes a regression guard that fails when one
+   doesn't. Never simplify, remove, or bypass that guard; fix the transform. Why and how:
+   "the alpha gotcha" in `Agents/skills/design-tokens/SKILL.md`.
 
 ## Operating notes
 
@@ -116,11 +114,16 @@ moves and kit reuse.
   the technical work for them. See `Agents/context/guiding-users.md`.
 
 - Checks always run: `lint`, `check`, `build`, `validate`, and the token usage review are
-  never skipped or switched off. When one finds problems, tell the user what it found and
-  ask whether to fix them now or carry on. If they carry on, the problem is still
-  recorded where that check keeps its record (the deviations backlog, the token usage
-  review file), never dropped. The build guards in rules 5 and 6 are the exception: they
-  can't be carried past.
+  never skipped or switched off. What happens to a finding depends on its kind:
+  - **Technical problems** (formatting, code lint, type errors, a failing build, a broken
+    install): fix them yourself and carry on. They are not recorded anywhere and the user
+    doesn't need to hear about each one. Tell the user only when the fix is risky: it
+    could change how the prototype looks or behaves, removes or rewrites their work, needs
+    a decision, or you can't find one.
+  - **Design problems** (design-system deviations, token misuse): fix the clear ones. For
+    the rest, tell the user what was found and ask whether to fix them now or carry on.
+    Either way they stay recorded in the deviations backlog or the token usage review
+    file, never dropped.
 - Keep `Code/`, `Docs/`, and `Export/` in sync when a change spans them (e.g. a new
   feature usually touches code, docs, and eventually an export).
 - Treat `Export/` as an output drop zone: write built artifacts there, don't hand-edit them.

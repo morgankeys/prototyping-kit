@@ -78,22 +78,10 @@ under "Token usage" in
 
 ## Handling deviations
 
-**Never weaken lint rules to suppress design-system violations.** That includes the token
-usage map: never widen a group to clear a finding. When `lint` or `validate` flags a
-hardcoded value or a misused token:
-
-1. Check whether a suitable token exists (grep the generated token CSS).
-2. If yes: use the token.
-3. If no suitable token exists: leave the deviation in the backlog
-   (`Docs/Design system/deviations-backlog.md`) and write your best guess of why on its
-   `Rationale:` line. Leave the sentinel `Unknown — needs review` only if the reason is
-   genuinely unclear; that flags it for the owner. The validator carries each rationale
-   forward on the next run, so you never copy a key by hand.
-4. If it's technical debt: log it the same way and add a TODO comment in the code.
-
-The backlog is a transparent record of legitimate exceptions and work in progress, not a
-place to hide violations. Its contract is in
-[`Docs/Design system/design-in-code architecture.md`](../../Docs/Design%20system/design-in-code%20architecture.md).
+When `lint` or `validate` flags a hardcoded value or a misused token, follow
+["Working a deviation"](../../Docs/Design%20system/design-in-code%20architecture.md#working-a-deviation):
+use a token if one fits, otherwise leave the deviation in the backlog with a `Rationale:`
+line. Never weaken a rule or widen the token usage map to clear a finding.
 
 **Run `validate` after styling changes** and review the backlog diff before committing.
 

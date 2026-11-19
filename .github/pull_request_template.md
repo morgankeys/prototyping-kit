@@ -10,14 +10,10 @@
 
 ## Verification
 
-Run from `Code/`. `Code/README.md` maps each role to this project's real command.
+CI runs `lint`, `check`, `build`, `validate`, and the component catalog checks. These are
+the ones it can't:
 
-- [ ] `lint`
-- [ ] `check`
-- [ ] `build`
-- [ ] `validate`
 - [ ] `/token-usage-review` (changed tokens; `full` before a promotion to `main`)
-- [ ] `stories-build` and `connect`, once `/component-catalog` has turned them on
 - [ ] Checked the affected pages in the dev server
 
 ## Design system deviations

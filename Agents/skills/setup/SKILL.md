@@ -176,10 +176,9 @@ one, say in a sentence what it is for; after it, say what changed.
   piece of work, and commit `Docs/setup-status.md` with
   the change that moved its rows. Mention once that work is saved in steps and can be
   undone; don't narrate git after that.
-- **When a check finds problems** (`lint`, `check`, `build`, `validate`) while you work:
-  say what it found in plain words and ask whether to fix it now or carry on, as the
-  operating notes in `AGENTS.md` describe. Never skip the check or switch it off to get
-  past it.
+- **When a check finds problems** while you work: fix technical ones yourself; raise
+  design ones with the user. The split is in the operating notes in `AGENTS.md`. Never
+  skip a check or switch it off to get past it.
 - **Pace:** setup doesn't have to finish in one sitting. At a natural stopping point, say
   what is working now and that `/setup` picks up where it left off.
 - When every item an agent can do is `done`, `opted out`, or `n/a`, say so, say what the

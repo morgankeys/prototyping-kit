@@ -27,9 +27,8 @@ The tools below are the Figma path.
 Figma exports variable collections as DTCG-style JSON, one zip per collection, dropped in
 `Docs/Design system/Figma/Tokens/`.
 
-- **Alpha is a separate field.** A color token's `hex` is 6-digit RGB only; opacity lives
-  in `alpha`. Anything that reads only `hex` silently drops transparency. See
-  [`Agents/skills/design-tokens/SKILL.md`](../Agents/skills/design-tokens/SKILL.md).
+- **Alpha is a separate field** from `hex`, and easy to drop. See
+  ["the alpha gotcha"](../Agents/skills/design-tokens/SKILL.md#critical-the-alpha-gotcha).
 - Several collections share the filename `Baseline.tokens.json`, so unpack each zip into
   its own folder.
 - Only `color`, `number`, and `string` `$type`s come out of the export.
@@ -45,11 +44,9 @@ Figma exports variable collections as DTCG-style JSON, one zip per collection, d
 One option for turning token JSON into CSS custom properties. It reads the DTCG format
 natively.
 
-- **Needs a custom color transform.** The stock color transforms read `hex` and lose alpha.
-  Write a transform that emits `rgb(r g b / a)` from `components` and `alpha` when
-  `alpha < 1`.
-- **Needs a regression guard.** Add a build-time assertion that every `alpha < 1` token
-  comes out alpha-bearing, so an upgrade or refactor cannot drop it silently.
+- **Needs a custom color transform and a regression guard.** The stock color transforms
+  lose alpha. Both requirements are specified in
+  ["the alpha gotcha"](../Agents/skills/design-tokens/SKILL.md#critical-the-alpha-gotcha).
 - Name transforms map Figma names with spaces and casing (`On Primary`) to the project's
   namespace (`--<prefix>-color-on-primary`).
 

@@ -9,7 +9,9 @@ people too.
 
 ## Branch model
 
-Preferred layout. A project that has not created `staging` uses `main` as the integration branch until it does.
+Agents start a new thread on a new branch cut from an up-to-date `main`, unless the user says to stay on the current branch or names another base. The pull request targets that same base.
+
+`staging` is optional. Use it only when the user says to. When a project is using it:
 
 | Branch          | Role                                                          |
 | --------------- | ------------------------------------------------------------- |
@@ -20,13 +22,15 @@ Preferred layout. A project that has not created `staging` uses `main` as the in
 
 `staging` mirrors `main` aside from those unpromoted commits. The promotion merge commit lands on `main` only. Do not add any other commit directly to `main`, and do not rewrite `staging`.
 
-New work goes on a feature branch unless someone explicitly says to work on `main` or `staging`.
+New work goes on a feature branch. The default base is `main`. Someone can say to keep working on the current branch, or to use `staging`.
+
+When the work is using `staging`:
 
 1. When the feature branch is ready, open a pull request into `staging` and **squash-merge** it.
 2. To promote, open a pull request from `staging` into `main` and merge with **Create a merge commit**.
 3. Never squash-merge `staging` into `main`. A squash gives `main` new commit hashes, the branches stop sharing history, and the next promotion conflicts.
 
-Feature work never targets `main` while `staging` exists. Only the promotion pull request does.
+Only the promotion pull request targets `main` in that layout.
 
 ## Promoting to production
 
@@ -93,10 +97,13 @@ delete head branches** on, this is rarely needed.
 
 ## Working with agents
 
-- **Agents push feature branches; people merge them.** An agent pushes a new branch when
-  its commits are ready, and asks first when the work is on `main` or `staging`. An agent
-  opens a PR only when asked (the `/pr` skill). Merging and promoting are always done by a
-  person.
+- **Agents push feature branches; people merge them.** A new thread starts a new branch
+  from `main`, unless the user says to stay on the current branch or names another base.
+  If the repo is already dirty with work that chat did not create, the agent asks what to
+  do and leaves that work untouched. Once the branch is clear, the agent commits and
+  pushes without a separate ask. It asks first before committing or pushing `main` or
+  `staging`. An agent opens a PR only when asked (the `/pr` skill). Merging and promoting
+  are always done by a person.
 - **Agent sessions can't delete branches.** Claude Code cloud sessions can push branches
   but get a 403 when deleting one, so branch cleanup is a person's job.
 - **Agent rules live in the repo.** `AGENTS.md` is the entry point, and changes to how

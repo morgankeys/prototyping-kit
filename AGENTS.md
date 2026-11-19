@@ -95,12 +95,13 @@ moves and kit reuse.
    leave the "needs review" sentinel only when the reason is genuinely unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded
    color, spacing, or radius.
-4. **Keep tracks of work organized.** New work goes on a feature branch unless the chat was
-   explicitly told to work on `main` or `staging`. The preferred flow squash-merges that
-   branch into `staging`, then promotes `staging` into `main` with a merge commit, never a
-   squash. Push a feature branch when its commits are ready. If the chat was told to work
-   on `main` or `staging`, ask before pushing those branches. Opening a pull request still
-   waits for an ask; `/pr` is that ask.
+4. **Keep tracks of work organized.** A new thread starts a new branch from an up-to-date
+   `main`. Use another base only when the user specifies one, and stay on the current
+   branch only when the user says to keep working on it. If the repo is already dirty
+   with work this chat did not create, ask what to do and leave that work untouched.
+   Once the branch for this chat is clear, commit and push without a separate ask. Never
+   commit directly to `main` or `staging` unless this chat was told to work on that
+   branch. Opening a pull request still waits for an ask; `/pr` is that ask.
 5. **Sandbox, specimen, and sample pages never ship.** They render only on the local dev
    server. Never weaken whatever build check enforces this.
 6. **The token pipeline must preserve alpha.** A translucent token must come out of the

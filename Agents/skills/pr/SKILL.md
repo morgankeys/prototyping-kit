@@ -2,16 +2,16 @@
 name: pr
 description: >-
   Commit the current changes, push the branch, and open a pull request, then
-  note major conflicts with the integration branch. Use when the user invokes
+  note major conflicts with the base branch. Use when the user invokes
   /pr or asks to commit, push, and open a PR.
 disable-model-invocation: true
 ---
 
 # /pr
 
-Invoking `/pr` is the explicit ask to commit, push, and open a pull request in this turn. Pushing a feature branch does not require `/pr`. Opening the pull request does. If this chat was told to work on `main` or `staging`, ask before pushing those branches.
+Invoking `/pr` is the explicit ask to commit, push, and open a pull request in this turn. Once the branch for this chat is clear, committing and pushing does not require `/pr`. Opening the pull request does. If this chat was told to work on `main` or `staging`, ask before committing or pushing those branches.
 
-Read `Agents/context/git-workflow.md` for commit style and the name of the integration branch. Below, `<base>` is that branch. The preferred base is `staging`; use `main` only when the project has no `staging` branch, or when this chat was explicitly asked to open the promotion pull request from `staging` into `main`. A feature pull request never targets `main` while `staging` exists. Run the conflict check, then ship. Do not resolve conflicts in this skill — report them and continue. Do not choose the merge method: the person squash-merges into `staging` and merge-commits `staging` into `main`.
+Read `Agents/context/git-workflow.md` for commit style. Below, `<base>` is the branch this work was cut from. The default is `main`. Use another base only when the user specified one, including `staging` and a promotion pull request from `staging` into `main`. Run the conflict check, then ship. Do not resolve conflicts in this skill — report them and continue. Do not choose the merge method. When the base is `staging`, the person squash-merges into `staging` and merge-commits `staging` into `main`.
 
 This procedure uses the `gh` CLI for the PR steps below. Claude Code web sessions don't have `gh` available; in those sessions, use the GitHub MCP tools to accomplish the same steps instead.
 
@@ -20,6 +20,7 @@ Extra words after `/pr` are the PR title and summary. Otherwise infer both from 
 ## Safety
 
 - Never commit to `<base>` or the production branch. If HEAD is either, create a branch from `<base>` first, named per `Agents/context/git-workflow.md`. Uncommitted work from this chat comes along with `git switch -c`.
+- If the repo is already dirty with work this chat did not create, ask what to do and leave that work untouched.
 - If the diff mixes another conversation's track, ask before committing it into this one.
 - Never update git config, skip hooks, or force-push.
 - Do not commit secrets (`.env`, credentials), build output, or dependency folders. Leave those unstaged and say so.

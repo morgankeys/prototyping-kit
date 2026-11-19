@@ -226,11 +226,18 @@ Example entry:
 
 ### Working a deviation
 
+The one place these steps are written down; other files link here.
+
 1. Check whether a suitable token exists (search the generated token CSS; never guess a
    name).
 2. If one does, use it.
-3. If none does, leave the deviation in the backlog and write its `Rationale:` line.
+3. If none does, leave the deviation in the backlog and write your best guess of why on
+   its `Rationale:` line. Leave the sentinel `Unknown — needs review` only if the reason
+   is genuinely unclear; that flags it for the owner.
 4. If it is technical debt, log it the same way and add a TODO comment in the code.
+
+The backlog is a transparent record of legitimate exceptions and work in progress, not a
+place to hide violations.
 
 Never disable a lint rule, add an ignore comment, or delete a backlog entry to make a
 deviation disappear.

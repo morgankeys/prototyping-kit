@@ -5,6 +5,10 @@ has found worth adding. Pick what fits your stack, wire it to a command role in
 [`Code/README.md`](../Code/README.md), and record stack-specific quirks in that project's
 `Code/ARCHITECTURE.md` (or the "Gotchas" heading in `Code/README.md`), not here.
 
+Which of these a kit needs, which are optional, and what each waits on is in the
+[setup checklist](../Agents/skills/setup/checklist.md). `/setup` walks through them and
+records any the project skips.
+
 Worked examples below come from one project built on this kit, the kit owner's portfolio
 site (`morgankeys/morgankeysdotcomv3`). They are references to read, not files to copy in
 unchanged.
@@ -23,12 +27,13 @@ The tools below are the Figma path.
 Figma exports variable collections as DTCG-style JSON, one zip per collection, dropped in
 `Docs/Design system/Figma/Tokens/`.
 
-- **Alpha is a separate field.** A color token's `hex` is 6-digit RGB only; opacity lives
-  in `alpha`. Anything that reads only `hex` silently drops transparency. See
-  [`Agents/skills/design-tokens/SKILL.md`](../Agents/skills/design-tokens/SKILL.md).
+- **Alpha is a separate field** from `hex`, and easy to drop. See
+  ["the alpha gotcha"](../Agents/skills/design-tokens/SKILL.md#critical-the-alpha-gotcha).
 - Several collections share the filename `Baseline.tokens.json`, so unpack each zip into
   its own folder.
 - Only `color`, `number`, and `string` `$type`s come out of the export.
+- Nothing to install: the export is built into Figma's variables panel. Docs:
+  [Guide to variables in Figma](https://help.figma.com/hc/en-us/articles/15339657135383).
 - **Scopes and descriptions come along.** Each variable's `$extensions` carries
   `com.figma.scopes` (where it may be applied) and its `$description`. Most converters
   ignore `$extensions`; read them explicitly to write the token manifest that `validate`
@@ -39,15 +44,17 @@ Figma exports variable collections as DTCG-style JSON, one zip per collection, d
 One option for turning token JSON into CSS custom properties. It reads the DTCG format
 natively.
 
-- **Needs a custom color transform.** The stock color transforms read `hex` and lose alpha.
-  Write a transform that emits `rgb(r g b / a)` from `components` and `alpha` when
-  `alpha < 1`.
-- **Needs a regression guard.** Add a build-time assertion that every `alpha < 1` token
-  comes out alpha-bearing, so an upgrade or refactor cannot drop it silently.
+- **Needs a custom color transform and a regression guard.** The stock color transforms
+  lose alpha. Both requirements are specified in
+  ["the alpha gotcha"](../Agents/skills/design-tokens/SKILL.md#critical-the-alpha-gotcha).
 - Name transforms map Figma names with spaces and casing (`On Primary`) to the project's
   namespace (`--<prefix>-color-on-primary`).
 
 Any other converter works if it meets the same two requirements.
+
+Get it: npm [`style-dictionary`](https://www.npmjs.com/package/style-dictionary) ·
+[styledictionary.com](https://styledictionary.com/) ·
+[source](https://github.com/style-dictionary/style-dictionary).
 
 ### figma-capture-button
 
@@ -60,13 +67,30 @@ screenshot. Ctrl+C captures the entire screen without opening the menu.
   `figma-capture` and expect nothing.
 - **Network:** the capture is Figma's html-to-design script, which the button fetches from
   `mcp.figma.com` as it loads.
+- The package gates itself to `localhost`, but the kit still requires the dev-only import
+  and the build check above.
 - Example: `Code/src/scripts/figma-capture.ts` in the example site.
+
+Get it: npm [`figma-capture-button`](https://www.npmjs.com/package/figma-capture-button) ·
+[source and usage](https://github.com/Anna-Arteeva/figma-capture-button).
 
 ### Figma MCP server
 
 Lets an agent session read designs, variables, and screenshots straight from a Figma file,
 and push captures back. Useful for implementing a page from the site file without
 copy-pasting specs.
+
+- It is connected to the agent tool, not installed in `Code/`. The remote server is
+  `https://mcp.figma.com/mcp`; the user signs in with their Figma account the first time.
+  In Claude Code: `claude mcp add --transport http figma https://mcp.figma.com/mcp`.
+- Keep any MCP config that holds a token out of git (`.cursor/` is ignored apart from
+  rules and skills for this reason).
+- Figma also publishes agent skills for the server (design to code, Code Connect, and
+  more). Load one when the task matches.
+
+Get it: [developer docs](https://developers.figma.com/docs/figma-mcp-server/) ·
+[remote server setup, per client](https://developers.figma.com/docs/figma-mcp-server/remote-server-installation/) ·
+[help center guide](https://help.figma.com/hc/en-us/articles/32132100833559).
 
 ## Component catalog
 
@@ -82,10 +106,18 @@ and more; its installer detects the framework.
 
 - **Delete the installer's example stories.** They hardcode colors and spacing and add
   deviations to the backlog.
-- **MCP add-on** (`@storybook/addon-mcp`): lets agents query components and stories. React
-  only, and in preview, at the time of writing.
-- **`@storybook/addon-designs`** embeds a component's Figma frame in its story, a free
-  design-to-code link when the Figma plan doesn't include Code Connect.
+- **MCP add-on** ([`@storybook/addon-mcp`](https://storybook.js.org/addons/@storybook/addon-mcp),
+  [docs](https://storybook.js.org/docs/ai/mcp/overview)): lets agents query components and
+  stories, write stories, and run their tests. Optional. Its docs toolset needs a
+  components manifest, which only some frameworks generate (React, and the Vite builds of
+  Angular and Vue 3, when last checked in November 2026); check the docs for the stack
+  before adding it.
+- **[`@storybook/addon-designs`](https://storybook.js.org/addons/@storybook/addon-designs)**
+  ([source](https://github.com/storybookjs/addon-designs)) embeds a component's Figma
+  frame in its story, a free design-to-code link when the Figma plan doesn't include Code
+  Connect. Optional.
+
+Get it: `npx storybook@latest init` from `Code/` · [docs](https://storybook.js.org/docs).
 
 ### Figma Code Connect
 
@@ -107,7 +139,15 @@ project's components instead of generic markup. Wired to the `connect` role.
   `--exit-on-unreadable-files`.
 - **Publishing needs an Organization or Enterprise plan** and a personal access token
   (`FIGMA_ACCESS_TOKEN`, server-side only).
-- Docs: [developers.figma.com/docs/code-connect](https://developers.figma.com/docs/code-connect/).
+- **Two kinds of component.** Core components come from the library file; project-specific
+  ones are designed in the site file. Both are mapped the same way, each to the node in
+  the file where its main component lives.
+- The token is a Figma [personal access token](https://help.figma.com/hc/en-us/articles/8085703771159).
+
+Get it: npm [`@figma/code-connect`](https://www.npmjs.com/package/@figma/code-connect) ·
+[docs](https://developers.figma.com/docs/code-connect/) ·
+[source](https://github.com/figma/code-connect) ·
+[help center](https://help.figma.com/hc/en-us/articles/23920389749655).
 
 ## Enforcement (any stack)
 
@@ -124,6 +164,12 @@ literals, including the color inside `border*`, `outline`, and `background` shor
 - Parsing styles inside component files depends on the framework (a custom syntax for
   single-file components); plain `.css` files must keep the default parser.
 
+Get it: [stylelint.io](https://stylelint.io/) · npm
+[`stylelint`](https://www.npmjs.com/package/stylelint),
+[`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard),
+[`stylelint-declaration-strict-value`](https://www.npmjs.com/package/stylelint-declaration-strict-value)
+([source](https://github.com/AndyOGo/stylelint-declaration-strict-value)).
+
 ### Design-system validator
 
 A script that implements the validator contract in
@@ -136,6 +182,9 @@ site.
 Formatting and code lint. **Ignore the generated token CSS in every linter config**
 (Prettier, ESLint, Stylelint), or each regeneration produces noise and lint failures in
 files nobody may hand-edit.
+
+Get them: [prettier.io](https://prettier.io/) · [eslint.org](https://eslint.org/). Add the
+framework's own plugins for each (its file types and template syntax).
 
 ### `git diff --exit-code` in CI
 

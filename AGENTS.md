@@ -60,7 +60,9 @@ column, read the right column first.
 | Building UI that might already exist as a component | `Docs/Design system/Guidelines/components.md` |
 | Adding a component, a story, or a Code Connect file | `Agents/context/component-catalog.md` |
 | `/component-catalog`, turning on Storybook or Code Connect, or the first components after choosing a stack | `Agents/skills/component-catalog/SKILL.md` |
-| Setting up a new kit, step by step | `README.md` (Getting started) |
+| Asking the user to do, decide, or provide something, or explaining a step to them | `Agents/context/guiding-users.md` |
+| `/setup`, setting up a new kit, what is left to install or fill in, or skipping a tool | `Agents/skills/setup/SKILL.md` |
+| What a fully set-up kit needs, or adding a setup item or a placeholder to the template | `Agents/skills/setup/checklist.md` |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
 | Exporting the design system to Lovable, Replit, Bolt.new, v0, or Figma Make | `Agents/skills/design-system-export/SKILL.md` |
@@ -71,7 +73,7 @@ column, read the right column first.
 | `/token-usage-review` (changed tokens by default, `full` for everything), or reviewing token use before a pull request that changes styles | `Agents/skills/token-usage-review/SKILL.md` |
 | Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |
 | Choosing or adding a tool (token converter, linter, Figma capture) | `Docs/Tooling.md` |
-| Forking the kit or porting changes between kit and fork | `Agents/context/kit-structure.md` |
+| Starting a kit from the template, kit provenance, or comparing a kit with the template | `Agents/context/kit-structure.md` |
 | Reviewing `Docs/` and `Agents/` for drift against `Code/` | `Agents/prompts/review-drift.md` |
 
 When a `.cursor/rules/*.mdc` file auto-attaches because you're editing a relevant file,
@@ -88,7 +90,7 @@ moves and kit reuse.
    edited and are read back on the next run (for example, the `Rationale:` lines in the
    design-system deviations backlog).
 2. **Never weaken lint or validation rules to suppress design-system deviations.** Fix the
- root cause or log the deviation in the backlog — do not disable the rule, add an
+   root cause or log the deviation in the backlog — do not disable the rule, add an
  ignore comment, or widen the token usage map. When you log one, write your best guess of why on its rationale line;
    leave the "needs review" sentinel only when the reason is genuinely unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded
@@ -101,15 +103,28 @@ moves and kit reuse.
    waits for an ask; `/pr` is that ask.
 5. **Sandbox, specimen, and sample pages never ship.** They render only on the local dev
    server. Never weaken whatever build check enforces this.
-6. **The token pipeline must preserve alpha.** Whatever converts tokens to CSS must emit an
-   alpha-bearing color wherever the source token is not fully opaque, and the build must
-   include a regression guard that fails when one loses its alpha. Never simplify, remove,
-   or bypass that guard; fix the transform. The usual source is a Figma variables export,
-   which stores opacity in a separate `alpha` field while `hex` is RGB only — reading only
-   `hex` drops transparency.
+6. **The token pipeline must preserve alpha.** A translucent token must come out of the
+   pipeline translucent, and the build includes a regression guard that fails when one
+   doesn't. Never simplify, remove, or bypass that guard; fix the transform. Why and how:
+   "the alpha gotcha" in `Agents/skills/design-tokens/SKILL.md`.
 
 ## Operating notes
 
+- The kit is for designers, many of whom have not set up a codebase before. Lead them
+  through anything they have to do themselves, in plain words, one step at a time, and do
+  the technical work for them. See `Agents/context/guiding-users.md`.
+
+- Checks always run: `lint`, `check`, `build`, `validate`, and the token usage review are
+  never skipped or switched off. What happens to a finding depends on its kind:
+  - **Technical problems** (formatting, code lint, type errors, a failing build, a broken
+    install): fix them yourself and carry on. They are not recorded anywhere and the user
+    doesn't need to hear about each one. Tell the user only when the fix is risky: it
+    could change how the prototype looks or behaves, removes or rewrites their work, needs
+    a decision, or you can't find one.
+  - **Design problems** (design-system deviations, token misuse): fix the clear ones. For
+    the rest, tell the user what was found and ask whether to fix them now or carry on.
+    Either way they stay recorded in the deviations backlog or the token usage review
+    file, never dropped.
 - Keep `Code/`, `Docs/`, and `Export/` in sync when a change spans them (e.g. a new
   feature usually touches code, docs, and eventually an export).
 - Treat `Export/` as an output drop zone: write built artifacts there, don't hand-edit them.

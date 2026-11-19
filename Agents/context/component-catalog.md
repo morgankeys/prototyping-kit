@@ -41,9 +41,12 @@ One table in `Docs/Design system/Guidelines/components.md`, plus one property ma
 component with variants. It is the record the workbench and Code Connect are generated
 from.
 
-- **Rows come from evidence.** Add a row for a component that exists in the Figma library
-  or in `Code/`, never for one you expect to need. In the template the table holds only
-  its placeholder row.
+- **Rows come from evidence.** Add a row for a component that exists in Figma or in
+  `Code/`, never for one you expect to need. In the template the table holds only its
+  placeholder row.
+- **The Figma column links to where the main component lives.** Core components live in
+  the library file. A project-specific component, designed for this prototype, lives in
+  the site file. Both get a row, a story, and a Code Connect file in the same way.
 - **Leave a column empty rather than guess.** Never invent a Figma node link, a code path,
   or a story id. A component in Figma but not in code, or the reverse, is a useful gap to
   see.
@@ -87,18 +90,17 @@ apply.
 
 Write `Figma: not used` under "Figma sources" in
 [`design-system.md`](design-system.md#figma-sources). Agents and `/component-catalog` then
-skip Code Connect for good and mark its registry column `n/a`. That is enough on its own.
+skip Code Connect for good and mark its registry column `n/a`, and `/setup` marks every
+`figma-*` item `n/a`. That is enough on its own.
 
 To also remove the Code Connect placeholders, delete:
 
 | Place | What to remove |
 | --- | --- |
 | `Docs/Tooling.md` | The "Figma Code Connect" entry |
-| `README.md` | The *Figma* publishing step in "Getting started" |
 | `Code/README.md` | The `connect` row |
 | `Code/ARCHITECTURE.md` | The Code Connect comment under "Component catalog" |
 | `.github/workflows/ci.yml` | The `connect` step |
-| `.github/pull_request_template.md` | `connect` in the component catalog checkbox |
 | `Code/.env.example` | The `FIGMA_ACCESS_TOKEN` block |
 | `Docs/Design system/Guidelines/components.md` | The Figma and Code Connect columns, and the Figma columns of the property mappings |
 | `Agents/skills/component-catalog/SKILL.md` | The "Set up Code Connect" step, and its mentions in the other steps |

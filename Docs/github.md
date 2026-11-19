@@ -39,8 +39,9 @@ Promote often. Small promotions are easy to review and easy to roll back.
 ## What CI checks
 
 [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs on pull requests into
-`staging` and `main`: `lint`, `check`, `build`, `validate`, then `git diff --exit-code` to
-fail the run if build or validation changed a tracked file. Validation prints deviations
+`staging` and `main`: `lint`, `check`, `build`, `validate`, `stories-build` and `connect`
+(once `/component-catalog` has turned them on), then `git diff --exit-code` to fail the
+run if build or validation changed a tracked file. Validation prints deviations
 as a warning and exits 0; a stale committed backlog is what fails the job. `--strict` is
 local-only. Fill in the real commands from [`Code/README.md`](../Code/README.md).
 

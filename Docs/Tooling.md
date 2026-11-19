@@ -196,3 +196,52 @@ token JSON, the deviations backlog) is stale, without failing on deviations them
 Tests whether two branches merge cleanly without touching the working tree. The
 [`/pr` skill](../Agents/skills/pr/SKILL.md) uses it to check a branch against its base and
 against other open work.
+
+## Editor
+
+What each editor needs so the kit's files look right: highlighting for every file type,
+and the project's linters shown as underlines. The
+[`/editor-setup` skill](../Agents/skills/editor-setup/SKILL.md) applies it. Extension ids
+below were current when written; confirm each on its marketplace before adding it.
+
+### VS Code and Cursor
+
+Cursor is built on VS Code and reads the same project files.
+
+- **Project files.** `.vscode/extensions.json` lists `recommendations`, which the editor
+  offers to install when the folder is opened. `.vscode/settings.json` holds workspace
+  settings. Both are read only from the folder that is open, so open the kit's root.
+- **Where extensions come from.** VS Code uses the
+  [Visual Studio Marketplace](https://marketplace.visualstudio.com/vscode); Cursor uses
+  [Open VSX](https://open-vsx.org/), so confirm an id is published there too. Each has a
+  command-line installer: `code --install-extension <id>`, `cursor --install-extension <id>`.
+- **Built in:** HTML, CSS, JavaScript, TypeScript (including JSX and TSX), JSON, Markdown.
+- **Language extensions:** Svelte `svelte.svelte-vscode`, Vue `Vue.volar`, Astro
+  `astro-build.astro-vscode`, MDX `unifiedjs.vscode-mdx`, Tailwind CSS
+  `bradlc.vscode-tailwindcss`.
+- **Stylelint** `stylelint.vscode-stylelint`
+  ([settings](https://github.com/stylelint/vscode-stylelint#extension-settings)):
+  - `stylelint.validate` lists the language ids to check; the default is only `css` and
+    `postcss`. Add each one `lint` checks, such as `svelte`, `vue`, or `astro`.
+  - Turn off the editor's own CSS checks (`css.validate`, `less.validate`,
+    `scss.validate`) so the same line doesn't get two different messages.
+  - `stylelint.configFile` loads one config file instead of searching for one. The
+    extension documents `${workspaceFolder}` for some path settings but not this one;
+    test a path before relying on it.
+  - Tested against Stylelint 14 to 18.
+- **ESLint** `dbaeumer.vscode-eslint`. When the config and dependencies live in `Code/`
+  rather than the open folder, set `eslint.workingDirectories` to `["./Code"]`.
+- **Prettier** `esbenp.prettier-vscode`. Set it as `editor.defaultFormatter` for the file
+  types it formats. `editor.formatOnSave` rewrites files on save, so it is the user's
+  choice.
+
+### JetBrains IDEs (WebStorm and others)
+
+Stylelint, ESLint, and Prettier support is built in and turned on per project in Settings.
+Vue support is bundled; Svelte and Astro come as plugins from the JetBrains Marketplace.
+Project settings live in `.idea/`, which is mostly personal; the kit doesn't commit it.
+
+### Zed
+
+Language support for frameworks comes from Zed's extensions panel. Project settings go in
+`.zed/settings.json` at the kit's root.

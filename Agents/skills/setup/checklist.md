@@ -50,6 +50,7 @@ the real command.
 | `stack-dev-guard` | Keep dev-only pages out of every build, with a guard that fails the build if one leaks ([contract](../../context/dev-only-pages.md)). | agent | required | `stack-choice` | A `dev/` pages folder is excluded from `build`, `build` runs the guard, and "Dev-only pages guard" in `Code/ARCHITECTURE.md` describes both. |
 | `stack-architecture` | Fill in `Code/ARCHITECTURE.md`. | agent | required | `stack-choice` | No section is still only its template comment, apart from sections for pieces that are opted out or `waiting`. |
 | `stack-ci` | Replace the placeholders in [`.github/workflows/ci.yml`](../../../.github/workflows/ci.yml) with real commands. | agent | default | `stack-commands` | No step whose role has a real command still echoes `TODO`. Steps for roles the project will never use (opted out or `n/a`) are deleted, not left as placeholders. |
+| `stack-editor` | Set up the user's editor so every file type in `Code/` is highlighted and the project's linters show as underlines ([`/editor-setup`](../editor-setup/SKILL.md)). | both | default | `stack-choice`, `lint-role` | The user says their files look right. For VS Code or Cursor, `.vscode/extensions.json` also recommends an extension for each file type and linter that needs one. |
 
 ## 3. Tokens
 

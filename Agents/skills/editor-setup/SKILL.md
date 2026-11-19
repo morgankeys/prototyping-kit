@@ -34,8 +34,9 @@ Which extension or setting does what, per editor, is in "Editor" in
 - **Linters and formatter.** Note which of Stylelint, ESLint, and Prettier (or their
   replacements) are installed and configured in `Code/`, and where each config lives.
   Only those can be shown in the editor. Also note whether `validate` runs on Stylelint
-  with a design-system config of its own (see "Design-system validator" in
-  `Docs/Tooling.md`, and "Validation" in `Code/ARCHITECTURE.md`).
+  with a design-system config of its own (see
+  ["Design-system validator"](../../../Docs/Tooling.md#design-system-validator), and
+  "Validation" in `Code/ARCHITECTURE.md`).
 - **What is already set up.** Read the editor's committed project files (for VS Code and
   Cursor: `.vscode/extensions.json` and `.vscode/settings.json` at the repo root).
 
@@ -67,9 +68,9 @@ already recommended or installed. Then list the gaps:
 - **Design-system hints:** if `validate` runs on Stylelint with its own design-system
   config, the editor's Stylelint extension can load that config instead, so it shows both
   CSS errors and design-system findings. Recommend it, and say what the second kind means:
-  a hint to use a token, never an error to fix before carrying on (see "Validation and
-  linting" in `Docs/Design system/design-in-code architecture.md`). If the validator runs
-  some other way, skip this.
+  a hint to use a token, never an error to fix before carrying on (see
+  ["Validation and linting"](../../../Docs/Design%20system/design-in-code%20architecture.md#validation-and-linting)).
+  If the validator runs some other way, skip this.
 - **Formatting:** the project's formatter is the editor's formatter for these file types.
   Ask before turning on format on save, because it rewrites files as they are saved.
 

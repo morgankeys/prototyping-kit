@@ -204,6 +204,7 @@ fallbacks). A hand-written parser repeats that work, and it is where missed find
 - **Editor hints, optional.** Point the editor's Stylelint extension at the design-system
   config (in VS Code, the `stylelint.configFile` setting) to see CSS errors and the
   validator's findings while editing. Nothing in `lint` changes.
+  [`/editor-setup`](../Agents/skills/editor-setup/SKILL.md) offers this when it applies.
 - On a stack without Node, write the validator in the stack's language against the same
   contract.
 

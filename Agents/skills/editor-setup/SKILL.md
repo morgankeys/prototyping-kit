@@ -66,7 +66,9 @@ already recommended or installed. Then list the gaps:
   using the same config `lint` uses. A linter that checks `.svelte` files in `lint` but
   only `.css` files in the editor is a gap.
 - **Design-system hints:** if `validate` runs on Stylelint with its own design-system
-  config, the editor's Stylelint extension can load that config instead, so it shows both
+  config (the reference build's is `Code/stylelint.design-system.config.mjs`, copied by
+  [`/design-validator`](../design-validator/SKILL.md) on request), the editor's Stylelint
+  extension can load that config instead, so it shows both
   CSS errors and design-system findings. Recommend it, and say what the second kind means:
   a hint to use a token, never an error to fix before carrying on (see
   ["Validation and linting"](../../../Docs/Design%20system/design-in-code%20architecture.md#validation-and-linting)).

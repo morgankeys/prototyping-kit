@@ -23,9 +23,13 @@ This repo is the prototyping-kit **template**. `new-kit.sh` at the repo root dup
 into a fresh, standalone kit for one specific prototype (it asks for the new repo's name).
 
 - Run it when someone wants a new kit: `./new-kit.sh`. It is a plain script, not a skill.
-- It is **not copied** into the new kit, and neither is this section: anything between
-  `template-only:start` / `template-only:end` HTML comments in a Markdown file is stripped
-  from the copy. Wrap any future template-only notes the same way.
+- It is **not copied** into the new kit, and neither is the template's own CI
+  (`.github/workflows/template.yml` and `.github/template-checks/`) or this section:
+  anything between `template-only:start` / `template-only:end` HTML comments in a
+  Markdown file is stripped from the copy. Wrap any future template-only notes the same
+  way.
+- The template's CI fails if someone starts setting up a prototype here: a stack in
+  `Code/`, a filled-in placeholder, or a setup status file. Setup happens in a kit.
 - In a duplicated kit there is no `new-kit.sh`. Don't recreate it there; new kits come
   from the template.
 - The copy's `README.md` gets the kit's name and the provenance line described in
@@ -70,6 +74,7 @@ column, read the right column first.
 | Regenerating tokens from a new export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
+| `/design-validator`, installing `validate` in a kit, or adapting the validator to a framework | `Agents/skills/design-validator/SKILL.md` |
 | Whether a token fits its intended use, the token usage map, or `token-*` deviations | "Token usage" in `Docs/Design system/design-in-code architecture.md` |
 | `/token-usage-review` (changed tokens by default, `full` for everything), or reviewing token use before a pull request that changes styles | `Agents/skills/token-usage-review/SKILL.md` |
 | Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |

@@ -53,9 +53,11 @@ Which linters the kit uses, and why the token-only Stylelint plugin is not one o
 
 ## Validator contract
 
-Any validator, in any language or on any engine, implements these rules. The kit's
-default build, custom Stylelint rules run by a small wrapper, is described in
-[`Docs/Tooling.md`](../Tooling.md#design-system-validator). Each finding becomes one backlog
+Any validator, in any language or on any engine, implements these rules. The kit ships a
+tested reference build, custom Stylelint rules run by a small wrapper, which
+[`/design-validator`](../../Agents/skills/design-validator/SKILL.md) installs in `Code/`
+(tool notes: [`Docs/Tooling.md`](../Tooling.md#design-system-validator)). In the template,
+a change to this contract changes that build and its tests in the same change. Each finding becomes one backlog
 entry with a rule id, a line, and a detail string. Rule ids below are suggestions; keep
 them stable once chosen, because rationale is matched on them.
 
@@ -177,7 +179,7 @@ system; replace it with the project's own groups.
   `--<namespace>-`.
 - **`propertySets`**: named property lists, referenced as `@name`. A trailing `*` in a
   property matches any longhand (`padding*` matches `padding-inline-start`), and a `*`
-  inside one matches a segment (`border-*-radius`).
+  inside one matches one or more segments (`border-*-radius` matches `border-top-left-radius`).
 - **`figmaScopes`**: scope → property list, used by layer 1.
 - **`groups`**: ordered; **the first group whose `match` fits a token wins.** Put specific
   groups above general ones. Each group has:

@@ -1,0 +1,34 @@
+{
+  "$comment": [
+    "Settings for `validate` (scripts/ds-validate/). Paths are relative to this file, which lives in Code/.",
+    "Contract: Docs/Design system/design-in-code architecture.md. Record what you set here in 'Validation' in Code/ARCHITECTURE.md."
+  ],
+
+  "include": ["src/**/*.{css,svelte,vue,astro}"],
+  "ignore": ["**/node_modules/**"],
+
+  "$tokenFiles": "The generated token CSS. Never scanned.",
+  "tokenFiles": ["src/styles/tokens/**/*.css"],
+
+  "$globalStylesheets": "The global stylesheet: element defaults, type settings, resets, :root. Usually one file.",
+  "globalStylesheets": ["src/styles/global.css"],
+
+  "$manifest": "The token manifest that `tokens` writes. Without it, Figma scope checks are off.",
+  "manifest": "src/styles/tokens/manifest.json",
+
+  "$allowedGlobalClasses": "Utility classes that really are meant for use anywhere. Each needs `class` and `for`. Adding one is the design-system owner's decision; never add one to clear a scoping error.",
+  "allowedGlobalClasses": [],
+
+  "$allowedValues": "Extra literal values the value rules ignore, on top of 0, auto, inherit, initial, unset, revert, revert-layer, transparent, currentcolor, and none.",
+  "allowedValues": [],
+
+  "$allowedVariables": "Non-token CSS variables a framework or tool sets, as name patterns (`*` matches any run of characters), for example \"--tw-*\".",
+  "allowedVariables": [],
+
+  "$exemptions": "Files allowed to break specific deviation rules, each with `files`, `rules`, and `why`. Scoping errors can't be exempted.",
+  "exemptions": [],
+
+  "usageMap": "../Docs/Design system/token-usage.json",
+  "backlog": "../Docs/Design system/deviations-backlog.md",
+  "repoRoot": ".."
+}

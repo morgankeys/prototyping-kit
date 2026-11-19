@@ -1,0 +1,87 @@
+name: Template
+
+# Template only. new-kit.sh deletes this file and .github/template-checks/ from every new
+# kit, and /setup deletes them from a kit copied by hand (kit-provenance). Each job also
+# skips itself where new-kit.sh is absent. Kits test their own code through ci.yml.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: template-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  template-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: template check
+        id: template
+        run: |
+          if [ -f new-kit.sh ]; then echo "is=true" >> "$GITHUB_OUTPUT"; else
+            echo "Not the template (no new-kit.sh); skipping. Delete this workflow and .github/template-checks/ from the kit."
+            echo "is=false" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/setup-node@v4
+        if: steps.template.outputs.is == 'true'
+        with:
+          node-version: "22"
+
+      # Each check runs even if an earlier one failed, so one run shows every problem.
+      - name: setup has not started in the template
+        if: ${{ !cancelled() && steps.template.outputs.is == 'true' }}
+        run: node .github/template-checks/setup-not-started.mjs
+
+      - name: setup scan reads the checklist
+        if: ${{ !cancelled() && steps.template.outputs.is == 'true' }}
+        run: node .github/template-checks/setup-scan.test.mjs
+
+      - name: docs agree
+        if: ${{ !cancelled() && steps.template.outputs.is == 'true' }}
+        run: node .github/template-checks/docs-agree.mjs
+
+      - name: links and anchors resolve
+        if: ${{ !cancelled() && steps.template.outputs.is == 'true' }}
+        run: node .github/template-checks/links.mjs
+
+      - name: new-kit.sh makes a clean kit
+        if: ${{ !cancelled() && steps.template.outputs.is == 'true' }}
+        run: bash .github/template-checks/new-kit.test.sh
+
+  validator-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Agents/skills/design-validator
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: template check
+        id: template
+        working-directory: .
+        run: |
+          if [ -f new-kit.sh ]; then echo "is=true" >> "$GITHUB_OUTPUT"; else
+            echo "Not the template (no new-kit.sh); skipping."
+            echo "is=false" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/setup-node@v4
+        if: steps.template.outputs.is == 'true'
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: Agents/skills/design-validator/package-lock.json
+
+      - name: install
+        if: steps.template.outputs.is == 'true'
+        run: npm ci
+
+      - name: test
+        if: steps.template.outputs.is == 'true'
+        run: npm test

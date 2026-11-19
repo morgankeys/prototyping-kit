@@ -1,0 +1,14 @@
+{
+  "name": "design-validator-tests",
+  "private": true,
+  "description": "Tests for the reference design-system validator in template/. Not copied into kits.",
+  "type": "module",
+  "engines": { "node": ">=22.22" },
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "devDependencies": {
+    "postcss-html": "2.0.0",
+    "postcss-selector-parser": "7.1.0",
+    "postcss-value-parser": "4.2.0",
+    "stylelint": "18.0.0"
+  }
+}

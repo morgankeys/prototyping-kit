@@ -44,14 +44,25 @@ It reads the checklist and prints the facts that need no judgment: template or k
 Figma decision, how the status file compares with the checklist, and every open stub with
 its line numbers. Then read [`checklist.md`](checklist.md) in full.
 
-**If the scan says this is the template** (`new-kit.sh` is present), ask the user which it
-is before going further:
+**If the scan says this is the template** (`new-kit.sh` is present), work out which it is
+before going further. Converting deletes template material, so never do it on a guess,
+but don't make the user know the words "template" or "kit" either:
 
-- *The template:* report the scan and stop. Setup progress is never tracked in the
-  template, and `Docs/setup-status.md` must not exist there. To start a kit, the user runs
-  `./new-kit.sh`, then `/setup` in the new kit.
-- *A kit copied by hand:* do `kit-provenance` first. Add the provenance line to
-  `README.md`, then delete `new-kit.sh` and every `template-only` block, as
+- **Look first.** It is probably the user's own prototype if setup has already started
+  here (`node .github/template-checks/setup-not-started.mjs` fails), or the `origin`
+  remote's repository name is not `prototyping-kit` (for example, a repo made with GitHub's
+  "Use this template" button). Otherwise it is probably the template itself.
+- **Ask one plain question** that states your guess: "This looks like a copy of the
+  prototyping kit made for your project. Is this repo where you'll build your prototype?
+  (The other option is that it's the master copy you make new projects from.)"
+- *It's the master copy (the template):* report the scan and stop. Setup progress is never
+  tracked in the template, and `Docs/setup-status.md` must not exist there. To start a
+  kit, run `./new-kit.sh` for the user (or give them the one command), then run `/setup`
+  in the new kit.
+- *It's their prototype (a kit copied by hand):* convert it for them, then say in a
+  sentence what you removed and why. Do `kit-provenance` first. Add the provenance line to
+  `README.md`, then delete `new-kit.sh`, `.github/workflows/template.yml`,
+  `.github/template-checks/`, and every `template-only` block, as
   [`kit-structure.md`](../../context/kit-structure.md#kit-provenance) describes. Then
   continue.
 

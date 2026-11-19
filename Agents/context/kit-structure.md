@@ -51,6 +51,9 @@ way yet to bring later template changes into it: don't merge from the `template`
 Until an update process exists, compare the two by hand and copy across what is wanted.
 <!-- template-only:start -->
 
-In the template itself, `new-kit.sh` is the way to start a new kit. It strips itself and
-every `template-only` block (like this one) from the copy, so a kit never contains it.
+In the template itself, `new-kit.sh` is the way to start a new kit. It strips itself,
+the template's own CI (`.github/workflows/template.yml` and `.github/template-checks/`,
+which check the template itself and test the reference validator), and every
+`template-only` block (like this one) from the copy, so a kit never contains them. That CI
+also fails if setup starts in the template instead of a kit.
 <!-- template-only:end -->

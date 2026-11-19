@@ -9,7 +9,7 @@
 //
 //   node Agents/skills/export-design-md/scripts/design-md.mjs lint [file]
 //     Runs Google's DESIGN.md linter (pinned below) on Export/DESIGN.md or [file], then the
-//     kit's own checks. Exits non-zero on any error.
+//     repo's own checks. Exits non-zero on any error.
 
 import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
@@ -90,7 +90,7 @@ function lint(file = OUTPUT) {
   if (!text.includes(MARKER)) problems.push(`missing the "${MARKER}" marker comment`);
   if (/^##\s+Components\s*$/m.test(text)) problems.push("has a Components section; the portable export leaves components out");
   if (/`(Code|Agents|Docs)\//.test(text)) problems.push("mentions repo paths; the portable export must stand alone");
-  for (const p of problems) console.error(`kit check: ${p}`);
+  for (const p of problems) console.error(`repo check: ${p}`);
 
   process.exit(result.status || (problems.length ? 1 : 0));
 }

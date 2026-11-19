@@ -1,6 +1,6 @@
 # Managing the repo
 
-Notes for the people who own a project built on this kit: how branches flow, which repo
+Notes for the people who own a prototype made from this template: how branches flow, which repo
 settings matter, and routine upkeep.
 
 Related: [`Agents/context/git-workflow.md`](../Agents/context/git-workflow.md) holds the

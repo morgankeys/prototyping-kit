@@ -121,7 +121,7 @@ ${MARKER}
 | \`replit.md\` | Block to append to a project's \`replit.md\` |
 | \`custom-instructions.md\` | Workspace custom instructions |
 
-Unzip the skill into \`.agents/skills/\` for one project, or add the zip in **Workspace Settings**. For Replit Design, attach \`Export/DESIGN.md\` from \`/export-design-md\` as the seed. Replit Design re-derives tokens, so the skill is the copy that carries this kit's CSS.
+Unzip the skill into \`.agents/skills/\` for one project, or add the zip in **Workspace Settings**. For Replit Design, attach \`Export/DESIGN.md\` from \`/export-design-md\` as the seed. Replit Design re-derives tokens, so the skill is the copy that carries this repo's CSS.
 
 ${model.components.length ? "Component source is under `assets/components/` because the manifest validated." : "No component source is included."}
 `,

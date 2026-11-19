@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 #
-# new-kit.sh — duplicate this template into a fresh, standalone prototyping kit.
+# new-prototype.sh — copy this template into a fresh, standalone repo for one prototype.
 #
-# TEMPLATE-ONLY: this script, and every block wrapped in
+# TEMPLATE-ONLY: this script, the template's own CI, and every block wrapped in
 #   <!-- template-only:start --> ... <!-- template-only:end -->
-# in the kit's Markdown files, is left out of the new kit. The new kit becomes a specific
-# kit for one prototype, so it does not carry the means to stamp out more kits.
+# in the Markdown files are left out of the new prototype. A prototype is for one project,
+# so it does not carry the means to stamp out more prototypes.
 #
 # What it does:
-#   1. Asks for the new kit's name and where to put it (default: next to this template).
+#   1. Asks for the new prototype's name and where to put it (default: next to this template).
 #   2. Copies the template's committed files (HEAD), minus this script and the
 #      template-only blocks. Uncommitted changes and untracked files are not copied.
 #      Retitles the README with the new name and adds the provenance line.
 #   3. Starts a fresh git history with one commit, and adds a `template` remote pointing
-#      back here, as a record of where the kit came from.
+#      back here, as a record of where the prototype came from.
 #   4. Optionally creates a GitHub repo with `gh` and pushes to it.
 #
-# Usage: ./new-kit.sh
+# Usage: ./new-prototype.sh
 
 set -euo pipefail
 
@@ -51,7 +51,7 @@ git -C "$TEMPLATE_DIR" rev-parse --verify -q HEAD >/dev/null \
 
 # --- Gather input ----------------------------------------------------------------------
 
-NAME="$(ask "New kit name (used for the folder and repo, e.g. prototyping-kit-example-acme)")"
+NAME="$(ask "New prototype name (used for the folder and repo, e.g. acme-checkout-prototype)")"
 [[ -n "$NAME" ]] || die "a name is required."
 [[ "$NAME" =~ ^[A-Za-z0-9._-]+$ ]] \
   || die "use only letters, numbers, dots, dashes, and underscores in the name."
@@ -82,8 +82,8 @@ grep -rlF --include='*.md' --include='*.mdc' "$START_MARK" . 2>/dev/null | while
   sed "\#$START_MARK#,\#$END_MARK#d" "$file" > "$file.tmp" && mv "$file.tmp" "$file"
 done
 
-# Title the README after the new kit and record provenance
-# (see Agents/context/kit-structure.md#kit-provenance).
+# Title the README after the new prototype and record provenance
+# (see Agents/context/repo-structure.md#provenance).
 PROVENANCE="Created from prototyping-kit @ \`$TEMPLATE_SHA\` on \`$(date +%Y-%m-%d)\`."
 awk -v name="$NAME" -v line="$PROVENANCE" '
   NR == 1 && /^# / { print "# " name; print ""; print line; next }

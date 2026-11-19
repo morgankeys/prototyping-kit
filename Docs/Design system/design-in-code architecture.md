@@ -6,7 +6,7 @@ code, whatever the stack. These principles are enforced by the design-system val
 
 * There is a global variables file, built directly from the source-of-truth tokens. A Figma
   variables export is the default source; the same file is built when tokens are maintained
-  in this kit, another repository, or another design tool.
+  in this repo, another repository, or another design tool.
 * There is a global CSS file that contains a minimal set of universal styles. For example,
   type settings.
 * Component styles should be contained and scoped to the component itself. Every style is
@@ -40,7 +40,7 @@ The one place this split is written down; other files link here.
 Why one owner: a deviation logged with its rationale is handled. If `lint` flagged the
 same value as an error, it would fail CI with no legitimate way through.
 
-When the validator runs on Stylelint (the kit's default build), the two share an engine,
+When the validator runs on Stylelint (the template's default build), the two share an engine,
 not a config or an exit code: `lint`'s config never loads the design-system rules, and
 `validate` decides its own exit code.
 
@@ -48,12 +48,12 @@ Both always run. The hard failures that protect the design system are the alpha
 regression guard and the dev-only pages guard, both in `build`; scoping errors, in
 `validate`; and the stale-backlog check in CI.
 
-Which linters the kit uses, and why the token-only Stylelint plugin is not one of them:
+Which linters this repo uses, and why the token-only Stylelint plugin is not one of them:
 [`Docs/Tooling.md`](../Tooling.md#stylelint).
 
 ## Validator contract
 
-Any validator, in any language or on any engine, implements these rules. The kit ships a
+Any validator, in any language or on any engine, implements these rules. The template ships a
 tested reference build, custom Stylelint rules run by a small wrapper, which
 [`/design-validator`](../../Agents/skills/design-validator/SKILL.md) installs in `Code/`
 (tool notes: [`Docs/Tooling.md`](../Tooling.md#design-system-validator)). In the template,

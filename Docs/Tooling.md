@@ -1,25 +1,25 @@
 # Tooling
 
-A menu, not a manifest. The kit installs none of these; each is a tool a project in `Code/`
+A menu, not a manifest. The template installs none of these; each is a tool a project in `Code/`
 has found worth adding. Pick what fits your stack, wire it to a command role in
 [`Code/README.md`](../Code/README.md), and record stack-specific quirks in that project's
 `Code/ARCHITECTURE.md` (or the "Gotchas" heading in `Code/README.md`), not here.
 
-Which of these a kit needs, which are optional, and what each waits on is in the
+Which of these a prototype needs, which are optional, and what each waits on is in the
 [setup checklist](../Agents/skills/setup/checklist.md). `/setup` walks through them and
 records any the project skips.
 
-Worked examples below come from one project built on this kit, the kit owner's portfolio
+Worked examples below come from one prototype built from this template, the template owner's portfolio
 site (`morgankeys/morgankeysdotcomv3`). They are references to read, not files to copy in
 unchanged.
 
 ## Design ↔ code
 
-The kit needs a source of truth for tokens. The default path is
+Every prototype needs a source of truth for tokens. The default path is
 **Figma → tokens → prototype → capture back to Figma**.
 
-A team can instead keep tokens in this kit or a separate repository and feed both the
-prototype and Figma, or use another design tool, as long as the tokens land in this kit.
+A team can instead keep tokens in the prototype's repo or a separate repository and feed both the
+prototype and Figma, or use another design tool, as long as the tokens land in the prototype's repo.
 The tools below are the Figma path.
 
 ### Figma variables export
@@ -67,7 +67,7 @@ screenshot. Ctrl+C captures the entire screen without opening the menu.
   `figma-capture` and expect nothing.
 - **Network:** the capture is Figma's html-to-design script, which the button fetches from
   `mcp.figma.com` as it loads.
-- The package gates itself to `localhost`, but the kit still requires the dev-only import
+- The package gates itself to `localhost`, but this repo still requires the dev-only import
   and the build check above.
 - Example: `Code/src/scripts/figma-capture.ts` in the example site.
 
@@ -161,7 +161,7 @@ default engine for `validate`, under a separate config (see
 - **`lint`'s config does not check token use.** Hardcoded colors, spacing, radius, and
   typography are design-system findings, and `validate` owns those (see
   [Validation and linting](Design%20system/design-in-code%20architecture.md#validation-and-linting)).
-- **`stylelint-declaration-strict-value` is not part of the kit.** The plugin forces
+- **`stylelint-declaration-strict-value` is not part of the template.** The plugin forces
   `var(…)` in chosen properties, which reports the validator's findings a second time, as
   errors that fail `lint` even when the deviation is logged with a rationale. It is also
   the weaker check: it accepts any function call, so literals inside `rgb()`, `calc()`,
@@ -182,7 +182,7 @@ and writes the deviations backlog. It is the only check that reports design-syst
 findings.
 
 **Default build, on a stack with Node: the contract's rules as custom Stylelint rules,
-run by a small wrapper.** The kit ships it, tested, in
+run by a small wrapper.** The template ships it, tested, in
 [`Agents/skills/design-validator/`](../Agents/skills/design-validator/SKILL.md);
 `/design-validator` copies it into `Code/scripts/ds-validate/` and configures it in
 `Code/ds-validate.config.json`. Stylelint already finds the files, parses CSS and the style
@@ -243,7 +243,7 @@ against other open work.
 
 ## Editor
 
-What each editor needs so the kit's files look right: highlighting for every file type,
+What each editor needs so this repo's files look right: highlighting for every file type,
 and the project's linters shown as underlines. The
 [`/editor-setup` skill](../Agents/skills/editor-setup/SKILL.md) applies it. Every extension
 id below was confirmed on both the Visual Studio Marketplace and Open VSX on 2026-11-19;
@@ -255,7 +255,7 @@ Cursor is built on VS Code and reads the same project files.
 
 - **Project files.** `.vscode/extensions.json` lists `recommendations`, which the editor
   offers to install when the folder is opened. `.vscode/settings.json` holds workspace
-  settings. Both are read only from the folder that is open, so open the kit's root.
+  settings. Both are read only from the folder that is open, so open the repo's root folder.
 - **Where extensions come from.** VS Code uses the
   [Visual Studio Marketplace](https://marketplace.visualstudio.com/vscode); Cursor uses
   [Open VSX](https://open-vsx.org/), so confirm an id is published there too. Each has a
@@ -284,9 +284,9 @@ Cursor is built on VS Code and reads the same project files.
 
 Stylelint, ESLint, and Prettier support is built in and turned on per project in Settings.
 Vue support is bundled; Svelte and Astro come as plugins from the JetBrains Marketplace.
-Project settings live in `.idea/`, which is mostly personal; the kit doesn't commit it.
+Project settings live in `.idea/`, which is mostly personal; this repo doesn't commit it.
 
 ### Zed
 
 Language support for frameworks comes from Zed's extensions panel. Project settings go in
-`.zed/settings.json` at the kit's root.
+`.zed/settings.json` at the repo's root.

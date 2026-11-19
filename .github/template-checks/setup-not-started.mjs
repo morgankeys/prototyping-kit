@@ -1,5 +1,5 @@
 // The template must stay a template. Fails, with plain instructions, when someone has
-// started setting up a prototype here instead of in a kit made with ./new-kit.sh.
+// started setting up a prototype here instead of in a new repo made with ./new-prototype.sh.
 //   node .github/template-checks/setup-not-started.mjs
 import { codeIn, exists, read, report, tableRows, trackedFiles } from './lib.mjs';
 
@@ -9,7 +9,7 @@ const EMPTY_FOLDERS = ['Docs/Design system/Figma/Tokens/', 'Docs/Design system/F
 
 const problems = [];
 
-// 1. Progress is tracked only in kits.
+// 1. Progress is tracked only in prototypes.
 if (exists('Docs/setup-status.md')) {
   problems.push('`Docs/setup-status.md` exists: setup progress is being tracked here.');
 }
@@ -38,24 +38,24 @@ for (const [stub, fileCell, markerCell] of tableRows(read(CHECKLIST), '## Stubs'
   }
 }
 
-// 5. Only a kit records where it came from.
+// 5. Only a prototype records where it came from.
 if (/^(Created|Forked) from prototyping-kit @/m.test(read('README.md'))) {
-  problems.push('`README.md` has a "Created from prototyping-kit" line, which only a kit has.');
+  problems.push('`README.md` has a "Created from prototyping-kit" line, which only a prototype has.');
 }
 
 report('setup has not started in the template', problems, {
   intro: [
     '',
-    'This repo is the prototyping-kit TEMPLATE (it has new-kit.sh), but someone has started',
-    'setting up a prototype in it. The template stays empty so every new kit starts clean.',
+    'This repo is the prototyping-kit TEMPLATE (it has new-prototype.sh), but someone has started',
+    'setting up a prototype in it. The template stays empty so every new prototype starts clean.',
     '',
     'To fix it, do one of these:',
     '  1. If this repo is meant to be where you build your prototype: ask your agent to',
-    '     run the /setup skill here. It will turn this copy into a proper kit for you,',
-    '     and this check stops.',
-    '  2. If this repo is the template you make new kits from: run ./new-kit.sh to make',
-    '     a kit, then ask your agent to run the /setup skill from the new kit. Move these',
-    '     changes over there, and undo them here.',
+    '     run the /setup skill here. It will turn this copy into a proper prototype for',
+    '     you, and this check stops.',
+    '  2. If you want to make a prototype in a new repo and preserve this as a template:',
+    '     run ./new-prototype.sh, then ask your agent to run the /setup skill from the new',
+    '     prototype. Move these changes over there, and undo them here.',
     '',
     'What was found:',
   ].join('\n'),

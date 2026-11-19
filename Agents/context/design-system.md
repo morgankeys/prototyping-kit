@@ -6,7 +6,7 @@ project starts; keep stack-specific detail in `Code/ARCHITECTURE.md`.
 
 For the token pipeline — how token CSS is generated, and the alpha transform — see
 [`Agents/skills/design-tokens/SKILL.md`](../skills/design-tokens/SKILL.md). Figma is the
-default source. The same pipeline applies when tokens are maintained in this kit, another
+default source. The same pipeline applies when tokens are maintained in this repo, another
 repository, or another design tool: they still land in the folders below, and generated
 token CSS is what components use.
 
@@ -18,7 +18,7 @@ When the project uses Figma, record two files:
 - **Library file** — core styles; tokens are exported from here: `<Figma link to the library file>`
 
 List the same links for humans in `Docs/Design system/README.md`. If tokens come from this
-kit, another repository, or another design tool, say so here and point at where they are
+repo, another repository, or another design tool, say so here and point at where they are
 maintained.
 
 If the project doesn't use Figma, replace both lines with `Figma: not used`. Agents and

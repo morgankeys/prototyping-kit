@@ -1,25 +1,25 @@
 ---
 name: setup
-description: Review how far this kit is set up and walk the user through what's left. Checks the repo against the canonical setup checklist (stack, token pipeline, validator, linters, Figma tools, component catalog, unfilled stubs), records progress in Docs/setup-status.md, and respects opt-outs. Use when the user invokes /setup, starts a new kit, asks what still needs setting up or installing, or wants to skip or re-enable a tool.
+description: Review how far this prototype is set up and walk the user through what's left. Checks the repo against the canonical setup checklist (stack, token pipeline, validator, linters, Figma tools, component catalog, unfilled stubs), records progress in Docs/setup-status.md, and respects opt-outs. Use when the user invokes /setup, starts a new prototype, asks what still needs setting up or installing, or wants to skip or re-enable a tool.
 ---
 
 # /setup
 
-Checks the kit against the setup checklist, reports what is left, and walks the user
+Checks the prototype against the setup checklist, reports what is left, and walks the user
 through it one step at a time.
 
 Two files, kept apart on purpose:
 
 - **[`checklist.md`](checklist.md)** — the canonical definitions: every item, who does it,
   what it needs first, and how to tell it is done. Never record progress in it.
-- **`Docs/setup-status.md`** — this kit's progress, one row per item id. This skill
+- **`Docs/setup-status.md`** — this prototype's progress, one row per item id. This skill
   creates and maintains it; people may edit it by hand.
 
 This file holds the steps only. What each item means is in the checklist; how to do an
 item is in the skill or doc its row links to.
 
 **Read [`guiding-users.md`](../../context/guiding-users.md) before you start.** Setup is
-often a user's first hour with the kit, and many users have not set up a codebase before.
+often a user's first hour with their prototype, and many users have not set up a codebase before.
 The checklist is written for agents: its ids, levels, and role names are your working
 notes, not what you say to the user. Your job is to lead them through it.
 
@@ -40,30 +40,30 @@ Safe to rerun at any point in a project. A run with nothing to do just reports t
 node Agents/skills/setup/scripts/setup-scan.mjs
 ```
 
-It reads the checklist and prints the facts that need no judgment: template or kit, the
+It reads the checklist and prints the facts that need no judgment: template or prototype, the
 Figma decision, how the status file compares with the checklist, and every open stub with
 its line numbers. Then read [`checklist.md`](checklist.md) in full.
 
-**If the scan says this is the template** (`new-kit.sh` is present), work out which it is
+**If the scan says this is the template** (`new-prototype.sh` is present), work out which it is
 before going further. Converting deletes template material, so never do it on a guess,
-but don't make the user know the words "template" or "kit" either:
+but don't make the user know these words either:
 
 - **Look first.** It is probably the user's own prototype if setup has already started
   here (`node .github/template-checks/setup-not-started.mjs` fails), or the `origin`
   remote's repository name is not `prototyping-kit` (for example, a repo made with GitHub's
   "Use this template" button). Otherwise it is probably the template itself.
 - **Ask one plain question** that states your guess: "This looks like a copy of the
-  prototyping kit made for your project. Is this repo where you'll build your prototype?
+  template, made for your project. Is this repo where you'll build your prototype?
   (The other option is that it's the master copy you make new projects from.)"
 - *It's the master copy (the template):* report the scan and stop. Setup progress is never
   tracked in the template, and `Docs/setup-status.md` must not exist there. To start a
-  kit, run `./new-kit.sh` for the user (or give them the one command), then run `/setup`
-  in the new kit.
-- *It's their prototype (a kit copied by hand):* convert it for them, then say in a
-  sentence what you removed and why. Do `kit-provenance` first. Add the provenance line to
-  `README.md`, then delete `new-kit.sh`, `.github/workflows/template.yml`,
+  prototype, run `./new-prototype.sh` for the user (or give them the one command), then run
+  `/setup` in the new prototype.
+- *It's their prototype (copied by hand):* convert it for them, then say in a
+  sentence what you removed and why. Do `prototype-provenance` first. Add the provenance line to
+  `README.md`, then delete `new-prototype.sh`, `.github/workflows/template.yml`,
   `.github/template-checks/`, and every `template-only` block, as
-  [`kit-structure.md`](../../context/kit-structure.md#kit-provenance) describes. Then
+  [`repo-structure.md`](../../context/repo-structure.md#provenance) describes. Then
   continue.
 
 ### 2. Sync the status file
@@ -140,11 +140,11 @@ tool by name ("skip Storybook") at any point, including in answer to the report.
 
 - Set the row to `opted out`, with the date and the user's reason in Notes. Set the items
   that need it to `n/a`.
-- A `required` item can't be skipped. Say which kit rule depends on it (the checklist row
+- A `required` item can't be skipped. Say which rule depends on it (the checklist row
   links to it) and what breaks without it. The choice of tool is still open: any
   converter, validator language, or workbench that meets the contract counts.
 - Skipping Figma altogether is not a row edit: write `Figma: not used` in both files that
-  `kit-figma` names. Every `figma-*` item becomes `n/a`, and
+  `prototype-figma` names. Every `figma-*` item becomes `n/a`, and
   [`component-catalog.md`](../../context/component-catalog.md#not-using-figma) lists the
   placeholders that can then be deleted.
 - After an opt-out, offer to delete the placeholders that piece left behind (the scan
@@ -193,7 +193,7 @@ one, say in a sentence what it is for; after it, say what changed.
 - **Pace:** setup doesn't have to finish in one sitting. At a natural stopping point, say
   what is working now and that `/setup` picks up where it left off.
 - When every item an agent can do is `done`, `opted out`, or `n/a`, say so, say what the
-  user can do with the kit now, and list what still waits on them.
+  user can do with their prototype now, and list what still waits on them.
 
 ## Notes
 

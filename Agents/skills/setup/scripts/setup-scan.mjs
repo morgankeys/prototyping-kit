@@ -3,7 +3,7 @@
 //
 //   node Agents/skills/setup/scripts/setup-scan.mjs
 //     Read-only. Prints what can be told about setup without judgment: whether this is the
-//     template or a kit, the Figma decision, how Docs/setup-status.md compares with the
+//     template or a prototype, the Figma decision, how Docs/setup-status.md compares with the
 //     canonical checklist (new items, leftover rows), and every stub that is still open.
 //
 //   node Agents/skills/setup/scripts/setup-scan.mjs sync
@@ -76,7 +76,7 @@ function fail(message) {
   process.exit(2);
 }
 
-const isTemplate = () => existsSync(join(ROOT, "new-kit.sh"));
+const isTemplate = () => existsSync(join(ROOT, "new-prototype.sh"));
 
 // Both files also mention the phrase in the sentence that explains the option ("replace
 // both lines with ..."), which must not count as the decision.
@@ -108,8 +108,8 @@ function scan() {
   console.log("# Setup scan\n");
   console.log(
     isTemplate()
-      ? "Repo: TEMPLATE, or a kit copied by hand (new-kit.sh is present)."
-      : `Repo: kit. Provenance: ${provenance ?? "MISSING from README.md"}`,
+      ? "Repo: TEMPLATE, or a prototype copied by hand (new-prototype.sh is present)."
+      : `Repo: prototype. Provenance: ${provenance ?? "MISSING from README.md"}`,
   );
   console.log(`Figma: ${figmaDecision()}`);
 
@@ -156,7 +156,7 @@ function scan() {
 
 const HEADER = `# Setup status
 
-Where this kit stands against the setup checklist. Written by \`/setup\`; item definitions
+Where this prototype stands against the setup checklist. Written by \`/setup\`; item definitions
 are in [\`Agents/skills/setup/checklist.md\`](../Agents/skills/setup/checklist.md), so this
 file only records progress. Edit a row by hand whenever that is quicker: tick off a step
 you did, or write \`opted out\` to drop a tool.
@@ -171,8 +171,8 @@ Status is one of \`todo\`, \`waiting\` (on the item or person named in Notes), \
 function sync() {
   if (isTemplate()) {
     fail(
-      "new-kit.sh is present, so this looks like the template. Setup progress is tracked in a kit, not in the template.\n" +
-        "If this is a kit that was copied by hand, finish `kit-provenance` first (see the setup skill), then run sync again.",
+      "new-prototype.sh is present, so this looks like the template. Setup progress is tracked in a prototype, not in the template.\n" +
+        "If this is a prototype that was copied by hand, finish `prototype-provenance` first (see the setup skill), then run sync again.",
     );
   }
   const { items } = parseChecklist();

@@ -160,7 +160,7 @@ When a surface has a radius and something stacked over media:
 
 ## Where this came from
 
-Two fixes in the project this kit was distilled from, both resolved with the rules above:
+Two fixes in the project this template was distilled from, both resolved with the rules above:
 
 - **Thumbnail with a hover scrim:** the thumbnail had its own radius inside a rounded card,
   so the image and the scrim were clipped separately and light pixels showed along the

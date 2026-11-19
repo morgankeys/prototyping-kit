@@ -1,17 +1,18 @@
 ---
 name: design-validator
-description: Install the kit's reference design-system validator into Code/ and wire the validate role. Copies the tested Stylelint-based validator from this skill, installs its pinned dependencies, fills in its config for the stack (global stylesheet, token files, manifest, component file types), runs it, and records the setup in Code/ARCHITECTURE.md. Use when the user invokes /design-validator, when /setup reaches the ds-validator item, when validate has no real command yet, or when the validator needs adapting to a new framework.
+description: Install the template's reference design-system validator into Code/ and wire the validate role. Copies the tested Stylelint-based validator from this skill, installs its pinned dependencies, fills in its config for the stack (global stylesheet, token files, manifest, component file types), runs it, and records the setup in Code/ARCHITECTURE.md. Use when the user invokes /design-validator, when /setup reaches the ds-validator item, when validate has no real command yet, or when the validator needs adapting to a new framework.
 ---
 
 # /design-validator
 
-Installs `validate` in a kit: the design-system validator that writes the deviations
+Installs `validate` in a prototype: the design-system validator that writes the deviations
 backlog and fails on scoping errors. The rules it implements are the contract in
 [`design-in-code architecture.md`](../../../Docs/Design%20system/design-in-code%20architecture.md#validator-contract);
 this skill holds the install steps only.
 
-The validator is already written and tested here, in [`template/`](template/). A kit gets a
-copy in `Code/` and owns it from then on. Safe to rerun: it never overwrites a kit's copy
+The validator is already written and tested here, in [`template/`](template/). A prototype gets
+a copy in `Code/` and owns it from then on. Safe to rerun: it never overwrites a
+prototype's copy
 without asking.
 
 **Read [`guiding-users.md`](../../context/guiding-users.md) before you start.** All of
@@ -48,7 +49,7 @@ here; use those.
   manifest exist. Without the manifest the validator still runs, with Figma scope checks
   off, and says so.
 - **Existing copy.** If `Code/scripts/ds-validate/` already exists, compare it with
-  `template/`. The kit may have adapted it; never overwrite local changes without asking.
+  `template/`. The prototype may have adapted it; never overwrite local changes without asking.
 
 ### 2. Copy and install
 
@@ -121,7 +122,7 @@ Done when the `ds-validator` item in the [setup checklist](../setup/checklist.md
 ## Adapting it to another framework
 
 A framework with its own component file type (anything other than Svelte, Vue, Astro, or
-CSS modules) needs two small changes in the kit's copy: map the file extension to a
+CSS modules) needs two small changes in the prototype's copy: map the file extension to a
 framework in `COMPONENT_EXTENSIONS` (`settings.mjs`), and say how that framework marks a
 style block as not scoped in `blockScope` (`plugin.mjs`). Styles written in JavaScript
 (CSS-in-JS) are not CSS files Stylelint can read without a custom syntax; check that one

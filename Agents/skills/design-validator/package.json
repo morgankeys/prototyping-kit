@@ -1,7 +1,7 @@
 {
   "name": "design-validator-tests",
   "private": true,
-  "description": "Tests for the reference design-system validator in template/. Not copied into kits.",
+  "description": "Tests for the reference design-system validator in template/. Not copied into prototypes.",
   "type": "module",
   "engines": { "node": ">=22.22" },
   "scripts": { "test": "node --test test/*.test.mjs" },

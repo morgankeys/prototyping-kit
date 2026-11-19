@@ -1,4 +1,4 @@
-// Exercises the exporter against a temporary kit. Not part of the template's Docs.
+// Exercises the exporter against a temporary prototype. Not part of the template's Docs.
 import { gunzipSync } from "node:zlib";
 import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -138,7 +138,7 @@ export function selfTest() {
     } catch (err) {
       code = err.code;
     }
-    assert(code === 3, `empty kit exited ${code}`);
+    assert(code === 3, `empty prototype exited ${code}`);
 
     const huge = join(root, "huge");
     mkdirSync(join(huge, "Docs/Design system/Guidelines"), { recursive: true });

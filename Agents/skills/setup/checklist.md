@@ -1,6 +1,6 @@
 # Setup checklist
 
-The canonical list of everything a kit needs before it is fully set up: tools to install,
+The canonical list of everything a prototype needs before it is fully set up: tools to install,
 configuration to write, decisions to record, and stubs to fill in. `/setup`
 ([`SKILL.md`](SKILL.md)) reads this file, checks the repo against it, and reports what is
 left.
@@ -8,9 +8,9 @@ left.
 It is written for agents. Ids, levels, and role names are working notes; when talking to
 the user, follow [`guiding-users.md`](../../context/guiding-users.md).
 
-**This file holds definitions only. Never tick anything off here.** Each kit's progress
+**This file holds definitions only. Never tick anything off here.** Each prototype's progress
 lives in `Docs/setup-status.md`, one row per item id below, written by `/setup`. Keeping
-the two apart means this file can be replaced with a newer version without losing a kit's
+the two apart means this file can be replaced with a newer version without losing a prototype's
 progress: a new item simply shows up as a new row.
 
 Rules and tool facts are not restated here. Each item links to the file that owns them:
@@ -23,22 +23,22 @@ in [`Docs/Tooling.md`](../../../Docs/Tooling.md).
 | --- | --- |
 | **Item** | Stable id. Never rename one; status rows are matched on it. |
 | **Who** | `user`: only a person can do it (a decision, an account, a file from Figma). `agent`: an agent does it once its inputs exist. `both`: the user decides or supplies something, then the agent does the work. |
-| **Level** | `required`: a kit rule or check depends on it, so it can't be opted out of. The tool that does the job can still be swapped for an equivalent. `default`: set up unless the user opts out. `optional`: offered once, set up only if the user opts in. `anytime`: content that fills in as the project goes; reported, never a blocker. |
+| **Level** | `required`: a rule or check depends on it, so it can't be opted out of. The tool that does the job can still be swapped for an equivalent. `default`: set up unless the user opts out. `optional`: offered once, set up only if the user opts in. `anytime`: content that fills in as the project goes; reported, never a blocker. |
 | **Needs** | Items that must be `done` first. An item whose needs aren't met is `waiting`, not `todo`. |
 | **Done when** | What to check in the repo. *Ask* means it can't be seen from the repo: take the user's word and record the date. |
 
-Every `figma-*` item is `n/a` when the project says `Figma: not used` (see `kit-figma`).
+Every `figma-*` item is `n/a` when the project says `Figma: not used` (see `prototype-figma`).
 
 Commands are named by role; [`Code/README.md`](../../../Code/README.md) maps each role to
 the real command.
 
-## 1. Kit
+## 1. Prototype
 
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |
-| `kit-provenance` | Record where the kit came from ([kit provenance](../../context/kit-structure.md#kit-provenance)). | agent | required | | The root `README.md` has a `Created from prototyping-kit @` line (`Forked from` in older kits), and the repo has no `new-kit.sh`, no `.github/workflows/template.yml` or `.github/template-checks/`, and no `template-only` blocks. |
-| `kit-figma` | Decide whether the project uses Figma, and record the site and library file links, or `Figma: not used` ([Figma sources](../../context/design-system.md#figma-sources)). | user | required | | Both [`Agents/context/design-system.md`](../../context/design-system.md) and [`Docs/Design system/README.md`](../../../Docs/Design%20system/README.md) hold real links or `Figma: not used`, and they agree. |
-| `kit-github` | Create `staging`, and apply the repo settings and rulesets in [`Docs/github.md`](../../../Docs/github.md). | user | default | | A `staging` branch exists on the remote. Settings and rulesets: *ask*; agents can't see them. |
+| `prototype-provenance` | Record where the prototype came from ([provenance](../../context/repo-structure.md#provenance)). | agent | required | | The root `README.md` has a `Created from prototyping-kit @` line (`Forked from` in older kits), and the repo has no `new-prototype.sh`, no `.github/workflows/template.yml` or `.github/template-checks/`, and no `template-only` blocks. |
+| `prototype-figma` | Decide whether the project uses Figma, and record the site and library file links, or `Figma: not used` ([Figma sources](../../context/design-system.md#figma-sources)). | user | required | | Both [`Agents/context/design-system.md`](../../context/design-system.md) and [`Docs/Design system/README.md`](../../../Docs/Design%20system/README.md) hold real links or `Figma: not used`, and they agree. |
+| `prototype-github` | Create `staging`, and apply the repo settings and rulesets in [`Docs/github.md`](../../../Docs/github.md). | user | default | | A `staging` branch exists on the remote. Settings and rulesets: *ask*; agents can't see them. |
 
 ## 2. Stack
 
@@ -56,7 +56,7 @@ the real command.
 
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |
-| `tokens-source` | Bring in the token source. Default: export each variable collection from the Figma library file and drop the zips in `Docs/Design system/Figma/Tokens/` ([Figma variables export](../../../Docs/Tooling.md#figma-variables-export)). | user | required | `kit-figma` | The folder holds at least one export `.zip`, or `Agents/context/design-system.md` says where tokens are maintained and they are stored under `Docs/Design system/`. |
+| `tokens-source` | Bring in the token source. Default: export each variable collection from the Figma library file and drop the zips in `Docs/Design system/Figma/Tokens/` ([Figma variables export](../../../Docs/Tooling.md#figma-variables-export)). | user | required | `prototype-figma` | The folder holds at least one export `.zip`, or `Agents/context/design-system.md` says where tokens are maintained and they are stored under `Docs/Design system/`. |
 | `tokens-pipeline` | Install a token converter ([Style Dictionary](../../../Docs/Tooling.md#style-dictionary) by default) and wire the `tokens` role ([design-tokens skill](../design-tokens/SKILL.md)). | agent | required | `tokens-source`, `stack-choice` | `tokens` has a real command; each collection is unpacked into its own tracked folder; the generated token CSS exists with a generated-file header; the token manifest is written; `build` runs `tokens` first. |
 | `tokens-alpha-guard` | Preserve alpha in the color transform and add the regression guard ([the alpha gotcha](../design-tokens/SKILL.md#critical-the-alpha-gotcha)). | agent | required | `tokens-pipeline` | `build` runs an assertion that fails when a source token with `alpha < 1` is emitted without alpha, and every such token in the generated CSS is alpha-bearing. |
 | `tokens-namespace` | Record the token namespace. | agent | required | `tokens-pipeline` | "Styling rules" in `Agents/context/design-system.md` names the real prefix and its groups, and `namespace` in [`token-usage.json`](../../../Docs/Design%20system/token-usage.json) matches. |
@@ -81,7 +81,7 @@ Design findings come only from `validate`; `lint` is technical
 
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |
-| `figma-mcp` | Connect the [Figma MCP server](../../../Docs/Tooling.md#figma-mcp-server) to the agent tool in use, so agents can read the files and push captures back. Signing in is the user's step. | user | default | `kit-figma` | A Figma MCP tool answers in this session (for example, reading the library file). If none is available here, *ask*. |
+| `figma-mcp` | Connect the [Figma MCP server](../../../Docs/Tooling.md#figma-mcp-server) to the agent tool in use, so agents can read the files and push captures back. Signing in is the user's step. | user | default | `prototype-figma` | A Figma MCP tool answers in this session (for example, reading the library file). If none is available here, *ask*. |
 | `figma-registry` | List the library's components in the [component registry](../../../Docs/Design%20system/Guidelines/components.md), with node links and variant properties ([registry rules](../../context/component-catalog.md#the-registry)). | agent | default | `figma-mcp` | The registry has real rows for the library's components and the placeholder row is gone. |
 | `figma-capture` | Add [figma-capture-button](../../../Docs/Tooling.md#figma-capture-button), loaded only in development. | agent | default | `stack-choice` | It is a dev dependency, loaded behind the stack's dev-mode flag, and a search of the `build` output for `figma-capture` finds nothing. |
 
@@ -95,8 +95,8 @@ safe to rerun. Rules: [`component-catalog.md`](../../context/component-catalog.m
 | `catalog-workbench` | Turn on the component workbench ([Storybook](../../../Docs/Tooling.md#storybook) by default). | agent | default | `stack-choice`, and at least one component in `Code/` | `stories` and `stories-build` have real commands, the installer's example stories are gone, and the preview loads the global stylesheet and token CSS. |
 | `catalog-stories` | A story for every component. | agent | default | `catalog-workbench` | Every registry row with a code path has a story id, and `stories-build` passes. |
 | `catalog-addon-mcp` | Storybook's MCP add-on (`@storybook/addon-mcp`), so agents can query components and stories. | agent | optional | `catalog-workbench` | It is listed in the workbench's add-ons and pinned. |
-| `figma-addon-designs` | `@storybook/addon-designs`, to embed each component's Figma frame in its story. Offer it when Code Connect can't be published on the project's Figma plan. | agent | optional | `catalog-workbench`, `kit-figma` | It is listed in the workbench's add-ons, and stories with a Figma node link carry it. |
-| `figma-connect-setup` | Install and configure [Figma Code Connect](../../../Docs/Tooling.md#figma-code-connect). | agent | default | `stack-choice`, `kit-figma`, and at least one component in `Code/` | `@figma/code-connect` is a pinned dev dependency, `Code/figma.config.json` exists, `connect` has a real command, and `FIGMA_ACCESS_TOKEN` is uncommented in `Code/.env.example`. |
+| `figma-addon-designs` | `@storybook/addon-designs`, to embed each component's Figma frame in its story. Offer it when Code Connect can't be published on the project's Figma plan. | agent | optional | `catalog-workbench`, `prototype-figma` | It is listed in the workbench's add-ons, and stories with a Figma node link carry it. |
+| `figma-connect-setup` | Install and configure [Figma Code Connect](../../../Docs/Tooling.md#figma-code-connect). | agent | default | `stack-choice`, `prototype-figma`, and at least one component in `Code/` | `@figma/code-connect` is a pinned dev dependency, `Code/figma.config.json` exists, `connect` has a real command, and `FIGMA_ACCESS_TOKEN` is uncommented in `Code/.env.example`. |
 | `figma-connect-core` | Code Connect mappings for core components: the ones that come from the library file. | agent | default | `figma-connect-setup`, `figma-registry` | Every registry row with a code path and a library node link has `✓` under Code Connect, and `connect` passes. |
 | `figma-connect-project` | Code Connect mappings for project-specific components: built for this prototype and designed in the site file, not the library. | agent | default | `figma-connect-setup` | Every such component has a registry row with a site-file node link and `✓` under Code Connect, or its Figma column is empty because it has no Figma counterpart. |
 | `figma-connect-publish` | Publish the mappings: check the [plan requirement](../../../Docs/Tooling.md#figma-code-connect), put a personal access token in `Code/.env`, run `connect --publish`. Agents never publish. | user | default | `figma-connect-core` | *Ask.* |
@@ -136,10 +136,10 @@ When you add a placeholder to the template, add its row here in the same change.
 
 | Stub | File | Marker | Item |
 | --- | --- | --- | --- |
-| `stub-figma-site-agents` | `Agents/context/design-system.md` | `<Figma link to the site file>` | `kit-figma` |
-| `stub-figma-library-agents` | `Agents/context/design-system.md` | `<Figma link to the library file>` | `kit-figma` |
-| `stub-figma-site-docs` | `Docs/Design system/README.md` | `<Figma link to the site file>` | `kit-figma` |
-| `stub-figma-library-docs` | `Docs/Design system/README.md` | `<Figma link to the library file>` | `kit-figma` |
+| `stub-figma-site-agents` | `Agents/context/design-system.md` | `<Figma link to the site file>` | `prototype-figma` |
+| `stub-figma-library-agents` | `Agents/context/design-system.md` | `<Figma link to the library file>` | `prototype-figma` |
+| `stub-figma-site-docs` | `Docs/Design system/README.md` | `<Figma link to the site file>` | `prototype-figma` |
+| `stub-figma-library-docs` | `Docs/Design system/README.md` | `<Figma link to the library file>` | `prototype-figma` |
 | `stub-commands` | `Code/README.md` | `<fill in>` | `stack-commands` |
 | `stub-dev-port` | `Code/README.md` | `<dev port>` | `stack-commands` |
 | `stub-quick-start` | `Code/README.md` | `<!-- Fill in: install dependencies` | `stack-commands` |
@@ -178,9 +178,9 @@ When you add a placeholder to the template, add its row here in the same change.
 
 ## Changing this checklist
 
-- **New item:** add a row with a new id, and its stub rows if it has placeholders. Kits
-  pick it up as a new `todo` row the next time `/setup` runs.
-- **Retired item:** delete the row. `/setup` flags the leftover status row so the kit can
-  drop it.
+- **New item:** add a row with a new id, and its stub rows if it has placeholders.
+  Prototypes pick it up as a new `todo` row the next time `/setup` runs.
+- **Retired item:** delete the row. `/setup` flags the leftover status row so the prototype
+  can drop it.
 - **New tool:** its facts and links go in `Docs/Tooling.md`; the row here links to that
   entry.

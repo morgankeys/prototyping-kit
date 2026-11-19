@@ -1,9 +1,10 @@
 ---
-description: Prototyping kit structure and where agent material lives
+description: Repo structure (template or prototype) and where agent material lives
 alwaysApply: true
 ---
 
-This is a prototyping kit with four top-level, peer folders you may read and manage:
+This repo is the prototyping-kit template or a prototype made from it. It has four
+top-level, peer folders you may read and manage:
 
 - `Code/` — the full prototype codebase
 - `Docs/` — human-level documentation and resources

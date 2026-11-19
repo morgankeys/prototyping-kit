@@ -1,4 +1,4 @@
-// Builds a throwaway kit (Code/ + Docs/) in a temp folder and runs `validate` on it.
+// Builds a throwaway prototype (Code/ + Docs/) in a temp folder and runs `validate` on it.
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -50,7 +50,7 @@ export const CONFIG = {
 
 // files: { 'src/x.svelte': '...' } relative to Code/. Options override the config,
 // usage map, or manifest.
-export function makeKit(files = {}, { config = {}, usageMap = USAGE_MAP, manifest = MANIFEST } = {}) {
+export function makePrototype(files = {}, { config = {}, usageMap = USAGE_MAP, manifest = MANIFEST } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'ds-validate-'));
   const write = (rel, text) => {
     const p = path.join(root, rel);

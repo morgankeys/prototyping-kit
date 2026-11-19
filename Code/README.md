@@ -13,7 +13,7 @@ current when the stack changes.
 | ---------- | ----------------------------------------------------------------------------------------------------- | -------------- |
 | `dev`      | Start the local dev server on `<dev port>`. The only place dev-only pages render. Say how to pass a different port. | `<fill in>` |
 | `build`    | Produce the production build. Runs `tokens` first, the alpha regression guard, and the dev-only pages guard. | `<fill in>` |
-| `lint`     | Formatting check, code lint, and style lint (with token-only rules).                                  | `<fill in>` |
+| `lint`     | Formatting check, code lint, and CSS validity. Technical only; design-system findings belong to `validate`. | `<fill in>` |
 | `check`    | Type or template check, if the stack has one.                                                          | `<fill in>` |
 | `tokens`   | Unpack the token source (a Figma variables export, by default) and regenerate the token CSS.           | `<fill in>` |
 | `validate` | Run design-system validation and rewrite `Docs/Design system/deviations-backlog.md`. Exits 0 with deviations present; `validate --strict` exits 1 on any deviation (local only). | `<fill in>` |

@@ -1,8 +1,8 @@
 # Guidelines for implementing the design system in code
 
 The following are general requirements for how the design system should be architected in
-code, whatever the stack. These principles should be enforced via linting or validation
-scripts.
+code, whatever the stack. These principles are enforced by the design-system validator;
+[Validation and linting](#validation-and-linting) says which check owns what.
 
 * There is a global variables file, built directly from the source-of-truth tokens. A Figma
   variables export is the default source; the same file is built when tokens are maintained
@@ -17,11 +17,41 @@ scripts.
 * There is a design-system validation script/mechanism (run either automatically or
   on-demand) that assesses code based on these principles and generates a list of
   identified deviations.
-* Code-linting should be used within or alongside validation.
+* Code linting runs alongside validation and covers technical correctness only. It does
+  not enforce these principles.
+
+## Validation and linting
+
+The one place this split is written down; other files link here.
+
+- **`validate` owns every design-system finding**: hardcoded values, tokens used outside
+  their purpose, and unscoped or leaking styles. Its findings are deviations. Each is
+  written to the backlog, and none fails `validate` or CI (see
+  [Exit codes and CI](#exit-codes-and-ci)).
+- **`lint` owns technical correctness only**: formatting, code lint, and CSS validity
+  (syntax errors, unknown properties, invalid values). Its findings are errors, they fail
+  CI, and the agent fixes them. No rule in `lint` requires a token or forbids a literal
+  value.
+
+Why one owner: a deviation logged with its rationale is handled. If `lint` flagged the
+same value as an error, it would fail CI with no legitimate way through.
+
+When the validator runs on Stylelint (the kit's default build), the two share an engine,
+not a config or an exit code: `lint`'s config never loads the design-system rules, and
+`validate` decides its own exit code.
+
+Both always run. The hard failures that protect the design system are the alpha
+regression guard and the dev-only pages guard, both in `build`, and the stale-backlog
+check in CI.
+
+Which linters the kit uses, and why the token-only Stylelint plugin is not one of them:
+[`Docs/Tooling.md`](../Tooling.md#stylelint).
 
 ## Validator contract
 
-Any validator, in any language, implements these rules. Each finding becomes one backlog
+Any validator, in any language or on any engine, implements these rules. The kit's
+default build, custom Stylelint rules run by a small wrapper, is described in
+[`Docs/Tooling.md`](../Tooling.md#design-system-validator). Each finding becomes one backlog
 entry with a rule id, a line, and a detail string. Rule ids below are suggestions; keep
 them stable once chosen, because rationale is matched on them.
 
@@ -148,7 +178,7 @@ changes when unrelated map entries change, so rationale carries forward. For exa
 that matches no token in the manifest. After an export renames tokens, that is the sign the
 map needs updating.
 
-The usage map is held to the same standard as lint rules: **never widen a group** (add a
+The usage map is held to the same standard as the validator's rules: **never widen a group** (add a
 property, a selector, or a pair) to make a deviation disappear. Widening is a design-system
 decision for the owner. Until it is made, the deviation stays in the backlog with its
 rationale.
@@ -239,5 +269,5 @@ The one place these steps are written down; other files link here.
 The backlog is a transparent record of legitimate exceptions and work in progress, not a
 place to hide violations.
 
-Never disable a lint rule, add an ignore comment, or delete a backlog entry to make a
+Never disable or loosen a rule, add an ignore comment, or delete a backlog entry to make a
 deviation disappear.

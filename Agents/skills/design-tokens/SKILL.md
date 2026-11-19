@@ -158,7 +158,7 @@ exits non-zero and lists the offending tokens. It protects against:
 - **Components broke after regeneration.** Run `validate` and search for the removed or
   renamed names; update components to the new tokens and validate again.
 - **Validation flags a value that has no token.** Leave the deviation, write its
-  `Rationale:` line, and ask the design-system owner for a token. Never weaken the lint
+  `Rationale:` line, and ask the design-system owner for a token. Never weaken the
   rule.
 
 ## References

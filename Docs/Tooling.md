@@ -151,35 +151,67 @@ Get it: npm [`@figma/code-connect`](https://www.npmjs.com/package/@figma/code-co
 
 ## Enforcement (any stack)
 
-### Stylelint + `stylelint-declaration-strict-value`
+### Stylelint
 
-Forces color, spacing, radius, and typography properties to use `var(…)` instead of
-literals, including the color inside `border*`, `outline`, and `background` shorthands.
+CSS validity: syntax errors, unknown properties, invalid values, through
+`stylelint-config-standard`. Part of `lint`, where its findings are errors. It is also the
+default engine for `validate`, under a separate config (see
+[Design-system validator](#design-system-validator)).
 
-- **The allowlist must carry both `currentcolor` and `currentColor`.** The plugin matches
-  `ignoreValues` case-sensitively while the standard config requires the lowercase
-  spelling; with only one, the two rules contradict each other and no spelling passes.
-- The plugin accepts any function call, so literals inside `rgb()`, `calc()`, gradients,
-  and `var()` fallbacks still need the validator.
+- **`lint`'s config does not check token use.** Hardcoded colors, spacing, radius, and
+  typography are design-system findings, and `validate` owns those (see
+  [Validation and linting](Design%20system/design-in-code%20architecture.md#validation-and-linting)).
+- **`stylelint-declaration-strict-value` is not part of the kit.** The plugin forces
+  `var(…)` in chosen properties, which reports the validator's findings a second time, as
+  errors that fail `lint` even when the deviation is logged with a rationale. It is also
+  the weaker check: it accepts any function call, so literals inside `rgb()`, `calc()`,
+  gradients, and `var()` fallbacks pass. For hints in the editor, use the validator's own
+  rules instead (below).
 - Parsing styles inside component files depends on the framework (a custom syntax for
   single-file components); plain `.css` files must keep the default parser.
 
 Get it: [stylelint.io](https://stylelint.io/) · npm
 [`stylelint`](https://www.npmjs.com/package/stylelint),
-[`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard),
-[`stylelint-declaration-strict-value`](https://www.npmjs.com/package/stylelint-declaration-strict-value)
-([source](https://github.com/AndyOGo/stylelint-declaration-strict-value)).
+[`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard).
 
 ### Design-system validator
 
 A script that implements the validator contract in
 [`Docs/Design system/design-in-code architecture.md`](Design%20system/design-in-code%20architecture.md)
-and writes the deviations backlog. Example: `Code/scripts/ds-validate.mjs` in the example
-site.
+and writes the deviations backlog. It is the only check that reports design-system
+findings.
+
+**Default build, on a stack with Node: the contract's rules as custom Stylelint rules,
+run by a small wrapper.** Stylelint already finds the files, parses CSS and the style
+blocks inside component files, and splits values (`calc()`, gradients, `var()`
+fallbacks). A hand-written parser repeats that work, and it is where missed findings hide.
+
+- **The rules.** One custom rule per rule in the contract and per token usage rule, in a
+  Stylelint plugin the project keeps in `Code/`. Each reads the token manifest and
+  `token-usage.json`. Rule ids match the contract's, because rationale is matched on them.
+- **Their own config.** A design-system config extends `lint`'s Stylelint config and adds
+  the custom rules at warning severity. `lint`'s config never loads them.
+- **The wrapper is `validate`.** It runs Stylelint through its Node API (`stylelint.lint`)
+  with the design-system config, keeps only results from the custom rules, and maps each
+  to a backlog entry. It adds the checks that are not about one file (`token-unclassified`,
+  and the warning for a usage-map group that matches no token), carries rationale forward,
+  writes the backlog only when it changes, and sets the exit code itself: 0 with
+  deviations present, 1 under `--strict`. Stylelint's own exit code never decides it.
+- **Check `unscoped-style` per framework.** Whether a style block is scoped depends on the
+  framework (a `scoped` attribute, CSS modules, a compiler default), and the parser for
+  component files may not expose it. Where a rule can't see it, do that check in the
+  wrapper.
+- **Editor hints, optional.** Point the editor's Stylelint extension at the design-system
+  config (in VS Code, the `stylelint.configFile` setting) to see CSS errors and the
+  validator's findings while editing. Nothing in `lint` changes.
+- On a stack without Node, write the validator in the stack's language against the same
+  contract.
+
+Example: `Code/scripts/ds-validate.mjs` in the example site, which predates this default.
 
 ### Prettier + ESLint
 
-Formatting and code lint. **Ignore the generated token CSS in every linter config**
+Formatting and code lint, both part of `lint`. **Ignore the generated token CSS in every linter config**
 (Prettier, ESLint, Stylelint), or each regeneration produces noise and lint failures in
 files nobody may hand-edit.
 

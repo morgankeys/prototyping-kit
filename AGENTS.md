@@ -89,10 +89,12 @@ moves and kit reuse.
    generated file reserves fields for human and agent notes, those fields are meant to be
    edited and are read back on the next run (for example, the `Rationale:` lines in the
    design-system deviations backlog).
-2. **Never weaken lint or validation rules to suppress design-system deviations.** Fix the
-   root cause or log the deviation in the backlog — do not disable the rule, add an
- ignore comment, or widen the token usage map. When you log one, write your best guess of why on its rationale line;
-   leave the "needs review" sentinel only when the reason is genuinely unclear.
+2. **Never weaken lint or validation rules to suppress design-system deviations.**
+   `validate` reports them. Fix the root cause or log the deviation in the backlog — do
+   not disable or loosen a rule, add an ignore comment, or widen the token usage map, in
+   the validator or in any linter. When you log one, write your best guess of why on its
+   rationale line; leave the "needs review" sentinel only when the reason is genuinely
+   unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded
    color, spacing, or radius.
 4. **Keep tracks of work organized.** A new thread starts a new branch from an up-to-date
@@ -117,12 +119,15 @@ moves and kit reuse.
 
 - Checks always run: `lint`, `check`, `build`, `validate`, and the token usage review are
   never skipped or switched off. What happens to a finding depends on its kind:
-  - **Technical problems** (formatting, code lint, type errors, a failing build, a broken
-    install): fix them yourself and carry on. They are not recorded anywhere and the user
-    doesn't need to hear about each one. Tell the user only when the fix is risky: it
-    could change how the prototype looks or behaves, removes or rewrites their work, needs
-    a decision, or you can't find one.
-  - **Design problems** (design-system deviations, token misuse): fix the clear ones. For
+  - **Technical problems** (formatting, code lint, invalid CSS, type errors, a failing
+    build, a broken install): fix them yourself and carry on. They are not recorded
+    anywhere and the user doesn't need to hear about each one. Tell the user only when
+    the fix is risky: it could change how the prototype looks or behaves, removes or
+    rewrites their work, needs a decision, or you can't find one.
+  - **Design problems** (design-system deviations, token misuse): these come only from
+    `validate` and the token usage review, never from `lint`, and never fail CI once
+    recorded ("Validation and linting" in
+    `Docs/Design system/design-in-code architecture.md`). Fix the clear ones. For
     the rest, tell the user what was found and ask whether to fix them now or carry on.
     Either way they stay recorded in the deviations backlog or the token usage review
     file, never dropped.

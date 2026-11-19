@@ -112,7 +112,9 @@ else and never treats them as blockers ("Unfilled is fine": see
 | `content-guidelines` | Fill in the guideline files in `Docs/Design system/Guidelines/`. | both | anytime | | Report how many of the files are still stubs; there is no finish line. |
 | `content-supplemental` | List tokens and assets that aren't Figma variables in [`Supplemental/README.md`](../../../Docs/Design%20system/Supplemental/README.md). | both | anytime | | The list comment is replaced, or the user says there are none. |
 | `content-personas` | Replace the example user and org in `Docs/Personas/` with real ones, or delete them. | user | anytime | | No `EXAMPLE USER` or `EXAMPLE ORG` folder is left, and the two list files name real entries or say there are none. |
-| `content-design-md` | Generate a portable `Export/DESIGN.md` with [`/export-design-md`](../export-design-md/SKILL.md). | agent | optional | `tokens-pipeline` | `Export/DESIGN.md` exists and passes the skill's lint. |
+
+Exporting the design system (`/export-design-md`, the design-system export skill) is done
+as needed, so it isn't a setup item and isn't tracked.
 
 ## Stubs
 

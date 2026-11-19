@@ -42,9 +42,14 @@ Also at this level:
 - `token-usage-review.md` — findings from the agent token usage review; appears after the
   first finding.
 
-To hand the system to another AI tool (Lovable, Figma Make, …), run `/export-design-md`.
+To hand the system to another AI tool as a DESIGN.md, run `/export-design-md`.
 It generates a portable `Export/DESIGN.md` from this folder; see
 [`Agents/skills/export-design-md/SKILL.md`](../../Agents/skills/export-design-md/SKILL.md).
+To package the same docs for Lovable, Replit, Bolt.new, v0, and Figma Make, run
+`/design-system-export` (`npm run ds-export` from the repo root). See
+[`Agents/skills/design-system-export/SKILL.md`](../../Agents/skills/design-system-export/SKILL.md).
+How those platforms ingest a system is in
+[`Agents/context/design-system-platforms.md`](../../Agents/context/design-system-platforms.md).
 
 After a new Figma export, follow
 [`Agents/skills/design-tokens/SKILL.md`](../../Agents/skills/design-tokens/SKILL.md).

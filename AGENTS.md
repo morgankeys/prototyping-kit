@@ -65,6 +65,7 @@ column, read the right column first.
 | What a fully set-up kit needs, or adding a setup item or a placeholder to the template | `Agents/skills/setup/checklist.md` |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
+| Exporting the design system to Lovable, Replit, Bolt.new, v0, or Figma Make | `Agents/skills/design-system-export/SKILL.md` |
 | Regenerating tokens from a new export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
@@ -119,9 +120,9 @@ moves and kit reuse.
   never skipped or switched off. What happens to a finding depends on its kind:
   - **Technical problems** (formatting, code lint, invalid CSS, type errors, a failing
     build, a broken install): fix them yourself and carry on. They are not recorded
-    anywhere and the user doesn't need to hear about each one. Tell the user only when the fix is risky: it
-    could change how the prototype looks or behaves, removes or rewrites their work, needs
-    a decision, or you can't find one.
+    anywhere and the user doesn't need to hear about each one. Tell the user only when
+    the fix is risky: it could change how the prototype looks or behaves, removes or
+    rewrites their work, needs a decision, or you can't find one.
   - **Design problems** (design-system deviations, token misuse): these come only from
     `validate` and the token usage review, never from `lint`, and never fail CI once
     recorded ("Validation and linting" in

@@ -151,35 +151,41 @@ Get it: npm [`@figma/code-connect`](https://www.npmjs.com/package/@figma/code-co
 
 ## Enforcement (any stack)
 
-### Stylelint + `stylelint-declaration-strict-value`
+### Stylelint
 
-Forces color, spacing, radius, and typography properties to use `var(…)` instead of
-literals, including the color inside `border*`, `outline`, and `background` shorthands.
+CSS validity: syntax errors, unknown properties, invalid values, through
+`stylelint-config-standard`. Part of `lint`, where its findings are errors.
 
-- **The allowlist must carry both `currentcolor` and `currentColor`.** The plugin matches
-  `ignoreValues` case-sensitively while the standard config requires the lowercase
-  spelling; with only one, the two rules contradict each other and no spelling passes.
-- The plugin accepts any function call, so literals inside `rgb()`, `calc()`, gradients,
-  and `var()` fallbacks still need the validator.
+- **It does not check token use.** Hardcoded colors, spacing, radius, and typography are
+  design-system findings, and `validate` owns those (see
+  [Validation and linting](Design%20system/design-in-code%20architecture.md#validation-and-linting)).
+- **`stylelint-declaration-strict-value` is not part of the kit.** The plugin forces
+  `var(…)` in chosen properties, which reports the validator's findings a second time, as
+  errors that fail `lint` even when the deviation is logged with a rationale. It is also
+  the weaker check: it accepts any function call, so literals inside `rgb()`, `calc()`,
+  gradients, and `var()` fallbacks pass.
+- A project that still wants it for hints in the editor sets it to warning severity and
+  never lets it change `lint`'s exit code (no `--max-warnings`). Its `ignoreValues` then
+  needs both `currentcolor` and `currentColor`: the plugin matches case-sensitively while
+  the standard config requires lowercase.
 - Parsing styles inside component files depends on the framework (a custom syntax for
   single-file components); plain `.css` files must keep the default parser.
 
 Get it: [stylelint.io](https://stylelint.io/) · npm
 [`stylelint`](https://www.npmjs.com/package/stylelint),
-[`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard),
-[`stylelint-declaration-strict-value`](https://www.npmjs.com/package/stylelint-declaration-strict-value)
-([source](https://github.com/AndyOGo/stylelint-declaration-strict-value)).
+[`stylelint-config-standard`](https://www.npmjs.com/package/stylelint-config-standard).
 
 ### Design-system validator
 
 A script that implements the validator contract in
 [`Docs/Design system/design-in-code architecture.md`](Design%20system/design-in-code%20architecture.md)
-and writes the deviations backlog. Example: `Code/scripts/ds-validate.mjs` in the example
+and writes the deviations backlog. It is the only check that reports design-system
+findings. Example: `Code/scripts/ds-validate.mjs` in the example
 site.
 
 ### Prettier + ESLint
 
-Formatting and code lint. **Ignore the generated token CSS in every linter config**
+Formatting and code lint, both part of `lint`. **Ignore the generated token CSS in every linter config**
 (Prettier, ESLint, Stylelint), or each regeneration produces noise and lint failures in
 files nobody may hand-edit.
 

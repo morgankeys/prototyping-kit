@@ -65,11 +65,13 @@ the real command.
 
 The checks always run; none can be skipped. Agents fix technical findings themselves; the
 user decides what to do about design findings, not whether to look (see "Operating notes" in [`AGENTS.md`](../../../AGENTS.md)).
+Design findings come only from `validate`; `lint` is technical
+([Validation and linting](../../../Docs/Design%20system/design-in-code%20architecture.md#validation-and-linting)).
 
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |
 | `ds-validator` | Write the design-system validator in `Code/` to the [validator contract](../../../Docs/Design%20system/design-in-code%20architecture.md#validator-contract), and wire the `validate` role ([tool notes](../../../Docs/Tooling.md#design-system-validator)). | agent | required | `stack-choice`, `tokens-pipeline` | `validate` has a real command, exits 0 with deviations present, `validate --strict` exits 1 on any, and `Docs/Design system/deviations-backlog.md` exists and is committed. |
-| `lint-stylelint` | [Stylelint with `stylelint-declaration-strict-value`](../../../Docs/Tooling.md#stylelint--stylelint-declaration-strict-value), so themed properties must use token variables. | agent | required | `stack-choice` | Both are dev dependencies, the config forces `var(…)` for color, spacing, radius, and typography, and `lint` runs it. |
+| `lint-stylelint` | [Stylelint](../../../Docs/Tooling.md#stylelint) with the standard config, for CSS validity (syntax, unknown properties, invalid values). Token use is not its job: `validate` owns that. | agent | required | `stack-choice` | `stylelint` and `stylelint-config-standard` are dev dependencies with a config, `lint` runs it, and no rule in the config fails `lint` over a hardcoded value. |
 | `lint-prettier` | [Prettier](../../../Docs/Tooling.md#prettier--eslint) for formatting. | agent | required | `stack-choice` | It is a dev dependency with a config, and `lint` runs its check. |
 | `lint-eslint` | [ESLint](../../../Docs/Tooling.md#prettier--eslint) for code lint. | agent | required | `stack-choice` | It is a dev dependency with a config, and `lint` runs it. |
 | `lint-role` | Wire the `lint` role, and keep generated files out of every linter. | agent | required | `stack-choice` | `lint` has a real command that runs all three, and each linter ignores the generated token CSS and the workbench's static output. |
@@ -143,7 +145,7 @@ When you add a placeholder to the template, add its row here in the same change.
 | `stub-arch-stack` | `Code/ARCHITECTURE.md` | `<!-- Framework, language` | `stack-choice` |
 | `stub-arch-structure` | `Code/ARCHITECTURE.md` | `<!-- The folders under Code/` | `stack-architecture` |
 | `stub-arch-styling` | `Code/ARCHITECTURE.md` | `<!-- How this stack scopes` | `stack-architecture` |
-| `stub-arch-validation` | `Code/ARCHITECTURE.md` | `<!-- Which linters and validator` | `ds-validator` |
+| `stub-arch-validation` | `Code/ARCHITECTURE.md` | `<!-- Which validator implements` | `ds-validator` |
 | `stub-arch-dev-guard` | `Code/ARCHITECTURE.md` | `<!-- Where dev-only pages live` | `stack-dev-guard` |
 | `stub-arch-catalog` | `Code/ARCHITECTURE.md` | `<!-- Filled in by /component-catalog` | `catalog-workbench` |
 | `stub-arch-workflow` | `Code/ARCHITECTURE.md` | `<!-- Commands reference` | `stack-architecture` |

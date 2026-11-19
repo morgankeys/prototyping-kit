@@ -41,9 +41,11 @@ Promote often. Small promotions are easy to review and easy to roll back.
 [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs on pull requests into
 `staging` and `main`: `lint`, `check`, `build`, `validate`, `stories-build` and `connect`
 (once `/component-catalog` has turned them on), then `git diff --exit-code` to fail the
-run if build or validation changed a tracked file. Validation prints deviations
+run if build or validation changed a tracked file. `lint` is technical only (formatting,
+code lint, CSS validity). Design-system deviations come from `validate`, which prints them
 as a warning and exits 0; a stale committed backlog is what fails the job. `--strict` is
-local-only. Fill in the real commands from [`Code/README.md`](../Code/README.md).
+local-only. Which check owns what:
+["Validation and linting"](Design%20system/design-in-code%20architecture.md#validation-and-linting). Fill in the real commands from [`Code/README.md`](../Code/README.md).
 
 ## Recommended settings
 

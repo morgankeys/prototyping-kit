@@ -23,6 +23,8 @@ Agents/
   (e.g. "package the prototype for export"). Each skill lives in its own folder with a
   `SKILL.md`. Current skills: `setup` (`/setup` checks the kit against the setup
   checklist, tracks progress in `Docs/setup-status.md`, and walks through what is left),
+  `editor-setup` (`/editor-setup` sets up the user's editor so every file type is
+  highlighted and lint problems show as underlines),
   `component-catalog` (`/component-catalog` turns on Storybook
   and Figma Code Connect for the chosen stack and fills in stories and mappings),
   `design-tokens` (regenerate tokens from an export — Figma by

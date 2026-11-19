@@ -63,6 +63,7 @@ column, read the right column first.
 | Asking the user to do, decide, or provide something, or explaining a step to them | `Agents/context/guiding-users.md` |
 | `/setup`, setting up a new kit, what is left to install or fill in, or skipping a tool | `Agents/skills/setup/SKILL.md` |
 | What a fully set-up kit needs, or adding a setup item or a placeholder to the template | `Agents/skills/setup/checklist.md` |
+| `/editor-setup`, files showing as plain text or without lint underlines in the editor, or opening the kit in a new editor | `Agents/skills/editor-setup/SKILL.md` |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
 | Exporting the design system to Lovable, Replit, Bolt.new, v0, or Figma Make | `Agents/skills/design-system-export/SKILL.md` |

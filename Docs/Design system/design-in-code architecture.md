@@ -36,6 +36,10 @@ The one place this split is written down; other files link here.
 Why one owner: a deviation logged with its rationale is handled. If `lint` flagged the
 same value as an error, it would fail CI with no legitimate way through.
 
+When the validator runs on Stylelint (the kit's default build), the two share an engine,
+not a config or an exit code: `lint`'s config never loads the design-system rules, and
+`validate` decides its own exit code.
+
 Both always run. The hard failures that protect the design system are the alpha
 regression guard and the dev-only pages guard, both in `build`, and the stale-backlog
 check in CI.
@@ -45,7 +49,9 @@ Which linters the kit uses, and why the token-only Stylelint plugin is not one o
 
 ## Validator contract
 
-Any validator, in any language, implements these rules. Each finding becomes one backlog
+Any validator, in any language or on any engine, implements these rules. The kit's
+default build, custom Stylelint rules run by a small wrapper, is described in
+[`Docs/Tooling.md`](../Tooling.md#design-system-validator). Each finding becomes one backlog
 entry with a rule id, a line, and a detail string. Rule ids below are suggestions; keep
 them stable once chosen, because rationale is matched on them.
 

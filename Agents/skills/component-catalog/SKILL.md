@@ -49,7 +49,8 @@ following the contract's registry rules:
 - Add a row for each component in `Code/` that has none, with its code path. Fill in its
   code attributes in the property mappings from the component's `data-*` attributes.
 - If a Figma library is recorded and the Figma tools are available, add the node link and
-  Figma properties for library components that match a row.
+  Figma properties for components that match a row: core components from the library
+  file, project-specific ones from the site file.
 - Remove the placeholder `<Name>` row once a real row exists.
 
 ### 3. Set up the workbench

@@ -49,7 +49,7 @@ the real command.
 | `stack-gitignore` | Ignore the stack's dependency folders, build output, and caches in `.gitignore`. | agent | required | `stack-choice` | After an install and a `build`, `git status` shows no dependency or build files. |
 | `stack-dev-guard` | Keep dev-only pages out of every build, with a guard that fails the build if one leaks ([contract](../../context/dev-only-pages.md)). | agent | required | `stack-choice` | A `dev/` pages folder is excluded from `build`, `build` runs the guard, and "Dev-only pages guard" in `Code/ARCHITECTURE.md` describes both. |
 | `stack-architecture` | Fill in `Code/ARCHITECTURE.md`. | agent | required | `stack-choice` | No section is still only its template comment, apart from sections for pieces that are opted out or `waiting`. |
-| `stack-ci` | Replace the placeholders in [`.github/workflows/ci.yml`](../../../.github/workflows/ci.yml) with real commands. | agent | default | `stack-commands` | No step still echoes `TODO`. Steps for roles the project doesn't use are deleted, not left as placeholders. |
+| `stack-ci` | Replace the placeholders in [`.github/workflows/ci.yml`](../../../.github/workflows/ci.yml) with real commands. | agent | default | `stack-commands` | No step whose role has a real command still echoes `TODO`. Steps for roles the project will never use (opted out or `n/a`) are deleted, not left as placeholders. |
 
 ## 3. Tokens
 
@@ -115,7 +115,12 @@ Every placeholder the template ships with, and the item that fills it in. A stub
 while its file still contains the marker text. `scripts/setup-scan.mjs` reads this table,
 so the marker must be copied exactly from the file and must not contain a `|`.
 
-A marker that is still present after its item is `done` means the item isn't done. A stub
+A marker that is still present after its item is `done` means the item isn't done. Three
+markers are shared, because several items fill in the same table or file: `stub-commands`
+(the `lint`, `tokens`, and `validate` rows belong to `lint-role`, `tokens-pipeline`, and
+`ds-validator`), `stub-catalog-roles` (the `connect` row belongs to `figma-connect-setup`),
+and `stub-ci` (each step belongs to the item that wires its role). For those, use the line
+numbers the scan prints to see whose lines are left. A stub
 that is open because its piece is opted out or `n/a` should be deleted from its file, not
 left as a placeholder; `/setup` offers to do that.
 

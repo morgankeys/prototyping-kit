@@ -21,7 +21,7 @@ current when the stack changes.
 | `stories-build` | Build the workbench to its static folder and check every story renders. The output never goes to `Export/`. | `<not turned on>` |
 | `connect`  | Validate the Figma Code Connect files without publishing. `connect --publish` publishes them to Figma: local only, needs `FIGMA_ACCESS_TOKEN` in `Code/.env`. | `<not turned on>` |
 
-The last three stay `<not turned on>` until `/component-catalog` fills them in (see
+The last three stay off until `/component-catalog` turns them on (see
 [`Agents/context/component-catalog.md`](../Agents/context/component-catalog.md)). `connect`
 becomes `n/a` if the project doesn't use Figma.
 

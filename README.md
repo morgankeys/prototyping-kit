@@ -19,10 +19,10 @@ What the kit needs is a source of truth for tokens. The default is Figma:
 
 **Figma → tokens → prototype → capture back to Figma**.
 
-Alternatively, a team can use this kit, or in a separate repository, as the source of truth 
-and feed both the prototype and Figma.
+Alternatively, a team can keep tokens in this kit, or in a separate repository, as the
+source of truth and feed both the prototype and Figma.
 
-Teams can also use tools other than Figma as long as tokens can be stored/exported to this kit.
+Teams can also use tools other than Figma, as long as the tokens are stored in this kit.
 
 ## Folders
 

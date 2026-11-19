@@ -89,7 +89,7 @@ moves and kit reuse.
    edited and are read back on the next run (for example, the `Rationale:` lines in the
    design-system deviations backlog).
 2. **Never weaken lint or validation rules to suppress design-system deviations.** Fix the
- root cause or log the deviation in the backlog — do not disable the rule, add an
+   root cause or log the deviation in the backlog — do not disable the rule, add an
  ignore comment, or widen the token usage map. When you log one, write your best guess of why on its rationale line;
    leave the "needs review" sentinel only when the reason is genuinely unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded

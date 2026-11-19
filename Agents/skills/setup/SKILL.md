@@ -82,7 +82,8 @@ Rules for the pass:
 
 - **Recheck `done` rows.** Verify each against its "Done when" again. If it no longer
   holds, set it back to `todo` and say in the report what regressed. A stub the scan
-  lists as open under a `done` item is exactly this case.
+  lists as open under a `done` item usually means this; the checklist's "Stubs" section
+  names the three markers that are shared between items.
 - ***Ask* items are the exception.** They can't be seen from the repo. Keep a `done` the
   user already gave; ask only when the row is still `todo`, and batch those questions
   into one message.
@@ -170,7 +171,9 @@ one, say in a sentence what it is for; after it, say what changed.
 - **Secrets:** when a step needs a token (publishing Code Connect), tell the user which
   file it goes in. Never ask them to paste it into the chat.
 - **Branches and commits:** follow [`git-workflow.md`](../../context/git-workflow.md). Use
-  a `chore/setup-<slug>` branch per piece of work, and commit `Docs/setup-status.md` with
+  the branch the linked skill names (`tokens/<slug>` for the token pipeline,
+  `chore/component-catalog` for the catalog), otherwise a `chore/setup-<slug>` branch per
+  piece of work, and commit `Docs/setup-status.md` with
   the change that moved its rows. Mention once that work is saved in steps and can be
   undone; don't narrate git after that.
 - **Pace:** setup doesn't have to finish in one sitting. At a natural stopping point, say

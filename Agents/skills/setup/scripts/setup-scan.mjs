@@ -78,14 +78,15 @@ function fail(message) {
 
 const isTemplate = () => existsSync(join(ROOT, "new-kit.sh"));
 
-// The decision is a line of its own. Both files also mention the phrase in their
-// instructions, mid-sentence, which must not count.
-const NOT_USED = /^\s*(?:[-*]\s+)?(?:\*\*)?`?Figma: not used`?(?:\*\*)?\.?\s*$/m;
+// Both files also mention the phrase in the sentence that explains the option ("replace
+// both lines with ..."), which must not count as the decision.
+const saysNotUsed = (text) =>
+  text.split("\n").some((line) => line.includes("Figma: not used") && !line.includes("replace both"));
 
 function figmaDecision() {
   const texts = FIGMA_FILES.map((rel) => read(rel) ?? "");
   if (texts.some((text) => text.includes("<Figma link to the"))) return "undecided (placeholder links)";
-  const notUsed = texts.map((text) => NOT_USED.test(text));
+  const notUsed = texts.map(saysNotUsed);
   if (notUsed.every(Boolean)) return "not used";
   if (notUsed.some(Boolean)) return "inconsistent (one file says not used, the other doesn't)";
   return "used (links recorded)";

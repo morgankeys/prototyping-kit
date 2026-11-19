@@ -18,7 +18,7 @@ Figma, and anything unusual about it. -->
 - **Site file** — pages and features to implement: `<Figma link to the site file>`
 - **Library file** — core styles; tokens are exported from here: `<Figma link to the library file>`
 
-If the project doesn't use Figma, replace both links with `Figma: not used`, here and in
+If the project doesn't use Figma, replace both lines with `Figma: not used`, here and in
 [`Agents/context/design-system.md`](../../Agents/context/design-system.md#figma-sources).
 
 The library file may or may not define variables. Anything it doesn't define as a

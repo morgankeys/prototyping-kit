@@ -40,9 +40,12 @@ tool's own docs instead of guessing. When a step can be done by dragging a file 
 chat or the folder, say that.
 
 **Do everything you can yourself.** If a step can be done by an agent, do it; don't
-teach it. Never ask the user to run a command, edit a config file, or resolve an error you
-could handle. The user's steps are the ones only they can do: decisions, things inside
-their accounts, and files that live in their design tool.
+teach it. Don't ask the user to run a command, edit a config file, or resolve an error
+when you could do it. The user's steps are the ones only they can do: decisions, things
+inside their accounts, and files that live in their design tool. The kit also reserves a
+few actions for a person, such as publishing Code Connect mappings and merging pull
+requests. For those, give the exact command or button, where to run it, and what they
+should see when it works.
 
 **Recommend; don't quiz.** When a choice needs knowledge the user may not have (which
 framework, which linter), ask about what they do know: what they are building, who will

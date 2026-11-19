@@ -1,7 +1,8 @@
 # Prototyping kit
 
-A starting point for designers who prototype with AI agents. Fork it, point it at a Figma
-file, and build the prototype in `Code/` with whatever stack suits the project.
+A starting point for designers who prototype with AI agents. Start a kit, ask your agent to
+run `/setup`, point it at a Figma file, and build the prototype in `Code/` with whatever
+stack suits the project.
 
 ## The idea
 
@@ -45,9 +46,10 @@ committed files into a fresh git repo, and can create and push a GitHub repo for
 
 The new kit is standalone: it does not include `new-kit.sh` or any `template-only`
 sections of the docs, like this one. Its README gets the kit's name and a
-[provenance line](Agents/context/kit-structure.md#kit-provenance), and the repo gets a
-`template` git remote pointing back here so you can pull in later kit updates
-(`git fetch template`, then merge).
+[provenance line](Agents/context/kit-structure.md#kit-provenance) recording which version
+of the template it came from. Then open the new kit and run `/setup`.
+
+Bringing later template changes into an existing kit is not supported yet.
 
 <!-- template-only:end -->
 ## Getting started

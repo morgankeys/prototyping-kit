@@ -10,8 +10,8 @@ the user, follow [`guiding-users.md`](../../context/guiding-users.md).
 
 **This file holds definitions only. Never tick anything off here.** Each kit's progress
 lives in `Docs/setup-status.md`, one row per item id below, written by `/setup`. Keeping
-the two apart means a kit can merge a newer checklist from the template without conflicts,
-and a new item simply shows up as a new row.
+the two apart means this file can be replaced with a newer version without losing a kit's
+progress: a new item simply shows up as a new row.
 
 Rules and tool facts are not restated here. Each item links to the file that owns them:
 rules in `Agents/context/`, procedures in `Agents/skills/`, tools (with where to get them)
@@ -23,7 +23,7 @@ in [`Docs/Tooling.md`](../../../Docs/Tooling.md).
 | --- | --- |
 | **Item** | Stable id. Never rename one; status rows are matched on it. |
 | **Who** | `user`: only a person can do it (a decision, an account, a file from Figma). `agent`: an agent does it once its inputs exist. `both`: the user decides or supplies something, then the agent does the work. |
-| **Level** | `required`: a kit rule depends on it, so it can't be opted out of. `default`: set up unless the user opts out. `optional`: offered once, set up only if the user opts in. `anytime`: content that fills in as the project goes; reported, never a blocker. |
+| **Level** | `required`: a kit rule or check depends on it, so it can't be opted out of. The tool that does the job can still be swapped for an equivalent. `default`: set up unless the user opts out. `optional`: offered once, set up only if the user opts in. `anytime`: content that fills in as the project goes; reported, never a blocker. |
 | **Needs** | Items that must be `done` first. An item whose needs aren't met is `waiting`, not `todo`. |
 | **Done when** | What to check in the repo. *Ask* means it can't be seen from the repo: take the user's word and record the date. |
 
@@ -36,7 +36,7 @@ the real command.
 
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |
-| `kit-provenance` | Record where the kit came from ([kit provenance](../../context/kit-structure.md#kit-provenance)). | agent | required | | The root `README.md` has a `Forked from prototyping-kit @` line, and the repo has no `new-kit.sh` and no `template-only` blocks. |
+| `kit-provenance` | Record where the kit came from ([kit provenance](../../context/kit-structure.md#kit-provenance)). | agent | required | | The root `README.md` has a `Created from prototyping-kit @` line (`Forked from` in older kits), and the repo has no `new-kit.sh` and no `template-only` blocks. |
 | `kit-figma` | Decide whether the project uses Figma, and record the site and library file links, or `Figma: not used` ([Figma sources](../../context/design-system.md#figma-sources)). | user | required | | Both [`Agents/context/design-system.md`](../../context/design-system.md) and [`Docs/Design system/README.md`](../../../Docs/Design%20system/README.md) hold real links or `Figma: not used`, and they agree. |
 | `kit-github` | Create `staging`, and apply the repo settings and rulesets in [`Docs/github.md`](../../../Docs/github.md). | user | default | | A `staging` branch exists on the remote. Settings and rulesets: *ask*; agents can't see them. |
 
@@ -63,13 +63,16 @@ the real command.
 
 ## 4. Enforcement
 
+The checks always run; none can be skipped. What the user decides is what to do about a
+finding, not whether to look (see "Operating notes" in [`AGENTS.md`](../../../AGENTS.md)).
+
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |
 | `ds-validator` | Write the design-system validator in `Code/` to the [validator contract](../../../Docs/Design%20system/design-in-code%20architecture.md#validator-contract), and wire the `validate` role ([tool notes](../../../Docs/Tooling.md#design-system-validator)). | agent | required | `stack-choice`, `tokens-pipeline` | `validate` has a real command, exits 0 with deviations present, `validate --strict` exits 1 on any, and `Docs/Design system/deviations-backlog.md` exists and is committed. |
-| `lint-stylelint` | [Stylelint with `stylelint-declaration-strict-value`](../../../Docs/Tooling.md#stylelint--stylelint-declaration-strict-value), so themed properties must use token variables. | agent | default | `stack-choice` | Both are dev dependencies, the config forces `var(…)` for color, spacing, radius, and typography, and `lint` runs it. |
-| `lint-prettier` | [Prettier](../../../Docs/Tooling.md#prettier--eslint) for formatting. | agent | default | `stack-choice` | It is a dev dependency with a config, and `lint` runs its check. |
-| `lint-eslint` | [ESLint](../../../Docs/Tooling.md#prettier--eslint) for code lint. | agent | default | `stack-choice` | It is a dev dependency with a config, and `lint` runs it. |
-| `lint-role` | Wire the `lint` role, and keep generated files out of every linter. | agent | required | `stack-choice` | `lint` has a real command (or `n/a` if every linter is opted out), and each installed linter ignores the generated token CSS and the workbench's static output. |
+| `lint-stylelint` | [Stylelint with `stylelint-declaration-strict-value`](../../../Docs/Tooling.md#stylelint--stylelint-declaration-strict-value), so themed properties must use token variables. | agent | required | `stack-choice` | Both are dev dependencies, the config forces `var(…)` for color, spacing, radius, and typography, and `lint` runs it. |
+| `lint-prettier` | [Prettier](../../../Docs/Tooling.md#prettier--eslint) for formatting. | agent | required | `stack-choice` | It is a dev dependency with a config, and `lint` runs its check. |
+| `lint-eslint` | [ESLint](../../../Docs/Tooling.md#prettier--eslint) for code lint. | agent | required | `stack-choice` | It is a dev dependency with a config, and `lint` runs it. |
+| `lint-role` | Wire the `lint` role, and keep generated files out of every linter. | agent | required | `stack-choice` | `lint` has a real command that runs all three, and each linter ignores the generated token CSS and the workbench's static output. |
 
 ## 5. Figma tools
 

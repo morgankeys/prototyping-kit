@@ -72,7 +72,7 @@ column, read the right column first.
 | `/token-usage-review` (changed tokens by default, `full` for everything), or reviewing token use before a pull request that changes styles | `Agents/skills/token-usage-review/SKILL.md` |
 | Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |
 | Choosing or adding a tool (token converter, linter, Figma capture) | `Docs/Tooling.md` |
-| Forking the kit or porting changes between kit and fork | `Agents/context/kit-structure.md` |
+| Starting a kit from the template, kit provenance, or comparing a kit with the template | `Agents/context/kit-structure.md` |
 | Reviewing `Docs/` and `Agents/` for drift against `Code/` | `Agents/prompts/review-drift.md` |
 
 When a `.cursor/rules/*.mdc` file auto-attaches because you're editing a relevant file,
@@ -115,6 +115,12 @@ moves and kit reuse.
   through anything they have to do themselves, in plain words, one step at a time, and do
   the technical work for them. See `Agents/context/guiding-users.md`.
 
+- Checks always run: `lint`, `check`, `build`, `validate`, and the token usage review are
+  never skipped or switched off. When one finds problems, tell the user what it found and
+  ask whether to fix them now or carry on. If they carry on, the problem is still
+  recorded where that check keeps its record (the deviations backlog, the token usage
+  review file), never dropped. The build guards in rules 5 and 6 are the exception: they
+  can't be carried past.
 - Keep `Code/`, `Docs/`, and `Export/` in sync when a change spans them (e.g. a new
   feature usually touches code, docs, and eventually an export).
 - Treat `Export/` as an output drop zone: write built artifacts there, don't hand-edit them.

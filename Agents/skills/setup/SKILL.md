@@ -49,8 +49,8 @@ is before going further:
 
 - *The template:* report the scan and stop. Setup progress is never tracked in the
   template, and `Docs/setup-status.md` must not exist there. To start a kit, the user runs
-  `./new-kit.sh`.
-- *A kit copied or forked by hand:* do `kit-provenance` first. Add the provenance line to
+  `./new-kit.sh`, then `/setup` in the new kit.
+- *A kit copied by hand:* do `kit-provenance` first. Add the provenance line to
   `README.md`, then delete `new-kit.sh` and every `template-only` block, as
   [`kit-structure.md`](../../context/kit-structure.md#kit-provenance) describes. Then
   continue.
@@ -124,7 +124,7 @@ in backticks after it. With `/setup status`, stop after the breakdown.
 
 ### 5. Opt-outs
 
-The user can skip any `default` or `optional` item, a whole group ("no linters"), or a
+The user can skip any `default` or `optional` item, a whole group ("no Figma tools"), or a
 tool by name ("skip Storybook") at any point, including in answer to the report.
 
 - Set the row to `opted out`, with the date and the user's reason in Notes. Set the items
@@ -176,6 +176,10 @@ one, say in a sentence what it is for; after it, say what changed.
   piece of work, and commit `Docs/setup-status.md` with
   the change that moved its rows. Mention once that work is saved in steps and can be
   undone; don't narrate git after that.
+- **When a check finds problems** (`lint`, `check`, `build`, `validate`) while you work:
+  say what it found in plain words and ask whether to fix it now or carry on, as the
+  operating notes in `AGENTS.md` describe. Never skip the check or switch it off to get
+  past it.
 - **Pace:** setup doesn't have to finish in one sitting. At a natural stopping point, say
   what is working now and that `/setup` picks up where it left off.
 - When every item an agent can do is `done`, `opted out`, or `n/a`, say so, say what the

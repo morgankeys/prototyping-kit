@@ -104,7 +104,7 @@ function scan() {
   const { items, stubs } = parseChecklist();
   const status = parseStatus();
 
-  const provenance = read("README.md")?.match(/^Forked from prototyping-kit @.*$/m)?.[0];
+  const provenance = read("README.md")?.match(/^(?:Created|Forked) from prototyping-kit @.*$/m)?.[0];
   console.log("# Setup scan\n");
   console.log(
     isTemplate()

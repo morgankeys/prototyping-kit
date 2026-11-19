@@ -37,17 +37,18 @@ span folders.
 
 ## Kit provenance
 
-A project forked from the kit records where it came from, so later kit improvements can be
-compared and pulled in. Add one line to the fork's root `README.md`:
+A kit records which version of the template it was created from. One line in the kit's
+root `README.md`:
 
-> Forked from prototyping-kit @ `<sha>` on `<date>`.
-
-When you port a kit change into the fork, or a fork's improvement back into the kit,
-update the line or note the port in the commit body.
+> Created from prototyping-kit @ `<sha>` on `<date>`.
 
 Kits made with the template's `new-kit.sh` get this line automatically, plus a `template`
-git remote pointing back at the kit, so `git fetch template` brings in kit changes to
-compare or merge.
+git remote pointing back at the template. A kit copied by hand gets the line from
+`/setup`. Older kits may say `Forked from` instead; both are read the same way.
+
+The line is a record only. A kit starts with its own git history, so there is no supported
+way yet to bring later template changes into it: don't merge from the `template` remote.
+Until an update process exists, compare the two by hand and copy across what is wanted.
 <!-- template-only:start -->
 
 In the template itself, `new-kit.sh` is the way to start a new kit. It strips itself and

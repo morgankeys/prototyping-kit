@@ -13,7 +13,7 @@
 #      template-only blocks. Uncommitted changes and untracked files are not copied.
 #      Retitles the README with the new name and adds the provenance line.
 #   3. Starts a fresh git history with one commit, and adds a `template` remote pointing
-#      back here so kit updates can be pulled in later.
+#      back here, as a record of where the kit came from.
 #   4. Optionally creates a GitHub repo with `gh` and pushes to it.
 #
 # Usage: ./new-kit.sh
@@ -84,7 +84,7 @@ done
 
 # Title the README after the new kit and record provenance
 # (see Agents/context/kit-structure.md#kit-provenance).
-PROVENANCE="Forked from prototyping-kit @ \`$TEMPLATE_SHA\` on \`$(date +%Y-%m-%d)\`."
+PROVENANCE="Created from prototyping-kit @ \`$TEMPLATE_SHA\` on \`$(date +%Y-%m-%d)\`."
 awk -v name="$NAME" -v line="$PROVENANCE" '
   NR == 1 && /^# / { print "# " name; print ""; print line; next }
   NR == 1          { print "# " name; print ""; print line; print "" }

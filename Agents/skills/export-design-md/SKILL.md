@@ -13,7 +13,9 @@ of truth: the export is always generated from `Docs/Design system/`, never edite
 
 Commands below run from the repo root. The helper script is
 [`scripts/design-md.mjs`](scripts/design-md.mjs) (Node 18+, no install; the linter is
-fetched with `npx` at a pinned version).
+fetched with `npx` at a pinned version). The guideline cleaner and token digest live in
+[`scripts/read-docs.mjs`](scripts/read-docs.mjs), which the platform export also uses.
+Keep that the only Docs reader.
 
 ## What goes in, what stays out
 

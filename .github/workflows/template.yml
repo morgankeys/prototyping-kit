@@ -1,0 +1,63 @@
+name: Template
+
+# Template only. new-kit.sh deletes this file from every new kit, and /setup deletes it
+# from a kit copied by hand (kit-provenance). Kits own their copy of the validator in
+# Code/ and test it through ci.yml.
+#
+# Runs the reference design-system validator's tests whenever the validator, or the
+# contract and usage map it implements, changes.
+
+on:
+  pull_request:
+    paths:
+      - "Agents/skills/design-validator/**"
+      - "Docs/Design system/design-in-code architecture.md"
+      - "Docs/Design system/token-usage.json"
+      - ".github/workflows/template.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Agents/skills/design-validator/**"
+      - "Docs/Design system/design-in-code architecture.md"
+      - "Docs/Design system/token-usage.json"
+      - ".github/workflows/template.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: template-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validator-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Agents/skills/design-validator
+    steps:
+      - uses: actions/checkout@v4
+
+      # Backstop: a kit copied by hand that kept this file has no new-kit.sh. Skip there.
+      - name: template check
+        id: template
+        working-directory: .
+        run: |
+          if [ -f new-kit.sh ]; then echo "is=true" >> "$GITHUB_OUTPUT"; else
+            echo "Not the template (no new-kit.sh); skipping. Delete this workflow from the kit."
+            echo "is=false" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/setup-node@v4
+        if: steps.template.outputs.is == 'true'
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: Agents/skills/design-validator/package-lock.json
+
+      - name: install
+        if: steps.template.outputs.is == 'true'
+        run: npm ci
+
+      - name: test
+        if: steps.template.outputs.is == 'true'
+        run: npm test

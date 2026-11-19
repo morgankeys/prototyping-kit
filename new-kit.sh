@@ -77,7 +77,7 @@ git -C "$TEMPLATE_DIR" archive HEAD | tar -x -C "$DEST"
 cd "$DEST"
 
 # Drop template-only material.
-rm -f "$SCRIPT_NAME"
+rm -f "$SCRIPT_NAME" .github/workflows/template.yml
 grep -rlF --include='*.md' --include='*.mdc' "$START_MARK" . 2>/dev/null | while read -r file; do
   sed "\#$START_MARK#,\#$END_MARK#d" "$file" > "$file.tmp" && mv "$file.tmp" "$file"
 done

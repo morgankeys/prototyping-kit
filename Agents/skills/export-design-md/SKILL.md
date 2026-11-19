@@ -6,9 +6,9 @@ description: >-
 
 # /export-design-md
 
-Builds `Export/DESIGN.md`, a portable, single-file summary of this kit's design system in
+Builds `Export/DESIGN.md`, a portable, single-file summary of this repo's design system in
 Google's [DESIGN.md](https://github.com/google-labs-code/design.md) format. It is meant to
-be dropped into other AI tools for fast, exploratory prototyping. The kit stays the source
+be dropped into other AI tools for fast, exploratory prototyping. This repo stays the source
 of truth: the export is always generated from `Docs/Design system/`, never edited by hand.
 
 Commands below run from the repo root. The helper script is
@@ -24,7 +24,7 @@ Keep that the only Docs reader.
   plus token values from `Figma/Tokens/` and `Supplemental/`.
 - **Out:** components, and everything specific to this repo: file paths, commands, lint
   rules, validation, git workflow, the deviations backlog. The export must make sense to a
-  tool that has never seen this kit.
+  tool that has never seen this repo.
 
 ## Steps
 
@@ -90,8 +90,8 @@ tables of token names. Don't add guidance the sources don't contain.
 node Agents/skills/export-design-md/scripts/design-md.mjs lint
 ```
 
-Runs Google's linter, then the kit's checks (marker present, no Components section, no
-repo paths). Fix every error and kit-check failure and lint again. Fix warnings that come
+Runs Google's linter, then this repo's own checks (marker present, no Components section, no
+repo paths). Fix every error and repo-check failure and lint again. Fix warnings that come
 from your mapping (a broken reference, a missing `primary`, sections out of order). A
 warning that reflects a gap in the sources, like `missing-typography` while
 `typography.md` is a stub, stays: report it rather than inventing tokens. Infos need no

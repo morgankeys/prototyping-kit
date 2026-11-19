@@ -6,7 +6,7 @@ description: Regenerate design tokens from a token export and run design-system 
 # Design tokens
 
 Workflow for turning a token export into the prototype's token CSS, and checking the
-result. Figma variables are the default source. Tokens maintained in this kit, another
+result. Figma variables are the default source. Tokens maintained in this repo, another
 repository, or another design tool follow the same pipeline once they are stored under
 `Docs/Design system/`. Commands are named by role;
 [`Code/README.md`](../../../Code/README.md) maps each role to this project's real command.

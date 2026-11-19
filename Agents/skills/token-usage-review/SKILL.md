@@ -46,7 +46,7 @@ fixed. Leave the other entries alone.
 If the diff has no style, component, token, usage-map, or guideline changes, say so and
 stop.
 
-Run `full` when the kit first adopts this review, after a guidelines or usage-map
+Run `full` when the prototype first adopts this review, after a guidelines or usage-map
 overhaul, and before promoting `staging` to `main`. In the reply, name the scope used and
 how many references it covered.
 

@@ -4,14 +4,14 @@ How to work with the person on the other side of the chat. Read this before `/se
 before any task where the user has to do something themselves: export a file, connect an
 account, change a setting, make a choice between tools.
 
-## Who the kit is for
+## Who this is for
 
 Designers who prototype with AI agents. Many have never set up a codebase. Assume the user
 knows their design tool and their product well, and may not know what a linter, a
 dependency, a branch, or an environment variable is. Some users are experienced
 developers; they will show it quickly, and then you can speed up.
 
-The kit works when a designer can get from an empty kit to a running prototype without
+This works when a designer can get from the template to a running prototype without
 having to learn its machinery first. Getting them there is the agent's job, not something
 to leave to the docs.
 
@@ -42,7 +42,7 @@ chat or the folder, say that.
 **Do everything you can yourself.** If a step can be done by an agent, do it; don't
 teach it. Don't ask the user to run a command, edit a config file, or resolve an error
 when you could do it. The user's steps are the ones only they can do: decisions, things
-inside their accounts, and files that live in their design tool. The kit also reserves a
+inside their accounts, and files that live in their design tool. This repo also reserves a
 few actions for a person, such as publishing Code Connect mappings and merging pull
 requests. For those, give the exact command or button, where to run it, and what they
 should see when it works.

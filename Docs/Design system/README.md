@@ -6,11 +6,11 @@ lives. Agents load the same links from
 
 The prototype needs a source of truth for tokens. Figma is the default: export variables
 from the library file into [`Figma/Tokens/`](Figma/Tokens/). A team can instead maintain
-tokens in this kit or a separate repository and feed both the prototype and Figma, or use
+tokens in this repo or a separate repository and feed both the prototype and Figma, or use
 another design tool, as long as the tokens are stored here.
 
 <!-- Summarize the system here once the project starts: what it is (an in-house library, a
-Material- or Radix-based kit, …), its token namespace, where the tokens come from if not
+Material- or Radix-based system, …), its token namespace, where the tokens come from if not
 Figma, and anything unusual about it. -->
 
 ## Figma files

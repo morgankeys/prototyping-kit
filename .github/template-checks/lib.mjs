@@ -1,5 +1,5 @@
-// Shared helpers for the template's own checks. Template only: new-kit.sh deletes this
-// folder from every new kit.
+// Shared helpers for the template's own checks. Template only: new-prototype.sh deletes this
+// folder from every new prototype.
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';

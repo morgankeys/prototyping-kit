@@ -1,11 +1,13 @@
 # AGENTS.md
 
-Front door for any AI agent working in this prototyping kit. Read this first, then load
+Front door for any AI agent working in this repo. Read this first, then load
 what you need from `Agents/`.
 
 ## What this repo is
 
-A prototyping kit. Work is organized into four top-level, peer folders:
+Either the prototyping-kit **template** (the master copy, which has `new-prototype.sh`) or a
+**prototype** made from it and set up for one project. Most of what follows applies to
+both. Work is organized into four top-level, peer folders:
 
 | Folder     | Purpose                                                                    |
 | ---------- | ------------------------------------------------------------------------- |
@@ -19,21 +21,22 @@ You may read and manage **all four** folders, not just `Code/`.
 <!-- template-only:start -->
 ## This is the template
 
-This repo is the prototyping-kit **template**. `new-kit.sh` at the repo root duplicates it
-into a fresh, standalone kit for one specific prototype (it asks for the new repo's name).
+This repo is the prototyping-kit **template**. `new-prototype.sh` at the repo root copies
+it into a fresh, standalone repo for one prototype (it asks for the new repo's name).
 
-- Run it when someone wants a new kit: `./new-kit.sh`. It is a plain script, not a skill.
-- It is **not copied** into the new kit, and neither is the template's own CI
+- Run it when someone wants a new prototype: `./new-prototype.sh`. It is a plain script,
+  not a skill.
+- It is **not copied** into the new prototype, and neither is the template's own CI
   (`.github/workflows/template.yml` and `.github/template-checks/`) or this section:
   anything between `template-only:start` / `template-only:end` HTML comments in a
   Markdown file is stripped from the copy. Wrap any future template-only notes the same
   way.
 - The template's CI fails if someone starts setting up a prototype here: a stack in
-  `Code/`, a filled-in placeholder, or a setup status file. Setup happens in a kit.
-- In a duplicated kit there is no `new-kit.sh`. Don't recreate it there; new kits come
-  from the template.
-- The copy's `README.md` gets the kit's name and the provenance line described in
-  `Agents/context/kit-structure.md`.
+  `Code/`, a filled-in placeholder, or a setup status file. Setup happens in a prototype.
+- In a prototype there is no `new-prototype.sh`. Don't recreate it there; new prototypes
+  come from the template.
+- The copy's `README.md` gets the prototype's name and the provenance line described in
+  `Agents/context/repo-structure.md`.
 
 <!-- template-only:end -->
 ## Where to look
@@ -65,21 +68,21 @@ column, read the right column first.
 | Adding a component, a story, or a Code Connect file | `Agents/context/component-catalog.md` |
 | `/component-catalog`, turning on Storybook or Code Connect, or the first components after choosing a stack | `Agents/skills/component-catalog/SKILL.md` |
 | Asking the user to do, decide, or provide something, or explaining a step to them | `Agents/context/guiding-users.md` |
-| `/setup`, setting up a new kit, what is left to install or fill in, or skipping a tool | `Agents/skills/setup/SKILL.md` |
-| What a fully set-up kit needs, or adding a setup item or a placeholder to the template | `Agents/skills/setup/checklist.md` |
-| `/editor-setup`, files showing as plain text or without lint underlines in the editor, or opening the kit in a new editor | `Agents/skills/editor-setup/SKILL.md` |
+| `/setup`, setting up a new prototype, what is left to install or fill in, or skipping a tool | `Agents/skills/setup/SKILL.md` |
+| What a fully set-up prototype needs, or adding a setup item or a placeholder to the template | `Agents/skills/setup/checklist.md` |
+| `/editor-setup`, files showing as plain text or without lint underlines in the editor, or opening the repo in a new editor | `Agents/skills/editor-setup/SKILL.md` |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
 | `/export-design-md`, or a portable DESIGN.md for another AI tool | `Agents/skills/export-design-md/SKILL.md` |
 | Exporting the design system to Lovable, Replit, Bolt.new, v0, or Figma Make | `Agents/skills/design-system-export/SKILL.md` |
 | Regenerating tokens from a new export, or the alpha transform | `Agents/skills/design-tokens/SKILL.md` |
 | Bringing in a new Figma export end to end | `Agents/prompts/regenerate-tokens.md` |
 | Design-system validation, the deviations backlog, or writing a `Rationale:` line | `Docs/Design system/design-in-code architecture.md` |
-| `/design-validator`, installing `validate` in a kit, or adapting the validator to a framework | `Agents/skills/design-validator/SKILL.md` |
+| `/design-validator`, installing `validate` in a prototype, or adapting the validator to a framework | `Agents/skills/design-validator/SKILL.md` |
 | Whether a token fits its intended use, the token usage map, or `token-*` deviations | "Token usage" in `Docs/Design system/design-in-code architecture.md` |
 | `/token-usage-review` (changed tokens by default, `full` for everything), or reviewing token use before a pull request that changes styles | `Agents/skills/token-usage-review/SKILL.md` |
 | Adding a sandbox, test, specimen, or sample page, or anything under a `dev/` pages folder | `Agents/context/dev-only-pages.md` |
 | Choosing or adding a tool (token converter, linter, Figma capture) | `Docs/Tooling.md` |
-| Starting a kit from the template, kit provenance, or comparing a kit with the template | `Agents/context/kit-structure.md` |
+| Starting a prototype from the template, provenance, or comparing a prototype with the template | `Agents/context/repo-structure.md` |
 | Reviewing `Docs/` and `Agents/` for drift against `Code/` | `Agents/prompts/review-drift.md` |
 
 When a `.cursor/rules/*.mdc` file auto-attaches because you're editing a relevant file,
@@ -88,7 +91,7 @@ trust it — it has the just-in-time rules you need.
 ## Non-negotiable rules
 
 These apply across all tasks. They are phrased as portable principles so they survive file
-moves and kit reuse.
+moves and reuse.
 
 1. **Never hand-edit generated files.** If a file's header says `GENERATED` or `do not edit
    by hand`, regenerate it with the documented command instead. The one carve-out: where a
@@ -121,7 +124,7 @@ moves and kit reuse.
 
 ## Operating notes
 
-- The kit is for designers, many of whom have not set up a codebase before. Lead them
+- This repo is for designers, many of whom have not set up a codebase before. Lead them
   through anything they have to do themselves, in plain words, one step at a time, and do
   the technical work for them. See `Agents/context/guiding-users.md`.
 

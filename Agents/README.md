@@ -1,6 +1,6 @@
 # Agents
 
-Curated home for everything an AI agent needs to work in this kit. This folder is a
+Curated home for everything an AI agent needs to work in this repo. This folder is a
 first-class peer of `Code/`, `Docs/`, and `Export/` — both humans and agents are expected
 to read and maintain it.
 
@@ -11,7 +11,7 @@ The repo-root `AGENTS.md` is the entry point agents load first; it points here.
 ```
 Agents/
 ├── skills/        Reusable capabilities, one folder per skill (setup/, component-catalog/, design-tokens/, token-usage-review/, export-design-md/, design-system-export/, pr/, example-skill/)
-├── context/       Conventions and background (kit-structure, guiding-users, git-workflow, design-system, design-system-platforms, dev-only-pages, component-catalog)
+├── context/       Conventions and background (repo-structure, guiding-users, git-workflow, design-system, design-system-platforms, dev-only-pages, component-catalog)
 │   └── troubleshooting/  Tips, tricks, and gotchas, indexed by symptom (load as needed)
 ├── prompts/       Task templates (review-drift, regenerate-tokens, example-task)
 └── README.md      This index
@@ -21,7 +21,7 @@ Agents/
 
 - **skills/** — A repeatable, self-contained capability with clear trigger conditions
   (e.g. "package the prototype for export"). Each skill lives in its own folder with a
-  `SKILL.md`. Current skills: `setup` (`/setup` checks the kit against the setup
+  `SKILL.md`. Current skills: `setup` (`/setup` checks a prototype against the setup
   checklist, tracks progress in `Docs/setup-status.md`, and walks through what is left),
   `design-validator` (`/design-validator` installs the tested reference validator in
   `Code/` and wires `validate`), `editor-setup` (`/editor-setup` sets up the user's editor so every file type is

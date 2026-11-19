@@ -4,7 +4,7 @@ How the prototype's components are catalogued: the component registry, the compo
 workbench (Storybook by default), and Figma Code Connect. Read this before adding a
 component, a story, or a Code Connect file, or before turning these tools on for a stack.
 
-The kit installs none of the tools. The registry is plain docs and works from day one; the
+The template installs none of the tools. The registry is plain docs and works from day one; the
 workbench and Code Connect are turned on with `/component-catalog` once their inputs exist.
 
 This file holds the rules, and is the only place they are stated. The steps for turning

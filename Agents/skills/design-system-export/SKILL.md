@@ -1,7 +1,7 @@
 ---
 name: design-system-export
 description: >-
-  Export this kit's design system from Docs/Design system into packages for
+  Export this repo's design system from Docs/Design system into packages for
   Lovable, Replit, Bolt.new, v0, and Figma Make. Use when asked to export or
   share the design system, or to package components from Code for those platforms.
 ---
@@ -119,7 +119,7 @@ registry lists those components and does not invent a shadcn theme.
 
 ## Verify
 
-On a kit that has tokens or filled guidelines, run the export and read the warnings.
+On a prototype that has tokens or filled guidelines, run the export and read the warnings.
 `Export/design-system/design-md/README.md` points at `Export/DESIGN.md`; it does not
 contain a second copy. Lovable's `instructions.md` and Bolt's `project-prompt.md` must
 stay at or under 10,000 characters. The script exits 1 when they do not.
@@ -128,4 +128,4 @@ stay at or under 10,000 characters. The script exits 1 when they do not.
 node Agents/skills/design-system-export/scripts/export.mjs --self-test
 ```
 
-That runs against a temporary kit, not this repo's Docs.
+That runs against a temporary prototype, not this repo's Docs.

@@ -1,6 +1,6 @@
 ---
 name: example-skill
-description: Template skill. Copy this folder to create a new skill. Use when you want a starting point for a repeatable agent capability in this kit.
+description: Template skill. Copy this folder to create a new skill. Use when you want a starting point for a repeatable agent capability in this repo.
 ---
 
 # Example Skill

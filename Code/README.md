@@ -5,7 +5,7 @@ lives in this folder; it can be wiped and rebuilt without touching `Docs/` or `A
 
 ## Commands
 
-The kit's docs, skills, CI, and PR template name commands by **role**, never by tool. Fill
+This repo's docs, skills, CI, and PR template name commands by **role**, never by tool. Fill
 in the right column with this project's real command (run from `Code/`), and keep it
 current when the stack changes.
 

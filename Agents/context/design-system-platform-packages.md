@@ -108,7 +108,8 @@ install step copies `assets/` to `src/design-system/<slug>/`.
 3. Review the result, then **Save design system**.
 
 Replit Design re-derives `tokens.json` and components from the seed, so the result is
-close to the kit rather than identical. The skill options carry the kit's own CSS.
+close to this repo's design system rather than identical. The skill options carry this
+repo's own CSS.
 
 ## Bolt.new
 
@@ -186,7 +187,7 @@ The script always writes `guidelines/` and `tokens.css`. The npm package is adde
 | --- | --- |
 | `package/` | An already-built npm package: ESM, type declarations, CSS, and a copy of the guidelines |
 | `<scope-name>-<version>.tgz` | The same package as `npm pack` would produce it |
-| `guidelines/` | The kit's guidelines. `Guidelines.md` stays at the top |
+| `guidelines/` | This repo's guidelines. `Guidelines.md` stays at the top |
 
 The package needs React 18 or 19 as a peer dependency, one `styles.css`, and no other
 runtime dependencies. Make's Vite environment requires that. Fonts load from Google

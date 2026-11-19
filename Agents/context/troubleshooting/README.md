@@ -29,7 +29,7 @@ A one-off typo or a fact the docs state plainly doesn't need an entry.
    - **How to verify**
    - **Review checklist**
    - **Where this came from** — the fixes that taught us, so readers can find the commits
-     (in the kit itself, describe the cases generically; name commits only in a project)
+     (in the template, describe the cases generically; name commits only in a prototype)
 3. Keep it portable: plain HTML, CSS, JS, or shell in examples, and no framework syntax.
    Name project files only in "Where this came from".
 4. Add a row to the index above, phrased as the symptom someone would notice.

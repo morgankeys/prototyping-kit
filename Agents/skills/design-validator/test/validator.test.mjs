@@ -1,29 +1,29 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { details, makeKit, summary } from './helpers.mjs';
+import { details, makePrototype, summary } from './helpers.mjs';
 
 const svelte = (css, markup = '<div class="card"></div>') => `${markup}\n<style>\n${css}\n</style>\n`;
 
 test('clean component: no findings, backlog says so, exit 0', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/Card.svelte': svelte(
       '.card { color: var(--ds-color-on-primary); background: var(--ds-color-primary); padding: var(--ds-spacing-md); gap: 0; }',
     ),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.equal(r.code, 0);
   assert.deepEqual(r.deviations, []);
   assert.deepEqual(r.scopingErrors, []);
-  assert.match(kit.backlog(), /No deviations\./);
+  assert.match(proto.backlog(), /No deviations\./);
 });
 
 test('token files are never scanned', async () => {
-  const r = await makeKit().run();
+  const r = await makePrototype().run();
   assert.deepEqual(r.deviations, []);
 });
 
 test('hardcoded-color: hex, named, rgb(), shorthands, var() fallbacks; allowed keywords pass', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/A.svelte': svelte(
       [
         '.a {',
@@ -38,7 +38,7 @@ test('hardcoded-color: hex, named, rgb(), shorthands, var() fallbacks; allowed k
       ].join('\n'),
     ),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(summary(r.deviations.filter((d) => d.rule === 'hardcoded-color')), [
     'hardcoded-color@4',
     'hardcoded-color@5',
@@ -49,7 +49,7 @@ test('hardcoded-color: hex, named, rgb(), shorthands, var() fallbacks; allowed k
 });
 
 test('raw-spacing, raw-border-radius, raw-font-size: raw lengths, including mixed with a token and in calc()', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/A.svelte': svelte(
       [
         '.a {',
@@ -65,13 +65,13 @@ test('raw-spacing, raw-border-radius, raw-font-size: raw lengths, including mixe
       ].join('\n'),
     ),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(summary(r.deviations), ['raw-border-radius@8', 'raw-font-size@10', 'raw-spacing@4', 'raw-spacing@5']);
   assert.deepEqual(details(r.deviations, 'raw-spacing'), ['`padding: 20px` uses a raw length.', '`margin: calc(var(--ds-spacing-md) + 4px)` uses a raw length.']);
 });
 
 test('non-token-font-family and raw-typography', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/A.svelte': svelte(
       [
         '.a {',
@@ -93,7 +93,7 @@ test('non-token-font-family and raw-typography', async () => {
       ].join('\n'),
     ),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(summary(r.deviations), [
     'non-token-font-family@16',
     'non-token-font-family@4',
@@ -104,10 +104,10 @@ test('non-token-font-family and raw-typography', async () => {
 });
 
 test('non-token-variable: definitions and references outside the namespace; allowed patterns pass', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/A.svelte': svelte('.a { --gap: 4px; padding: var(--other-space); margin: var(--tw-space-x); }'),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(details(r.deviations, 'non-token-variable'), [
     '`--gap` is a CSS variable outside the token namespace (`--ds-*`).',
     '`--other-space` is a CSS variable outside the token namespace (`--ds-*`).',
@@ -115,17 +115,17 @@ test('non-token-variable: definitions and references outside the namespace; allo
 });
 
 test('local-token-override: literal redefinition in a component; a token-to-token alias passes', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/A.svelte': svelte('.a { --ds-color-surface: #221f17; }\n.b { --ds-color-surface: var(--ds-color-primary); }'),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(details(r.deviations, 'local-token-override'), [
     '`--ds-color-surface` redefines a namespace token with a literal value: `#221f17`.',
   ]);
 });
 
 test('token usage: wrong property (scope and group), not for direct use, wrong context, unpaired, unclassified', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/A.svelte': svelte(
       [
         '.a { font-size: var(--ds-spacing-md); }',
@@ -138,7 +138,7 @@ test('token usage: wrong property (scope and group), not for direct use, wrong c
       ].join('\n'),
     ),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   const d = (rule) => details(r.deviations, rule);
   assert.deepEqual(d('token-wrong-property').sort(), [
     '`--ds-spacing-md` in `font-size` is outside group `spacing`.',
@@ -153,16 +153,16 @@ test('token usage: wrong property (scope and group), not for direct use, wrong c
 });
 
 test('usage-map warning for a group that matches no token; no manifest turns scope checks off', async () => {
-  const r = await makeKit().run();
+  const r = await makePrototype().run();
   assert.match(r.output, /usage-map group `unused` matches no token/);
-  const r2 = await makeKit({}, { manifest: null }).run();
+  const r2 = await makePrototype({}, { manifest: null }).run();
   assert.match(r2.output, /No token manifest found/);
 });
 
 // ---- Scoping ------------------------------------------------------------------------------
 
 test('svelte: <style global> and a bare :global() are scoping errors; nested escapes pass', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/Global.svelte': '<p>x</p>\n<style global>\np { margin: 0; }\n</style>\n',
     'src/lib/Escapes.svelte': svelte(
       [
@@ -175,7 +175,7 @@ test('svelte: <style global> and a bare :global() are scoping errors; nested esc
       ].join('\n'),
     ),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.equal(r.code, 1);
   assert.deepEqual(
     r.scopingErrors.map((e) => `${e.file.split('/').pop()}@${e.line} ${e.detail}`).sort(),
@@ -188,12 +188,12 @@ test('svelte: <style global> and a bare :global() are scoping errors; nested esc
 });
 
 test('vue: a <style> without scoped or module is a scoping error', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/Plain.vue': '<template><div class="a"/></template>\n<style>\n.a { margin: 0; }\n</style>\n',
     'src/lib/Scoped.vue': '<template><div class="a"/></template>\n<style scoped>\n.a { margin: 0; }\n</style>\n',
     'src/lib/Module.vue': '<template><div :class="$style.a"/></template>\n<style module lang="css">\n.a { margin: 0; }\n</style>\n',
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(
     r.scopingErrors.map((e) => `${e.file.split('/').pop()} ${e.detail}`),
     ['Plain.vue `<style>` is not scoped.'],
@@ -201,27 +201,27 @@ test('vue: a <style> without scoped or module is a scoping error', async () => {
 });
 
 test('astro: <style is:global> is a scoping error', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/components/Hero.astro': '---\nconst t = 1;\n---\n<h1>x</h1>\n<style is:global>\nh1 { margin: 0; }\n</style>\n',
     'src/components/Ok.astro': '---\n---\n<h1 class="t">x</h1>\n<style>\n.t { margin: 0; }\n</style>\n',
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(r.scopingErrors.map((e) => e.detail), ['`<style is:global>` is not scoped.']);
 });
 
 test('css modules: top-level :global() and a :global switch are errors; nested escapes pass', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/Card.module.css': ['.card { margin: 0; }', '.card :global(.x) { margin: 0; }', ':global(.x) { margin: 0; }', ':global .y { margin: 0; }'].join('\n'),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(summary(r.scopingErrors), ['unscoped-style@3', 'unscoped-style@4']);
 });
 
 test('a plain stylesheet must keep its rules inside @scope', async () => {
-  const kit = makeKit({
+  const proto = makePrototype({
     'src/lib/card.css': ['@scope (.card) { p { margin: 0; } }', '.card { margin: 0; }', '@media (width > 40rem) { .card { margin: 0; } }'].join('\n'),
   });
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(summary(r.scopingErrors), ['unscoped-style@2', 'unscoped-style@3']);
 });
 
@@ -239,11 +239,11 @@ test('global stylesheet: element, :root and theme rules pass; component selector
     'html[data-theme="dark"] body { margin: 0; }',
     '@keyframes spin { from { transform: rotate(0); } to { transform: rotate(1turn); } }',
   ].join('\n');
-  const kit = makeKit(
+  const proto = makePrototype(
     { 'src/styles/global.css': css },
     { config: { allowedGlobalClasses: [{ class: 'visually-hidden', for: 'Text for screen readers only' }] } },
   );
-  const r = await kit.run();
+  const r = await proto.run();
   assert.deepEqual(r.scopingErrors.map((e) => `${e.line} ${e.detail}`), [
     '6 `.card` styles a component in the global stylesheet (`.card`).',
     '7 `[data-component="Button"]` styles a component in the global stylesheet (`[data-component]`).',
@@ -251,12 +251,12 @@ test('global stylesheet: element, :root and theme rules pass; component selector
     '9 `a:not(.button)` styles a component in the global stylesheet (`.button`).',
   ]);
   // Value rules still apply in the global stylesheet; scoping errors never reach the backlog.
-  assert.doesNotMatch(kit.backlog(), /global-component-leak/);
+  assert.doesNotMatch(proto.backlog(), /global-component-leak/);
 });
 
 test('inline style attributes are not scoping errors, but their values are still checked', async () => {
-  const kit = makeKit({ 'src/lib/A.svelte': '<div style="color: #fff"></div>\n' });
-  const r = await kit.run();
+  const proto = makePrototype({ 'src/lib/A.svelte': '<div style="color: #fff"></div>\n' });
+  const r = await proto.run();
   assert.deepEqual(r.scopingErrors, []);
   assert.deepEqual(summary(r.deviations), ['hardcoded-color@1']);
 });
@@ -264,18 +264,18 @@ test('inline style attributes are not scoping errors, but their values are still
 // ---- Exit codes, backlog, config --------------------------------------------------------
 
 test('exit codes: 0 with deviations, 1 with --strict, 1 on a scoping error', async () => {
-  const kit = makeKit({ 'src/lib/A.svelte': svelte('.a { padding: 20px; }') });
-  assert.equal((await kit.run()).code, 0);
-  assert.equal((await kit.run({ strict: true })).code, 1);
-  kit.write('src/lib/B.vue', '<template><i/></template>\n<style>\ni { margin: 0; }\n</style>\n');
-  assert.equal((await kit.run()).code, 1);
+  const proto = makePrototype({ 'src/lib/A.svelte': svelte('.a { padding: 20px; }') });
+  assert.equal((await proto.run()).code, 0);
+  assert.equal((await proto.run({ strict: true })).code, 1);
+  proto.write('src/lib/B.vue', '<template><i/></template>\n<style>\ni { margin: 0; }\n</style>\n');
+  assert.equal((await proto.run()).code, 1);
 });
 
 test('backlog: rationale carries forward across line moves, unchanged runs do not rewrite, fixed entries drop', async () => {
-  const kit = makeKit({ 'src/lib/A.svelte': svelte('.a { padding: 20px; color: #fff; }') });
-  let r = await kit.run();
+  const proto = makePrototype({ 'src/lib/A.svelte': svelte('.a { padding: 20px; color: #fff; }') });
+  let r = await proto.run();
   assert.equal(r.changed, true);
-  let text = kit.backlog();
+  let text = proto.backlog();
   assert.match(text, /- \*\*L3 · raw-spacing\*\* — `padding: 20px` uses a raw length\.\n {2}- Rationale: Unknown — needs review/);
 
   // Write a two-line rationale by hand, then move the code down three lines.
@@ -283,40 +283,40 @@ test('backlog: rationale carries forward across line moves, unchanged runs do no
     /(raw-spacing\*\* — .*\n) {2}- Rationale: Unknown — needs review/,
     '$1  - Rationale: The card sits on a fixed grid the spacing scale\n    does not cover yet.',
   );
-  (await import('node:fs')).writeFileSync(kit.backlogPath, text);
-  kit.write('src/lib/A.svelte', svelte('\n\n\n.a { padding: 20px; color: #fff; }'));
-  r = await kit.run();
+  (await import('node:fs')).writeFileSync(proto.backlogPath, text);
+  proto.write('src/lib/A.svelte', svelte('\n\n\n.a { padding: 20px; color: #fff; }'));
+  r = await proto.run();
   assert.equal(r.changed, true);
-  text = kit.backlog();
+  text = proto.backlog();
   assert.match(text, /L6 · raw-spacing\*\* — `padding: 20px` uses a raw length\.\n {2}- Rationale: The card sits on a fixed grid the spacing scale\n {4}does not cover yet\./);
 
-  r = await kit.run();
+  r = await proto.run();
   assert.equal(r.changed, false);
 
-  kit.write('src/lib/A.svelte', svelte('\n\n\n.a { padding: var(--ds-spacing-md); color: #fff; }'));
-  await kit.run();
-  assert.doesNotMatch(kit.backlog(), /raw-spacing|fixed grid/);
-  assert.match(kit.backlog(), /\| `hardcoded-color` \| 1 \|/);
+  proto.write('src/lib/A.svelte', svelte('\n\n\n.a { padding: var(--ds-spacing-md); color: #fff; }'));
+  await proto.run();
+  assert.doesNotMatch(proto.backlog(), /raw-spacing|fixed grid/);
+  assert.match(proto.backlog(), /\| `hardcoded-color` \| 1 \|/);
 });
 
 test('exemptions: a deviation rule can be exempted per file; a scoping rule cannot', async () => {
   const files = { 'src/styles/primitives.css': '@scope (.x) { p { color: #123456; } }' };
-  const ok = makeKit(files, { config: { exemptions: [{ files: ['src/styles/primitives.css'], rules: ['hardcoded-color'], why: 'Defines primitives the export lacks.' }] } });
+  const ok = makePrototype(files, { config: { exemptions: [{ files: ['src/styles/primitives.css'], rules: ['hardcoded-color'], why: 'Defines primitives the export lacks.' }] } });
   assert.deepEqual((await ok.run()).deviations, []);
-  const bad = makeKit(files, { config: { exemptions: [{ files: ['src/styles/primitives.css'], rules: ['unscoped-style'], why: 'no' }] } });
+  const bad = makePrototype(files, { config: { exemptions: [{ files: ['src/styles/primitives.css'], rules: ['unscoped-style'], why: 'no' }] } });
   const r = await bad.run();
   assert.equal(r.code, 2);
   assert.match(r.output, /Scoping errors can't be exempted/);
 });
 
 test('a placeholder namespace stops validate with a clear message', async () => {
-  const r = await makeKit({}, { usageMap: { namespace: '<prefix>', groups: [] } }).run();
+  const r = await makePrototype({}, { usageMap: { namespace: '<prefix>', groups: [] } }).run();
   assert.equal(r.code, 2);
   assert.match(r.output, /namespace is still a placeholder/);
 });
 
 test('unparseable CSS stops validate and points to lint', async () => {
-  const r = await makeKit({ 'src/lib/broken.css': '@scope (.a) { p { color: red; ' }).run();
+  const r = await makePrototype({ 'src/lib/broken.css': '@scope (.a) { p { color: red; ' }).run();
   assert.equal(r.code, 2);
   assert.match(r.output, /could not be parsed/);
 });

@@ -1,11 +1,11 @@
 ---
 name: editor-setup
-description: Make the user's code editor show this kit's files properly. Looks at the repo, the stack in Code/, and the editor in use, then sets up what is missing so every file type gets syntax highlighting and lint problems show as underlines while editing. Asks when anything is unclear. From a session with no editor (a cloud session), explains what it is for and asks which editor and file types to set up. Use when the user invokes /editor-setup, after a stack is chosen, when files show as plain text or with the wrong colors, or when the user opens the kit in a new editor.
+description: Make the user's code editor show this repo's files properly. Looks at the repo, the stack in Code/, and the editor in use, then sets up what is missing so every file type gets syntax highlighting and lint problems show as underlines while editing. Asks when anything is unclear. From a session with no editor (a cloud session), explains what it is for and asks which editor and file types to set up. Use when the user invokes /editor-setup, after a stack is chosen, when files show as plain text or with the wrong colors, or when the user opens the repo in a new editor.
 ---
 
 # /editor-setup
 
-Makes the files in this kit look right in the user's editor: syntax highlighting for every
+Makes the files in this repo look right in the user's editor: syntax highlighting for every
 file type in `Code/`, and the project's linters shown as underlines while they edit, so a
 problem is visible before `lint` or `validate` runs. It changes no code and adds no check:
 what `lint` and `validate` decide stays the same with or without it.
@@ -89,7 +89,7 @@ If there are no gaps, go to step 5.
   `Docs/Tooling.md`). Never add an id from memory.
 - **Installing on the user's computer.** If this session runs on the user's computer and
   the editor has a command-line installer, offer to run it. Ask first: it changes their
-  machine, not the repo. Otherwise give them the one step to take: open the kit's root
+  machine, not the repo. Otherwise give them the one step to take: open the repo's root
   folder in the editor and accept its offer to install the recommended extensions (or
   name the exact extensions to install). The root folder matters: an editor opened on
   `Code/` alone doesn't see settings at the repo root.
@@ -110,7 +110,7 @@ their editor. If something looks wrong, troubleshoot (below).
 
 Check these in order, and ask the user to check only what you can't see yourself:
 
-1. **The kit's root folder is the one open in the editor**, not `Code/` or a single file.
+1. **The repo's root folder is the one open in the editor**, not `Code/` or a single file.
 2. **The extension is installed and enabled** for this workspace (editors can disable an
    extension per workspace).
 3. **The file is recognized as the right language.** Most editors show the language in

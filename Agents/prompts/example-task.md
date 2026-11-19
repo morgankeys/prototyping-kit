@@ -12,7 +12,7 @@ A template for a reusable, parameterized task. Copy and adapt.
 
 ## Steps
 
-1. Load `Agents/context/kit-structure.md` for orientation.
+1. Load `Agents/context/repo-structure.md` for orientation.
 2. <Do the thing.>
 3. Verify the result and update any affected `Docs/`.
 

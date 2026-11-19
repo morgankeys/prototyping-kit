@@ -5,7 +5,7 @@ description: Turn on the component workbench (Storybook by default) and Figma Co
 
 # /component-catalog
 
-Turns the kit's stack-neutral component catalog into working tools for the stack in
+Turns the template's stack-neutral component catalog into working tools for the stack in
 `Code/`, then fills in whatever is missing.
 
 This file holds the steps only. Read these first and follow them throughout:

@@ -14,7 +14,7 @@ today.
 
 ## Steps
 
-1. Load `Agents/context/kit-structure.md` and `AGENTS.md` for orientation.
+1. Load `Agents/context/repo-structure.md` and `AGENTS.md` for orientation.
 2. Read `Code/README.md` and `Code/ARCHITECTURE.md`. For every command, path, script name,
    and rule they state, confirm it exists in `Code/` and behaves as described.
 3. Do the same for each file the `AGENTS.md` routing table points to that touches
@@ -30,7 +30,7 @@ today.
    points at a file that exists.
 7. Run `node Agents/skills/setup/scripts/setup-scan.mjs`. Every placeholder the template
    ships with should have a row under "Stubs" in `Agents/skills/setup/checklist.md`, and
-   every link in the checklist should resolve. In a kit, check `Docs/setup-status.md`
+   every link in the checklist should resolve. In a prototype, check `Docs/setup-status.md`
    against the repo with `/setup status`.
 8. Fix the docs, not the code, unless the code is plainly wrong; if it is, report it
    instead of changing it in this task.

@@ -76,7 +76,9 @@ a diagnosis or a raw error.
 **Design problems are theirs to weigh.** When a check finds the prototype drifting from
 the design system, that is a design question, not a technical one. Say what was found in
 design terms and ask whether to fix it now or carry on; it stays on record either way.
-The split is in the operating notes in `AGENTS.md`.
+The one exception is a style in the wrong place (global or component): it fails the
+checks, so fix it first, and ask only when it is unclear whether the style should apply
+everywhere. The split is in the operating notes in `AGENTS.md`.
 
 **Explain the safety net once.** The first time you create a branch or a commit, say in a
 sentence that work is saved in steps and can be undone. After that, don't narrate git.

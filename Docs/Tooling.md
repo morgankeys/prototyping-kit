@@ -196,11 +196,13 @@ fallbacks). A hand-written parser repeats that work, and it is where missed find
   to a backlog entry. It adds the checks that are not about one file (`token-unclassified`,
   and the warning for a usage-map group that matches no token), carries rationale forward,
   writes the backlog only when it changes, and sets the exit code itself: 0 with
-  deviations present, 1 under `--strict`. Stylelint's own exit code never decides it.
+  deviations present, 1 on any scoping error, 1 on any deviation under `--strict`.
+  Stylelint's own exit code never decides it.
 - **Check `unscoped-style` per framework.** Whether a style block is scoped depends on the
   framework (a `scoped` attribute, CSS modules, a compiler default), and the parser for
   component files may not expose it. Where a rule can't see it, do that check in the
-  wrapper.
+  wrapper. `global-component-leak` reads the allowed global classes list from wherever
+  the project keeps it.
 - **Editor hints, optional.** Point the editor's Stylelint extension at the design-system
   config (in VS Code, the `stylelint.configFile` setting) to see CSS errors and the
   validator's findings while editing. Nothing in `lint` changes.
@@ -234,8 +236,9 @@ against other open work.
 
 What each editor needs so the kit's files look right: highlighting for every file type,
 and the project's linters shown as underlines. The
-[`/editor-setup` skill](../Agents/skills/editor-setup/SKILL.md) applies it. Extension ids
-below were current when written; confirm each on its marketplace before adding it.
+[`/editor-setup` skill](../Agents/skills/editor-setup/SKILL.md) applies it. Every extension
+id below was confirmed on both the Visual Studio Marketplace and Open VSX on 2026-11-19;
+ids can change, so confirm again before adding one.
 
 ### VS Code and Cursor
 

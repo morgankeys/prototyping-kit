@@ -97,7 +97,9 @@ moves and kit reuse.
    rationale line; leave the "needs review" sentinel only when the reason is genuinely
    unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded
-   color, spacing, or radius.
+   color, spacing, or radius. A style is either global (in the global stylesheet) or a
+   component's (in its scoped block), never in the other's place; `validate` fails when
+   one is. Never weaken that check or add to the allowed global classes list to clear it.
 4. **Keep tracks of work organized.** A new thread starts a new branch from an up-to-date
    `main`. Use another base only when the user specifies one, and stay on the current
    branch only when the user says to keep working on it. If the repo is already dirty
@@ -128,10 +130,13 @@ moves and kit reuse.
   - **Design problems** (design-system deviations, token misuse): these come only from
     `validate` and the token usage review, never from `lint`, and never fail CI once
     recorded ("Validation and linting" in
-    `Docs/Design system/design-in-code architecture.md`). Fix the clear ones. For
-    the rest, tell the user what was found and ask whether to fix them now or carry on.
+    `Docs/Design system/design-in-code architecture.md`). Fix the clear ones. For the
+    rest, tell the user what was found and ask whether to fix them now or carry on.
     Either way they stay recorded in the deviations backlog or the token usage review
     file, never dropped.
+  - **Scoping errors** (a style outside its global or component home) are the one design
+    finding that fails `validate` and CI. Fix them before carrying on; ask the user only
+    when it is unclear whether a style should apply everywhere.
 - Keep `Code/`, `Docs/`, and `Export/` in sync when a change spans them (e.g. a new
   feature usually touches code, docs, and eventually an export).
 - Treat `Export/` as an output drop zone: write built artifacts there, don't hand-edit them.

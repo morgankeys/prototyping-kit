@@ -22,7 +22,9 @@ against the code before editing.
 ## Styling Rules
 
 <!-- How this stack scopes component styles, where the generated token CSS lives, the
-     token namespace (`--<prefix>-*`), and how the global stylesheet is kept minimal. -->
+     token namespace (`--<prefix>-*`), how the global stylesheet is kept minimal, which
+     file it is, and where the allowed global classes list lives (see "Scoping: global or
+     component" in Docs/Design system/design-in-code architecture.md). -->
 
 ## Validation
 

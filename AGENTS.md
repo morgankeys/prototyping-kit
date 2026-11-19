@@ -23,10 +23,13 @@ This repo is the prototyping-kit **template**. `new-kit.sh` at the repo root dup
 into a fresh, standalone kit for one specific prototype (it asks for the new repo's name).
 
 - Run it when someone wants a new kit: `./new-kit.sh`. It is a plain script, not a skill.
-- It is **not copied** into the new kit, and neither is `.github/workflows/template.yml`
-  (the template's own CI) or this section: anything between
-  `template-only:start` / `template-only:end` HTML comments in a Markdown file is stripped
-  from the copy. Wrap any future template-only notes the same way.
+- It is **not copied** into the new kit, and neither is the template's own CI
+  (`.github/workflows/template.yml` and `.github/template-checks/`) or this section:
+  anything between `template-only:start` / `template-only:end` HTML comments in a
+  Markdown file is stripped from the copy. Wrap any future template-only notes the same
+  way.
+- The template's CI fails if someone starts setting up a prototype here: a stack in
+  `Code/`, a filled-in placeholder, or a setup status file. Setup happens in a kit.
 - In a duplicated kit there is no `new-kit.sh`. Don't recreate it there; new kits come
   from the template.
 - The copy's `README.md` gets the kit's name and the provenance line described in

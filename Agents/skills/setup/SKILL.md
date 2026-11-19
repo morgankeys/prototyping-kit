@@ -51,8 +51,8 @@ is before going further:
   template, and `Docs/setup-status.md` must not exist there. To start a kit, the user runs
   `./new-kit.sh`, then `/setup` in the new kit.
 - *A kit copied by hand:* do `kit-provenance` first. Add the provenance line to
-  `README.md`, then delete `new-kit.sh`, `.github/workflows/template.yml`, and every
-  `template-only` block, as
+  `README.md`, then delete `new-kit.sh`, `.github/workflows/template.yml`,
+  `.github/template-checks/`, and every `template-only` block, as
   [`kit-structure.md`](../../context/kit-structure.md#kit-provenance) describes. Then
   continue.
 

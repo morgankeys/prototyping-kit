@@ -36,7 +36,7 @@ the real command.
 
 | Item | What | Who | Level | Needs | Done when |
 | --- | --- | --- | --- | --- | --- |
-| `kit-provenance` | Record where the kit came from ([kit provenance](../../context/kit-structure.md#kit-provenance)). | agent | required | | The root `README.md` has a `Created from prototyping-kit @` line (`Forked from` in older kits), and the repo has no `new-kit.sh`, no `.github/workflows/template.yml`, and no `template-only` blocks. |
+| `kit-provenance` | Record where the kit came from ([kit provenance](../../context/kit-structure.md#kit-provenance)). | agent | required | | The root `README.md` has a `Created from prototyping-kit @` line (`Forked from` in older kits), and the repo has no `new-kit.sh`, no `.github/workflows/template.yml` or `.github/template-checks/`, and no `template-only` blocks. |
 | `kit-figma` | Decide whether the project uses Figma, and record the site and library file links, or `Figma: not used` ([Figma sources](../../context/design-system.md#figma-sources)). | user | required | | Both [`Agents/context/design-system.md`](../../context/design-system.md) and [`Docs/Design system/README.md`](../../../Docs/Design%20system/README.md) hold real links or `Figma: not used`, and they agree. |
 | `kit-github` | Create `staging`, and apply the repo settings and rulesets in [`Docs/github.md`](../../../Docs/github.md). | user | default | | A `staging` branch exists on the remote. Settings and rulesets: *ask*; agents can't see them. |
 

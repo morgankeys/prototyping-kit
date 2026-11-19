@@ -52,7 +52,8 @@ Until an update process exists, compare the two by hand and copy across what is 
 <!-- template-only:start -->
 
 In the template itself, `new-kit.sh` is the way to start a new kit. It strips itself,
-`.github/workflows/template.yml` (the template's own CI, which tests the reference
-validator), and every `template-only` block (like this one) from the copy, so a kit never
-contains them.
+the template's own CI (`.github/workflows/template.yml` and `.github/template-checks/`,
+which check the template itself and test the reference validator), and every
+`template-only` block (like this one) from the copy, so a kit never contains them. That CI
+also fails if setup starts in the template instead of a kit.
 <!-- template-only:end -->

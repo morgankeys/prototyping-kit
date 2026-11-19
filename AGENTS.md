@@ -60,6 +60,7 @@ column, read the right column first.
 | Building UI that might already exist as a component | `Docs/Design system/Guidelines/components.md` |
 | Adding a component, a story, or a Code Connect file | `Agents/context/component-catalog.md` |
 | `/component-catalog`, turning on Storybook or Code Connect, or the first components after choosing a stack | `Agents/skills/component-catalog/SKILL.md` |
+| Asking the user to do, decide, or provide something, or explaining a step to them | `Agents/context/guiding-users.md` |
 | `/setup`, setting up a new kit, what is left to install or fill in, or skipping a tool | `Agents/skills/setup/SKILL.md` |
 | What a fully set-up kit needs, or adding a setup item or a placeholder to the template | `Agents/skills/setup/checklist.md` |
 | Tokens or assets that aren't Figma variables | `Docs/Design system/Supplemental/README.md` |
@@ -109,6 +110,10 @@ moves and kit reuse.
    `hex` drops transparency.
 
 ## Operating notes
+
+- The kit is for designers, many of whom have not set up a codebase before. Lead them
+  through anything they have to do themselves, in plain words, one step at a time, and do
+  the technical work for them. See `Agents/context/guiding-users.md`.
 
 - Keep `Code/`, `Docs/`, and `Export/` in sync when a change spans them (e.g. a new
   feature usually touches code, docs, and eventually an export).

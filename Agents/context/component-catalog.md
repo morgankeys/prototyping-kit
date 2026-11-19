@@ -94,7 +94,6 @@ To also remove the Code Connect placeholders, delete:
 | Place | What to remove |
 | --- | --- |
 | `Docs/Tooling.md` | The "Figma Code Connect" entry |
-| `README.md` | The *Figma* publishing step in "Getting started" |
 | `Code/README.md` | The `connect` row |
 | `Code/ARCHITECTURE.md` | The Code Connect comment under "Component catalog" |
 | `.github/workflows/ci.yml` | The `connect` step |

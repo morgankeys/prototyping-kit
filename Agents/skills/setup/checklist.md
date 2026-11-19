@@ -5,6 +5,9 @@ configuration to write, decisions to record, and stubs to fill in. `/setup`
 ([`SKILL.md`](SKILL.md)) reads this file, checks the repo against it, and reports what is
 left.
 
+It is written for agents. Ids, levels, and role names are working notes; when talking to
+the user, follow [`guiding-users.md`](../../context/guiding-users.md).
+
 **This file holds definitions only. Never tick anything off here.** Each kit's progress
 lives in `Docs/setup-status.md`, one row per item id below, written by `/setup`. Keeping
 the two apart means a kit can merge a newer checklist from the template without conflicts,

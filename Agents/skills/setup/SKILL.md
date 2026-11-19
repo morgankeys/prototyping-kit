@@ -18,12 +18,17 @@ Two files, kept apart on purpose:
 This file holds the steps only. What each item means is in the checklist; how to do an
 item is in the skill or doc its row links to.
 
+**Read [`guiding-users.md`](../../context/guiding-users.md) before you start.** Setup is
+often a user's first hour with the kit, and many users have not set up a codebase before.
+The checklist is written for agents: its ids, levels, and role names are your working
+notes, not what you say to the user. Your job is to lead them through it.
+
 Safe to rerun at any point in a project. A run with nothing to do just reports that.
 
 | Invocation | Does |
 | --- | --- |
-| `/setup` | Check everything, report, then offer the next step. |
-| `/setup status` | Check and report only. Change nothing but the status file. |
+| `/setup` | Check everything, say where things stand, then guide the user through the next step. |
+| `/setup status` | Check and show the full breakdown only. Change nothing but the status file. |
 | `/setup skip <item or tool>` | Opt out (step 5). |
 | `/setup include <item or tool>` | Undo an opt-out, or opt in to an `optional` item. |
 
@@ -95,22 +100,26 @@ was skipped). Keep Notes a person wrote unless they are now wrong.
 
 ### 4. Report
 
-One message, in this order. Use plain words for each item, with its id in backticks so
-the user can refer to it. Leave out any group that is empty.
+Write for the user in front of you, following
+[`guiding-users.md`](../../context/guiding-users.md). The default is short and guided:
 
-1. **Where things stand:** one line, such as "14 of 31 done, 3 skipped".
-2. **Regressions:** rows that were `done` and no longer are.
-3. **Your turn:** `todo` items only the user can do, each with the exact action (which
-   file to export, where to drop it, which setting to change) and a link.
-4. **Ready for me:** `todo` items an agent can do now, in checklist order.
-5. **Waiting:** grouped by what unblocks them, such as "5 items wait on the token
-   export".
-6. **Optional, not decided:** `optional` items nobody has ruled on. Offer each once; if
-   the user declines, record `opted out` so it isn't offered again.
-7. **Still stubbed:** `anytime` items, as counts ("7 of 10 guideline files are stubs").
-8. **Skipped:** opted-out items in one line, so the user can change their mind.
+1. **Where things stand**, in a sentence or two of plain words: what is working already
+   and roughly how much is left. On a first run, also say in one or two sentences what
+   setup will involve and that you will do the technical parts.
+2. **Anything that broke** since the last run (rows that were `done` and no longer are),
+   and that you will fix it.
+3. **What you need from them**, if anything is theirs to do right now: the first such
+   step only, with what it is for and exactly how to do it. Mention how many more of
+   their steps follow, not what they are.
+4. **What you will do next** yourself, described by what it gives them.
+5. **One clear next move**, then wait: either their step, or "shall I go ahead?"
 
-End with the single next step you recommend, and wait. With `/setup status`, stop here.
+Offer the full breakdown; show it when the user asks, with `/setup status`, or when they
+have shown they are comfortable with the detail. It lists, leaving out empty groups:
+their steps, steps ready for an agent, steps waiting and what unblocks them, optional
+tools not yet decided, content still stubbed (as counts, such as "7 of 10 guideline files
+are placeholders"), and what was skipped. Describe each item in plain words and put its id
+in backticks after it. With `/setup status`, stop after the breakdown.
 
 ### 5. Opt-outs
 
@@ -133,25 +142,41 @@ tool by name ("skip Storybook") at any point, including in answer to the report.
 
 ### 6. Walk through what's left
 
-Work in checklist order, one item at a time, and re-run the scan after each.
+Work in checklist order, one item at a time, and re-run the scan after each. Before each
+one, say in a sentence what it is for; after it, say what changed.
 
-- **`user` items:** give the exact action, then wait. When the user says it is done,
-  verify what can be verified before marking it.
-- **`agent` items:** say what you are about to install or write, then do it by following
-  the skill or doc the checklist row links to. Don't restate or improvise its procedure.
-  Tokens go through [`design-tokens`](../design-tokens/SKILL.md); the workbench and Code
-  Connect go through [`/component-catalog`](../component-catalog/SKILL.md).
-- **`both` items:** ask for the decision first (which stack, which groups), then do the
-  work.
-- **Tools:** before installing one, read its entry in
+- **Their steps (`user`):** give one action with exact directions, then wait. When they
+  say it is done, verify what can be verified before marking it. If it didn't work, say
+  what you see and what to try, without blame.
+- **Your steps (`agent`):** say what you are about to set up and what it gives them, then
+  do it by following the skill or doc the checklist row links to. Don't restate or
+  improvise its procedure, and don't ask the user to run commands for you. Tokens go
+  through [`design-tokens`](../design-tokens/SKILL.md); the workbench and Code Connect go
+  through [`/component-catalog`](../component-catalog/SKILL.md).
+- **Shared steps (`both`):** these need a decision. Ask about what the user knows (what
+  they are building, who will see it, whether developers will take it over), recommend
+  one option with a one-line reason, and proceed with it unless they object. For
+  `stack-choice` in particular, never open with a list of frameworks.
+- **Default tools:** don't ask about each one. Before the first install, list the default
+  set in a few plain lines (what each is for), say any of them can be skipped now or
+  later, and ask once whether to go ahead with all of them.
+- **Optional tools:** offer each once, with what it adds and what skipping costs.
+- **Required items:** set them up without asking the user to decide, and say in a
+  sentence what each guards against.
+- **Tools in general:** before installing one, read its entry in
   [`Docs/Tooling.md`](../../../Docs/Tooling.md) for where to get it and its gotchas. Pin
   the version. If the user would rather use a different tool for the same job, use it and
   record it in `Code/ARCHITECTURE.md`.
+- **Secrets:** when a step needs a token (publishing Code Connect), tell the user which
+  file it goes in. Never ask them to paste it into the chat.
 - **Branches and commits:** follow [`git-workflow.md`](../../context/git-workflow.md). Use
   a `chore/setup-<slug>` branch per piece of work, and commit `Docs/setup-status.md` with
-  the change that moved its rows.
-- When every item an agent can do is `done`, `opted out`, or `n/a`, say so, and list what
-  still waits on the user.
+  the change that moved its rows. Mention once that work is saved in steps and can be
+  undone; don't narrate git after that.
+- **Pace:** setup doesn't have to finish in one sitting. At a natural stopping point, say
+  what is working now and that `/setup` picks up where it left off.
+- When every item an agent can do is `done`, `opted out`, or `n/a`, say so, say what the
+  user can do with the kit now, and list what still waits on them.
 
 ## Notes
 

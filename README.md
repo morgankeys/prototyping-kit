@@ -52,44 +52,40 @@ sections of the docs, like this one. Its README gets the kit's name and a
 <!-- template-only:end -->
 ## Getting started
 
-Ask an agent to run **`/setup`**. It checks the kit against the
-[setup checklist](Agents/skills/setup/checklist.md), tells you which steps are yours and
-which it can do, and walks you through them. Progress is kept in `Docs/setup-status.md`,
-and any tool can be skipped.
+Ask your agent to run **`/setup`**. It looks at what the kit already has, tells you what
+it needs from you, does the technical work itself, and walks you through the rest one
+step at a time. You don't need to have set up a codebase before.
 
-The outline below is the same path in brief; the checklist is the full list. Steps marked
-*Figma* are skipped by teams that don't use it.
+### What to bring
 
-1. **Check provenance.** Make sure the kit records where it came from (see
-   [`Agents/context/kit-structure.md`](Agents/context/kit-structure.md#kit-provenance)).
-   Kits made with the template's `new-kit.sh` already do.
-2. **Record the design sources.** Add the Figma site and library links to
-   [`Agents/context/design-system.md`](Agents/context/design-system.md#figma-sources) and
-   [`Docs/Design system/README.md`](Docs/Design%20system/README.md), or write
-   `Figma: not used` in both.
-3. ***Figma:* fill the component registry.** Ask an agent to list the library's components
-   into
-   [`Docs/Design system/Guidelines/components.md`](Docs/Design%20system/Guidelines/components.md),
-   with node links and variant properties. List only components the library has.
-4. **Pick a stack** for `Code/`, and fill in the command table in
-   [`Code/README.md`](Code/README.md) and the skeleton in
-   [`Code/ARCHITECTURE.md`](Code/ARCHITECTURE.md).
-5. **Bring in tokens.** Put the token export in `Docs/Design system/Figma/Tokens/` and
-   follow [`Agents/skills/design-tokens/SKILL.md`](Agents/skills/design-tokens/SKILL.md).
-6. **Build components.** Each new component gets its registry row in the same change.
-7. **Run `/component-catalog`.** It sets up Storybook, writes a story per registry row,
-   and, if a Figma library is recorded, sets up Code Connect. See
-   [`Agents/context/component-catalog.md`](Agents/context/component-catalog.md).
-8. ***Figma:* publish the Code Connect mappings.** Put a Figma personal access token in
-   `Code/.env` as `FIGMA_ACCESS_TOKEN` and run `connect --publish` from `Code/`. Check the
-   [plan requirement](Docs/Tooling.md#figma-code-connect) first.
+- **Your design files.** Links to the Figma file with your core styles and components
+  (the library) and the one with the screens you want to build. Not using Figma is fine;
+  say so and the Figma steps are skipped.
+- **Your design tokens.** The colors, type, and spacing from your library, exported from
+  Figma. `/setup` shows you how.
+- **An idea of what you're building**, and who will see it. The agent uses this to
+  recommend how to build it.
+- **Access to your accounts.** You sign in to Figma when the agent connects to it, and
+  the kit lives in a GitHub repository.
+- **Content, when you have it.** Example users and organizations, images, and any written
+  design guidelines. These can come later.
+
+### The broad strokes
+
+1. **Point the kit at your design sources.**
+2. **Choose how the prototype is built.** The agent recommends a setup and installs it.
+3. **Bring in your tokens**, so the prototype matches your design file.
+4. **Add the guardrails**: checks that keep the code on your design system.
+5. **Connect the Figma tools**, so the agent can read your designs and send pages back.
+6. **Build components and catalog them**, so each one is built once and reused.
+
+Most of the tools are optional; tell the agent to skip any you don't want. Rerun `/setup`
+whenever you like to see what is still open. Progress is kept in `Docs/setup-status.md`,
+and the full list of what a kit needs is the
+[setup checklist](Agents/skills/setup/checklist.md).
 
 After setup:
 
-- New components: add the registry row, then rerun `/component-catalog` (or write the
-  story and mapping in the same change).
-- A Figma library arrives late: add its links to the registry and rerun
-  `/component-catalog` to turn on Code Connect.
-- Rerun `/setup` any time to see what is still open, including unfilled placeholders.
-- Browse [`Docs/Tooling.md`](Docs/Tooling.md) for other tools worth adding.
+- New components: ask the agent to add them, then rerun `/component-catalog`.
+- Other tools worth adding: [`Docs/Tooling.md`](Docs/Tooling.md).
 - Managing branches and repo settings: [`Docs/github.md`](Docs/github.md).

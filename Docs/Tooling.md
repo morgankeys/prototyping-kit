@@ -182,7 +182,10 @@ and writes the deviations backlog. It is the only check that reports design-syst
 findings.
 
 **Default build, on a stack with Node: the contract's rules as custom Stylelint rules,
-run by a small wrapper.** Stylelint already finds the files, parses CSS and the style
+run by a small wrapper.** The kit ships it, tested, in
+[`Agents/skills/design-validator/`](../Agents/skills/design-validator/SKILL.md);
+`/design-validator` copies it into `Code/scripts/ds-validate/` and configures it in
+`Code/ds-validate.config.json`. Stylelint already finds the files, parses CSS and the style
 blocks inside component files, and splits values (`calc()`, gradients, `var()`
 fallbacks). A hand-written parser repeats that work, and it is where missed findings hide.
 
@@ -209,6 +212,12 @@ fallbacks). A hand-written parser repeats that work, and it is where missed find
   [`/editor-setup`](../Agents/skills/editor-setup/SKILL.md) offers this when it applies.
 - On a stack without Node, write the validator in the stack's language against the same
   contract.
+
+- **Versions:** the reference build is tested with Stylelint 18, `postcss-html` 2,
+  `postcss-value-parser` 4, and `postcss-selector-parser` 7 on Node 22.22 or later; the
+  exact pins are in the skill folder's `package.json`.
+- **What it can't see:** utility classes written in markup (Tailwind and the like), and
+  styles written in JavaScript unless a Stylelint custom syntax reads them.
 
 Example: `Code/scripts/ds-validate.mjs` in the example site, which predates this default.
 

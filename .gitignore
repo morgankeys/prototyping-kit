@@ -22,3 +22,6 @@ Thumbs.db
 
 # Generated platform packages. Regenerate with `npm run ds-export`.
 Export/design-system/
+
+# Test dependencies for the reference design-system validator (Agents/skills/design-validator)
+Agents/skills/design-validator/node_modules/

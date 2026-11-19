@@ -10,8 +10,8 @@
 
 ## Verification
 
-CI runs `lint`, `check`, `build`, `validate`, and the component catalog checks. These are
-the ones it can't:
+CI runs `lint`, `check`, `build`, `validate`, and the component catalog checks. Deviations
+that `validate` lists don't fail it; a stale backlog does. These are the ones it can't:
 
 - [ ] `/token-usage-review` (changed tokens; `full` before a promotion to `main`)
 - [ ] Checked the affected pages in the dev server
@@ -19,7 +19,7 @@ the ones it can't:
 ## Design system deviations
 
 <!-- Any hardcoded value or missing token introduced here, and why. Write "None" if
-     there are none. Do not suppress a lint rule to avoid listing one.
+     there are none. Do not suppress a rule or delete a backlog entry to avoid listing one.
      Fill in the `Rationale:` line for each new entry in
      Docs/Design system/deviations-backlog.md — leave "Unknown — needs review" only
      if the reason is genuinely unclear. -->

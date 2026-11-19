@@ -26,9 +26,11 @@ against the code before editing.
 
 ## Validation
 
-<!-- Which linters and validator implement the contract in
-     Docs/Design system/design-in-code architecture.md, where their config lives, and any
-     stack-specific exemptions. Include where `tokens` writes the token manifest, and how
+<!-- Which validator implements the contract in
+     Docs/Design system/design-in-code architecture.md and on what engine (custom
+     Stylelint rules by default; where the plugin and its config live), which linters `lint` runs (they
+     are technical only), where each one's config lives, and any stack-specific
+     exemptions. Include where `tokens` writes the token manifest, and how
      the validator resolves a rule block's selector for the token usage rules (nesting,
      scoped-style rewriting). -->
 

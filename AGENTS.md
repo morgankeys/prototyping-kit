@@ -90,18 +90,21 @@ moves and kit reuse.
    generated file reserves fields for human and agent notes, those fields are meant to be
    edited and are read back on the next run (for example, the `Rationale:` lines in the
    design-system deviations backlog).
-2. **Never weaken lint or validation rules to suppress design-system deviations.** Fix the
-   root cause or log the deviation in the backlog — do not disable the rule, add an
- ignore comment, or widen the token usage map. When you log one, write your best guess of why on its rationale line;
-   leave the "needs review" sentinel only when the reason is genuinely unclear.
+2. **Never weaken lint or validation rules to suppress design-system deviations.**
+   `validate` reports them. Fix the root cause or log the deviation in the backlog — do
+   not disable or loosen a rule, add an ignore comment, or widen the token usage map, in
+   the validator or in any linter. When you log one, write your best guess of why on its
+   rationale line; leave the "needs review" sentinel only when the reason is genuinely
+   unclear.
 3. **Component styles are scoped and token-driven.** No inline styles, no hardcoded
    color, spacing, or radius.
-4. **Keep tracks of work organized.** New work goes on a feature branch unless the chat was
-   explicitly told to work on `main` or `staging`. The preferred flow squash-merges that
-   branch into `staging`, then promotes `staging` into `main` with a merge commit, never a
-   squash. Push a feature branch when its commits are ready. If the chat was told to work
-   on `main` or `staging`, ask before pushing those branches. Opening a pull request still
-   waits for an ask; `/pr` is that ask.
+4. **Keep tracks of work organized.** A new thread starts a new branch from an up-to-date
+   `main`. Use another base only when the user specifies one, and stay on the current
+   branch only when the user says to keep working on it. If the repo is already dirty
+   with work this chat did not create, ask what to do and leave that work untouched.
+   Once the branch for this chat is clear, commit and push without a separate ask. Never
+   commit directly to `main` or `staging` unless this chat was told to work on that
+   branch. Opening a pull request still waits for an ask; `/pr` is that ask.
 5. **Sandbox, specimen, and sample pages never ship.** They render only on the local dev
    server. Never weaken whatever build check enforces this.
 6. **The token pipeline must preserve alpha.** A translucent token must come out of the
@@ -117,12 +120,15 @@ moves and kit reuse.
 
 - Checks always run: `lint`, `check`, `build`, `validate`, and the token usage review are
   never skipped or switched off. What happens to a finding depends on its kind:
-  - **Technical problems** (formatting, code lint, type errors, a failing build, a broken
-    install): fix them yourself and carry on. They are not recorded anywhere and the user
-    doesn't need to hear about each one. Tell the user only when the fix is risky: it
-    could change how the prototype looks or behaves, removes or rewrites their work, needs
-    a decision, or you can't find one.
-  - **Design problems** (design-system deviations, token misuse): fix the clear ones. For
+  - **Technical problems** (formatting, code lint, invalid CSS, type errors, a failing
+    build, a broken install): fix them yourself and carry on. They are not recorded
+    anywhere and the user doesn't need to hear about each one. Tell the user only when
+    the fix is risky: it could change how the prototype looks or behaves, removes or
+    rewrites their work, needs a decision, or you can't find one.
+  - **Design problems** (design-system deviations, token misuse): these come only from
+    `validate` and the token usage review, never from `lint`, and never fail CI once
+    recorded ("Validation and linting" in
+    `Docs/Design system/design-in-code architecture.md`). Fix the clear ones. For
     the rest, tell the user what was found and ask whether to fix them now or carry on.
     Either way they stay recorded in the deviations backlog or the token usage review
     file, never dropped.

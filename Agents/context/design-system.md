@@ -78,7 +78,9 @@ under "Token usage" in
 
 ## Handling deviations
 
-When `lint` or `validate` flags a hardcoded value or a misused token, follow
+`validate` is the only check that reports design-system findings; `lint` is technical
+only ([Validation and linting](../../Docs/Design%20system/design-in-code%20architecture.md#validation-and-linting)).
+When `validate` flags a hardcoded value or a misused token, follow
 ["Working a deviation"](../../Docs/Design%20system/design-in-code%20architecture.md#working-a-deviation):
 use a token if one fits, otherwise leave the deviation in the backlog with a `Rationale:`
 line. Never weaken a rule or widen the token usage map to clear a finding.

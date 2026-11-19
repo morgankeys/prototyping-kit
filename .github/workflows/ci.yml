@@ -30,6 +30,8 @@ jobs:
       - name: setup
         run: echo "TODO - install toolchain and dependencies"
 
+      # Formatting, code lint, and CSS validity: technical findings only. Design-system
+      # findings are not lint's; `validate` below owns them.
       - name: lint
         run: echo "TODO - <lint>"
 
@@ -41,8 +43,8 @@ jobs:
       - name: build
         run: echo "TODO - <build>"
 
-      # Prints the deviation summary. Deviations are warnings: this step exits 0 when any
-      # exist. `--strict` is a local-only flag and is not used here.
+      # The only step that reports design-system deviations. They are warnings: it prints
+      # a summary and exits 0 when any exist. `--strict` is a local-only flag and is not used here.
       - name: validate
         run: echo "TODO - <validate>"
 

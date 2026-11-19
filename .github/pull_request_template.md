@@ -11,7 +11,7 @@
 ## Verification
 
 CI runs `lint`, `check`, `build`, `validate`, and the component catalog checks. Deviations
-that `validate` lists don't fail it; a stale backlog does. These are the ones it can't:
+that `validate` lists don't fail it; a scoping error or a stale backlog does. These are the ones it can't:
 
 - [ ] `/token-usage-review` (changed tokens; `full` before a promotion to `main`)
 - [ ] Checked the affected pages in the dev server

@@ -51,6 +51,15 @@ why to use a token; they don't restate its value.
 No inline styles, and no global CSS outside the minimal global stylesheet and the generated
 token files.
 
+**Global or component, never both.** Before writing a style, decide which it is. Global
+means it should apply everywhere (element defaults, type settings, resets); it goes in the
+global stylesheet as an element rule. Anything that targets one component goes in that
+component's scoped block, and an escape to global scope (`:global()` and the like) stays
+nested under the component's own selector. `validate` fails on a style in the wrong place.
+When it is unclear whether a style should apply everywhere, ask the user. The rules, and
+the allowed global classes list for the few true utilities:
+["Scoping: global or component"](../../Docs/Design%20system/design-in-code%20architecture.md#scoping-global-or-component).
+
 **Token variables only.** Every themed property uses a CSS custom property from the
 generated token files, under the project's namespace `--<prefix>-*`:
 
